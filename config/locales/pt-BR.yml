@@ -1,0 +1,5 @@
+pt-BR:
+  hello: "Olá Mundo"
+  minimum_password_length:
+        one: "(Mínimo de %{count} caractere)"
+        other: "(Mínimo de %{count} caracteres)"

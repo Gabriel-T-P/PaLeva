@@ -29,3 +29,6 @@
 
 en:
   hello: "Hello world"
+  minimum_password_length:
+        one: "(%{count} character minimum)"
+        other: "(%{count} characters minimum)"
