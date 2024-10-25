@@ -1,0 +1,23 @@
+<h1> <%=t '.title'%> </h1>
+
+<dl>
+  <dt><%= Establishment.human_attribute_name(:corporate_name) %>: </dt>
+  <dd> <%= @establishment.corporate_name %> </dd>
+  <dt> <%= Establishment.human_attribute_name :trade_name %>: </dt>
+  <dd> <%= @establishment.trade_name %> </dd>
+  <dt> <%= Establishment.human_attribute_name :cnpj %>: </dt>
+  <dd> <%= @establishment.cnpj %> </dd>
+  <dt> <%= Establishment.human_attribute_name :full_address %>: </dt>
+  <dd> <%= @establishment.full_address %> </dd>
+  <dt> <%= Establishment.human_attribute_name :phone_number %>: </dt>
+  <dd> <%= @establishment.phone_number %> </dd>
+  <dt> <%= Establishment.human_attribute_name :email %>: </dt>
+  <dd> <%= @establishment.email %> </dd>
+  <dt> <%= Establishment.human_attribute_name :code %>: </dt>
+  <dd> <%= @establishment.code %> </dd>
+</dl>
+
+
+<% if @establishment.opening_hours.empty? %>
+  <%= link_to "Adicionar Horários", new_establishment_opening_hour_path(@establishment) %>
+<% end %>

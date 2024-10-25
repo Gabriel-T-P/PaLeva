@@ -19,14 +19,22 @@
 
   <body>
     <header>
-      <nav>
-        
-        <% if user_signed_in? %>
-          <%= current_user.first_name %> |
-          <%= button_to 'Sair', destroy_user_session_path, method: :delete %>  
-        <% else %>
-          <%= link_to 'Entrar', new_user_session_path %>
-        <% end %>
+      <nav class="navbar navbar-light bg-light px-4">
+
+        <div class="d-flex justify-content-between w-100">
+          <%= link_to 'PaLevá', root_path, class: 'navbar-brand' %>
+
+          <div class="d-inline-flex align-items-center">
+            <% if user_signed_in? %>
+              <span class="navbar-text"> Olá, <%= current_user.first_name %> </span>
+              <%= button_to I18n.t('logout'), destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark ms-3 py-1' %>
+            <% else %>
+              <%= link_to I18n.t('login'), new_user_session_path, class: 'btn btn-outline-primary py-1' %>
+            <% end %>
+          </div>
+
+        </div>
+
       </nav>
     </header>
 

@@ -18,7 +18,7 @@ describe 'usuário faz o cadastro' do
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Sobrenome'
     expect(page).to have_field 'CPF'
-    expect(page).to have_button 'Cadastrar'  
+    expect(page).to have_button 'Enviar'  
     
   end
 
@@ -35,7 +35,7 @@ describe 'usuário faz o cadastro' do
     fill_in 'E-mail',	with: 'carlosjonas@email.com'
     fill_in 'Senha',	with: '1234567891011'
     fill_in 'Confirme sua senha',	with: '1234567891011'
-    click_on 'Cadastrar'
+    click_on 'Enviar'
 
     # Assert
     expect(page).to have_content 'Carlos'

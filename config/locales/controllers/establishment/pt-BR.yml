@@ -1,0 +1,13 @@
+pt-BR:
+  establishments:
+    new:
+      title: 'Cadastrar Novo Estabelecimento'
+      errors_message: 'Verifique os seguintes erros'
+      alert: 'Você não pode cadastrar outro estabelecimento'
+    create:
+        notice: 'Estabelecimento criado com sucesso'
+        alert: 'Cadastro não foi concluído'
+    form:
+      save: 'Cadastrar'
+    show:
+      title: 'Informações Sobre o Estabelecimento'

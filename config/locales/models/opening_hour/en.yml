@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    attributes:
+      opening_hour:
+        day_of_week: 'Day of Week'
+        opening_time: 'Opening Time'
+        closing_time: 'Closing Time'
+        closed: 'Closed'
+    models:
+      opening_hour:
+        one: 'Opening Hour'
+        other: 'Opening Hours'

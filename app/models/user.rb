@@ -6,15 +6,22 @@ class User < ApplicationRecord
   
   validates :first_name, :last_name, :cpf, presence: true
   validates :cpf, uniqueness: true
-  
-  
   validate :valid_cpf
+
+  has_one :establishment
+  enum :role, { :admin => 2, :user => 5 }
+  after_initialize :set_default_role, :if => :new_record?
 
   private
 
+  #temporário
+  def set_default_role
+    self.role ||= :admin
+  end
+
   def valid_cpf
     unless CPF.valid?(cpf)
-      errors.add(:cpf, "é inválido")
+      errors.add(:cpf, 'não é válido')
     end
   end      
          

@@ -1,0 +1,14 @@
+<h1><%=t '.title'%></h1>
+
+<% if @establishment.errors.full_messages.any? %>
+  <h3><%=t '.errors_message'%>:</h3>
+  <ul>
+    <% @establishment.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+
+<% end %>
+
+<%=render "form", establishment: @establishment%>
+

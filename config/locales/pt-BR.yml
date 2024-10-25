@@ -3,3 +3,7 @@ pt-BR:
   minimum_password_length:
         one: "(Mínimo de %{count} caractere)"
         other: "(Mínimo de %{count} caracteres)"
+  login: 'Entrar'
+  logout: 'Sair'
+  redirect_establishment_alert: 'Você precisa completar o cadastro do estabelecimento'
+  route_negated: 'Você não possui acesso a essa página'

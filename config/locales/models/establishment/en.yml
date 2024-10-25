@@ -1,0 +1,15 @@
+en:
+  activerecord:
+    attributes:
+      establishment:
+        trade_name: 'Trade Name'
+        corporate_name: 'Corporate Name'
+        cnpj: 'CNPJ'
+        full_address: 'Address'
+        phone_number: 'Phone Number'
+        email: 'Email'
+        code: 'Code'
+    models:
+      establishment:
+        one: 'Establishment'
+        other: 'Establishments'

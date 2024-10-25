@@ -1,0 +1,15 @@
+<%= form_with model: [@establishment, @opening_hour] do |f| %>
+  <%= f.label :day_of_week, "Dia da Semana" %>
+  <%= f.select :day_of_week, Date::DAYNAMES.each_with_index.map { |day, i| [day, i] } %>
+
+  <%= f.label :opening_time, "Horário de Abertura" %>
+  <%= f.time_field :opening_time %>
+
+  <%= f.label :closing_time, "Horário de Fechamento" %>
+  <%= f.time_field :closing_time %>
+
+  <%= f.label :closed, "Não Abre" %>
+  <%= f.check_box :closed %>
+
+  <%= f.submit %>
+<% end %>

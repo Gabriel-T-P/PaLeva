@@ -1,0 +1,35 @@
+<%= form_with model: establishment do |f| %>
+
+  <div>
+    <%= f.label :corporate_name %>
+    <%= f.text_field :corporate_name %>
+  </div>
+
+  <div>
+    <%= f.label :trade_name %>
+    <%= f.text_field :trade_name %>
+  </div>
+
+  <div>
+    <%= f.label :cnpj %>
+    <%= f.text_field :cnpj %>
+  </div>
+
+  <div>
+    <%= f.label :full_address %>
+    <%= f.text_field :full_address %>
+  </div>
+
+  <div>
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone_number %>
+  </div>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+  <%=f.submit t '.save'%>
+
+<% end %>
