@@ -11,3 +11,10 @@ pt-BR:
       save: 'Register'
     show:
       title: 'More Info About the Establishment'
+      opening_hour_title: "Establishment's Open Hours"
+      edit_opening_hour: 'Change Open Hours'
+      dish_title: 'Registered Dishs'
+      add_new_dish: 'Add New Dish'
+      edit: 'Edit'
+      delete: 'Delete'
+      confirm: 'Confirm'

@@ -1,0 +1,49 @@
+<% if @item.errors.any? %>
+  <div class="alert alert-danger">
+    <h4 class="alert-heading"> <%=t '.errors_message'%>:</h4>
+    <ul class="mb-0">
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="d-flex justify-content-center">
+  <div class="col-md-6">
+    <%= form_with model: [establishment, item], class: 'border p-4 shadow-sm' do |f| %>
+
+      <div class="mb-3">
+        <%= f.label :name, class: 'form-label' %>:
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :description, class: 'form-label' %>:
+        <%= f.text_field :description, class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :calories, class: 'form-label' %>:
+        <%= f.number_field :calories, class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :item_type, class: 'form-label' %>:
+        <%= f.select :item_type, Item.item_types.keys.map { |key| [t(".#{key}"), key] }, {}, class: 'form-select' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :image, t('.image'), class: 'form-label' %>:
+        <%= f.file_field :image, direct_upload: true, class: 'form-control' %>
+      </div>
+
+      <div class="d-flex">
+        <%= f.submit t('.save'), class: 'btn btn-dark' %>
+        <%= link_to t('.cancel'), establishment_path(establishment), class: 'btn btn-danger ms-3' %>
+      </div>
+
+    <% end %>
+  </div>
+</div>
+

@@ -4,6 +4,7 @@ class EstablishmentsController < ApplicationController
   skip_before_action :check_admin_establishment, only: [:create, :new]
 
   def show
+    @items = @establishment.items
   end
 
   def new

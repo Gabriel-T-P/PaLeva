@@ -1,0 +1,24 @@
+pt-BR:
+  items:
+    form:
+      image: 'Cadastrar Imagem'
+      errors_message: 'Verifique os seguintes erros'
+      dish: 'Prato'
+      beverage: 'Bebida'
+      save: 'Salvar'
+      cancel: 'Cancelar'
+    new:
+      title: 'Cadastrar Novo Item'
+    create:
+      dish_notice: 'Prato cadastrado com sucesso'
+      dish_alert: 'Falha ao cadastrar o prato'
+      bevarage_notice: 'Bebida cadastrada com sucesso'
+      bevarage_alert: 'Falha ao cadastrar a bebida'
+    edit:
+      title: 'Editar Item'
+    update:
+      edit_success: 'Editado com sucesso'
+      edit_fail: 'Falha ao editar'
+    destroy:
+      delete_success: 'Deletado com sucesso'
+      delete_fail: 'Falha ao deletar'

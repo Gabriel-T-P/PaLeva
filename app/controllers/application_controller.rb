@@ -19,6 +19,5 @@ class ApplicationController < ActionController::Base
   
     redirect_to new_establishment_path, alert: I18n.t('redirect_establishment_alert')
   end
-  
 
 end

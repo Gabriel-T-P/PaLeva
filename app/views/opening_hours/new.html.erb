@@ -1,6 +1,6 @@
 <%= form_with model: [@establishment, @opening_hour] do |f| %>
   <%= f.label :day_of_week, "Dia da Semana" %>
-  <%= f.select :day_of_week, Date::DAYNAMES.each_with_index.map { |day, i| [day, i] } %>
+  <%= f.select :day_of_week, I18n.t('date.day_names').each_with_index.map { |day, i| [day, i] } %>
 
   <%= f.label :opening_time, "Horário de Abertura" %>
   <%= f.time_field :opening_time %>

@@ -1,23 +1,64 @@
-<h1> <%=t '.title'%> </h1>
+<br>
+<div class="container-fluid">
+  <div class="row justify-content-begin">
+    <div class="col-md-5">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h2><%= t '.title' %></h2>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong><%= Establishment.human_attribute_name(:corporate_name) %>:</strong> <%= @establishment.corporate_name %></li>
+          <li class="list-group-item"><strong><%= Establishment.human_attribute_name(:trade_name) %>:</strong> <%= @establishment.trade_name %></li>
+          <li class="list-group-item"><strong><%= Establishment.human_attribute_name(:cnpj) %>:</strong> <%= @establishment.cnpj %></li>
+          <li class="list-group-item"><strong><%= Establishment.human_attribute_name(:full_address) %>:</strong> <%= @establishment.full_address %></li>
+          <li class="list-group-item"><strong><%= Establishment.human_attribute_name(:phone_number) %>:</strong> <%= @establishment.phone_number %></li>
+          <li class="list-group-item"><strong><%= Establishment.human_attribute_name(:email) %>:</strong> <%= @establishment.email %></li>
+          <li class="list-group-item"><strong><%= Establishment.human_attribute_name(:code) %>:</strong> <%= @establishment.code %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
-<dl>
-  <dt><%= Establishment.human_attribute_name(:corporate_name) %>: </dt>
-  <dd> <%= @establishment.corporate_name %> </dd>
-  <dt> <%= Establishment.human_attribute_name :trade_name %>: </dt>
-  <dd> <%= @establishment.trade_name %> </dd>
-  <dt> <%= Establishment.human_attribute_name :cnpj %>: </dt>
-  <dd> <%= @establishment.cnpj %> </dd>
-  <dt> <%= Establishment.human_attribute_name :full_address %>: </dt>
-  <dd> <%= @establishment.full_address %> </dd>
-  <dt> <%= Establishment.human_attribute_name :phone_number %>: </dt>
-  <dd> <%= @establishment.phone_number %> </dd>
-  <dt> <%= Establishment.human_attribute_name :email %>: </dt>
-  <dd> <%= @establishment.email %> </dd>
-  <dt> <%= Establishment.human_attribute_name :code %>: </dt>
-  <dd> <%= @establishment.code %> </dd>
-</dl>
+<section id="OpeningHours">
+  <div class="d-flex align-items-center mb-3">
+    <h3> <%=t '.opening_hour_title'%> </h3>
+    <% if @establishment.opening_hours.empty? %>
+      <%= link_to t('.edit_opening_hour'), new_establishment_opening_hour_path(@establishment), class: 'btn btn-outline-dark ms-3' %>
+    <% end %>
+  </div>
+</section>
+
+<section id="Dishs">
+  <div class="d-flex align-items-center mb-3">
+    <h3><%= t '.dish_title' %></h3>
+    <%= link_to t('.add_new_dish'), new_establishment_item_path(@establishment), class: 'btn btn-outline-dark ms-3' %>
+  </div>
+
+  <div class="row">
+    <% @items.each do |item| %>
+      <% if item.dish? %>
+        <div class="col-md-4">
+          <div class="card mb-3 shadow-sm">
+            <% if item.image.attached? %>
+              <%= image_tag item.image, class: 'card-img-top img-fluid' %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= item.name %></h5>
+              <p class="card-text"><%= item.description %></p>
+              <p class="card-text">
+                <small class="text-muted"><%= item.calories %> cal</small>
+              </p>
+              <div class="d-flex">
+                <%= link_to t('.edit'), edit_establishment_item_path(@establishment, item), class: 'btn btn-sm btn-outline-dark' %>
+                <%= button_to t('.delete'), establishment_item_path(@establishment, item), method: :delete, data: { confirm: t('.confirm') }, class: 'btn btn-sm btn-outline-danger ms-3' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</section>
 
 
-<% if @establishment.opening_hours.empty? %>
-  <%= link_to "Adicionar Horários", new_establishment_opening_hour_path(@establishment) %>
-<% end %>

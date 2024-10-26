@@ -1,0 +1,64 @@
+class ItemsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_establishment_check_user
+  before_action :set_item, only: [:edit, :update, :destroy]
+
+  def new
+    @item = Item.new
+  end
+  
+  def create
+    @item = Item.new(set_item_params)
+    @item.establishment = @establishment
+
+    if @item.save
+      flash[:notice] = t '.dish_notice' if @item.item_type == 'dish'
+      flash[:notice] = t '.bevarage_notice' if @item.item_type == 'beverage'
+      redirect_to @establishment
+    else
+      flash.now[:alert] = t '.dish_alert' if @item.item_type == 'dish'
+      flash.now[:alert] = t '.bevarage_alert' if @item.item_type == 'beverage'
+      render 'new'
+    end
+  end
+
+  def edit
+  end
+
+  def update
+      if @item.update(set_item_params)
+        flash[:notice] = t '.edit_success'
+        redirect_to @establishment
+      else
+        flash.now[:alert] = t '.edit_fail'
+        render 'edit'
+      end
+  end
+  
+  def destroy
+    if @item.destroy
+      flash[:notice] = t '.delete_success'
+      redirect_to @establishment
+    else
+      flash[:alert] = t '.delete_fail'
+      redirect_to @establishment
+    end
+  end
+
+
+  private
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def set_establishment_check_user
+    @establishment = Establishment.find(params[:establishment_id])
+    return redirect_to root_path, alert: I18n.t('route_negated') if @establishment.user != current_user
+  end
+
+  def set_item_params
+    params.require(:item).permit(:name, :description, :calories, :item_type, :image)
+  end  
+
+end

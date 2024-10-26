@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    attributes:
+      item:
+        item_type: 'Tipo'
+        dish: 'Prato'
+        beverages: 'Bebida'
+        name: 'Nome do Item'
+        description: 'Descrição'
+        calories: 'Calorias'
+    models:
+      item:
+        one: 'Item'
+        other: 'Itens'

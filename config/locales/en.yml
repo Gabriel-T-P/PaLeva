@@ -1,5 +1,6 @@
 en:
   hello: "Hello world"
+  itemtype: 'Type'
   minimum_password_length:
         one: "(%{count} character minimum)"
         other: "(%{count} characters minimum)"

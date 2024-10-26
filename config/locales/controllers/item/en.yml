@@ -1,0 +1,24 @@
+pt-BR:
+  items:
+    form:
+      image: 'Register Image'
+      errors_message: 'Check the following errors'
+      dish: 'Dish'
+      beverage: 'Beverage'
+      save: 'Save'
+      cancel: 'Cancel'
+    new:
+      title: 'Create New Item'
+    create:
+      dish_notice: 'Dish registered with success'
+      dish_alert: 'Error in creating the dish'
+      bevarage_notice: 'Bevarage created with success'
+      bevarage_alert: 'Error in creating the bevarage'
+    edit:
+      title: 'Editar Item'
+    update:
+      edit_success: 'Succeed on edit'
+      edit_fail: 'Failed on edit'
+    destroy:
+      delete_success: 'Success on delete'
+      delete_fail: 'Fail on delete'

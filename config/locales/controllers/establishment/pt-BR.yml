@@ -11,3 +11,10 @@ pt-BR:
       save: 'Cadastrar'
     show:
       title: 'Informações Sobre o Estabelecimento'
+      opening_hour_title: 'Horários de Funcionamento do Estabelecimento'
+      edit_opening_hour: 'Editar Horário de Funcionamento'
+      dish_title: 'Pratos Cadastrados'
+      add_new_dish: 'Adicionar Novo Prato'
+      edit: 'Editar'
+      delete: 'Deletar'
+      confirm: 'Confirmar'

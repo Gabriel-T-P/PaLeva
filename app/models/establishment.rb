@@ -1,5 +1,6 @@
 class Establishment < ApplicationRecord
   has_many :opening_hours, dependent: :destroy
+  has_many :items, dependent: :destroy
   belongs_to :user
   
   before_validation :generate_code, on: :create

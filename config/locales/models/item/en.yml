@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    attributes:
+      item:
+        item_type: 'Type'
+        dish: 'Dish'
+        beverage: 'Beverage'
+        name: "Item's Name"
+        description: 'Description'
+        calories: 'Calories'
+    models:
+      item:
+        one: 'Item'
+        other: 'Items'
