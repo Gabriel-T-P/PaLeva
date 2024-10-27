@@ -36,7 +36,9 @@
   </div>
   
   <% if @dishs.empty? %>
-    <p class="lead"><%=t '.no_dishes_found'%></p>  
+    <div class="d-flex justify-content-center align-items-center" style="height: 300px;">
+      <p class="lead text-muted text-center"><%= t '.no_dishes_found' %></p>
+    </div>
   <% else %>
     <div class="d-flex justify-content-center">
       <div id="dishCarousel" class="carousel slide col-md-6 col-lg-8" data-bs-ride="carousel">
@@ -51,7 +53,7 @@
                   <h5 class="card-title"><%= item.name %></h5>
                   <p class="card-text"><%= item.description %></p>
                   <p class="card-text">
-                    <small class="text-muted"><%= item.calories %> cal</small>
+                    <small class="text-muted">- <%= item.calories %> cal</small>
                   </p>
                   <div class="d-flex">
                     <%= link_to t('.edit'), edit_establishment_item_path(@establishment, item), class: 'btn btn-sm btn-outline-dark' %>
@@ -82,10 +84,12 @@
     <%= link_to t('.add_new_beverage'), new_establishment_beverage_path(@establishment), class: 'btn btn-outline-dark ms-3' %>
   </div>
    <% if @beverages.empty? %>
-    <p class="lead"><%=t '.no_beverages_found'%></p>
+    <div class="d-flex justify-content-center align-items-center" style="height: 300px;">
+      <p class="lead text-muted text-center"><%= t '.no_beverages_found' %></p>
+    </div>
   <% else %>
     <div class="d-flex justify-content-center">
-      <div id="dishCarousel" class="carousel slide col-md-6 col-lg-8" data-bs-ride="carousel">
+      <div id="beverageCarousel" class="carousel slide col-md-6 col-lg-8" data-bs-ride="carousel">
         <div class="carousel-inner">
           <% @beverages.each_with_index do |item, index| %>
             <div class="carousel-item <%= 'active' if index == 0 %>">
@@ -97,13 +101,8 @@
                   <h5 class="card-title"><%= item.name %></h5>
                   <p class="card-text"><%= item.description %></p>
                   <p class="card-text">
-                    <small class="text-muted"><%= item.calories %> cal</small>
+                    <small class="text-muted"><%=Beverage.human_attribute_name :alcoholic if item.alcoholic%> - <%=item.calories%> cal</small>
                   </p>
-                  <% if item.alcoholic %>
-                    <p class="card-text">
-                      <small class="text-muted"><%= Beverage.human_attribute_name :alcoholic %></small>
-                    </p>                    
-                  <% end %>
                   <div class="d-flex">
                     <%= link_to t('.edit'), edit_establishment_beverage_path(@establishment, item), class: 'btn btn-sm btn-outline-dark' %>
                     <%= button_to t('.delete'), establishment_beverage_path(@establishment, item), method: :delete, data: { confirm: t('.confirm') }, class: 'btn btn-sm btn-outline-danger ms-3' %>
@@ -114,11 +113,11 @@
           <% end %>
         </div>
 
-        <button class="carousel-control-prev" type="button" data-bs-target="#dishCarousel" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#beverageCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#dishCarousel" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#beverageCarousel" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>

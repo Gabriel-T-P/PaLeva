@@ -29,11 +29,6 @@
       </div>
 
       <div class="mb-3">
-        <%= f.label :item_type, class: 'form-label' %>:
-        <%= f.select :item_type, Item.item_types.keys.map { |key| [t(".#{key}"), key] }, {}, class: 'form-select' %>
-      </div>
-
-      <div class="mb-3">
         <%= f.label :image, t('.image'), class: 'form-label' %>:
         <%= f.file_field :image, direct_upload: true, class: 'form-control' %>
       </div>

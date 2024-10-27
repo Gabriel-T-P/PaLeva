@@ -52,6 +52,31 @@ describe 'usuário edita prato' do
     expect(page).to have_content '120 cal'    
   end
 
+  it 'e imagem com sucesso' do
+    # Arrange
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+    dish = Beverage.create!(name: 'Cerveja', description: 'Mais comum do Brasil', calories: '140', item_type: 'beverage', establishment: establishment, alcoholic: true)
+
+    # Act
+    login_as user
+    visit root_path
+    click_on 'Meu Estabelecimento'
+    within '#Beverages' do
+      click_on 'Editar'
+    end
+    attach_file 'Escolher Imagem', Rails.root.join('spec', 'support', 'teste2.png')
+    click_on 'Salvar'
+
+    # Assert
+    expect(page).to have_content 'Bebida editada com sucesso'  
+    expect(page).to have_content 'Cerveja'
+    expect(page).to have_content 'Mais comum do Brasil' 
+    expect(page).to have_css 'img[src*="teste2.png"]'
+  end
+
+
   it 'e altera Alcoólicidade da bebida' do
     # Arrange
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
@@ -66,7 +91,7 @@ describe 'usuário edita prato' do
     within '#Beverages' do
       click_on 'Editar'
     end
-    check 'Alcoólica'
+    uncheck 'Alcoólica'
     click_on 'Salvar'
 
     # Assert

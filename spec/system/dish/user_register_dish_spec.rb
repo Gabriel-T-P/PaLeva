@@ -17,11 +17,8 @@ describe 'usuário cadastra prato' do
     expect(page).to have_field 'Nome do Item'
     expect(page).to have_field 'Descrição' 
     expect(page).to have_field 'Calorias'
-    expect(page).to have_field 'Tipo'
     expect(page).to have_field 'Cadastrar Imagem'
-    expect(page).to have_button 'Salvar'  
-    expect(page).to have_content 'Prato'
-    expect(page).to have_content 'Bebida'
+    expect(page).to have_button 'Salvar'
   end
 
   it 'com sucesso' do
@@ -38,10 +35,8 @@ describe 'usuário cadastra prato' do
     fill_in 'Nome do Item',	with: 'Lasanha'
     fill_in 'Descrição',	with: 'Macarrão, carne moída ou frango e molho' 
     fill_in 'Calorias',	with: '400'
-    select 'Prato', from: 'Tipo'
     attach_file 'Cadastrar Imagem', Rails.root.join('spec', 'support', 'test.jpg')
     click_on 'Salvar'
-
 
     # Assert
     expect(page).to have_content 'Prato cadastrado com sucesso'
@@ -78,7 +73,7 @@ describe 'usuário cadastra prato' do
   end
   
 
-  it 'porém clicou em bebida, e não vê item' do
+  it 'e não vê nenhuma bebida' do
     # Arrange
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
@@ -92,14 +87,16 @@ describe 'usuário cadastra prato' do
     fill_in 'Nome do Item',	with: 'Lasanha'
     fill_in 'Descrição',	with: 'Macarrão, carne moída ou frango e molho' 
     fill_in 'Calorias',	with: '400'
-    select 'Bebida', from: 'Tipo'
     click_on 'Salvar'
 
     # Assert
     within '#Dishs' do
-      expect(page).not_to have_content 'Lasanha'
-      expect(page).not_to have_content 'Macarrão, carne moída ou frango e molho'
-      expect(page).not_to have_content '400 cal'
+      expect(page).to have_content 'Lasanha'
+      expect(page).to have_content 'Macarrão, carne moída ou frango e molho'
+      expect(page).to have_content '400 cal'
+    end
+    within '#Beverages' do
+      expect(page).to have_content 'Nenhuma bebida cadastrada encontrada'  
     end
   end
 

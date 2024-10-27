@@ -21,11 +21,8 @@ describe 'usuário edita prato' do
     expect(page).to have_field 'Nome do Item'
     expect(page).to have_field 'Descrição' 
     expect(page).to have_field 'Calorias'
-    expect(page).to have_field 'Tipo'
     expect(page).to have_field 'Cadastrar Imagem'
     expect(page).to have_button 'Salvar'  
-    expect(page).to have_content 'Prato'
-    expect(page).to have_content 'Bebida'
   end
   
   it 'com sucesso' do
@@ -54,6 +51,30 @@ describe 'usuário edita prato' do
     expect(page).to have_content '452 cal'    
   end
   
+  it 'e imagem com sucesso' do
+    # Arrange
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+    dish = Item.create!(name: 'Lasanha', description: 'Alma do macarrão', calories: '400', item_type: 'dish', establishment: establishment)
+
+    # Act
+    login_as user
+    visit root_path
+    click_on 'Meu Estabelecimento'
+    within '#Dishs' do
+      click_on 'Editar'
+    end
+    attach_file 'Cadastrar Imagem', Rails.root.join('spec', 'support', 'teste2.png')
+    click_on 'Salvar'
+
+    # Assert
+    expect(page).to have_content 'Editado com sucesso'  
+    expect(page).to have_content 'Lasanha'
+    expect(page).to have_content 'Alma do macarrão' 
+    expect(page).to have_css 'img[src*="teste2.png"]'
+  end
+
   it 'e não pode alterar pedido de outro estabelecimento' do
     # Arrange
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')

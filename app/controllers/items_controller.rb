@@ -10,14 +10,13 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(set_item_params)
     @item.establishment = @establishment
+    @item.item_type = :dish
 
     if @item.save
-      flash[:notice] = t '.dish_notice' if @item.item_type == 'dish'
-      flash[:notice] = t '.bevarage_notice' if @item.item_type == 'beverage'
+      flash[:notice] = t '.dish_notice'
       redirect_to @establishment
     else
-      flash.now[:alert] = t '.dish_alert' if @item.item_type == 'dish'
-      flash.now[:alert] = t '.bevarage_alert' if @item.item_type == 'beverage'
+      flash.now[:alert] = t '.dish_alert'
       render 'new'
     end
   end
@@ -58,7 +57,7 @@ class ItemsController < ApplicationController
   end
 
   def set_item_params
-    params.require(:item).permit(:name, :description, :calories, :item_type, :image)
+    params.require(:item).permit(:name, :description, :calories, :image)
   end  
 
 end
