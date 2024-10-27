@@ -1,32 +1,31 @@
-class ItemsController < ApplicationController
+class BeveragesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_establishment_check_user
-  before_action :set_item, only: [:edit, :update, :destroy]
+  before_action :set_beverage, only: [:edit, :update, :destroy]
 
   def new
-    @item = Item.new
+    @beverage = Beverage.new
   end
-  
-  def create
-    @item = Item.new(set_item_params)
-    @item.establishment = @establishment
 
-    if @item.save
-      flash[:notice] = t '.dish_notice' if @item.item_type == 'dish'
-      flash[:notice] = t '.bevarage_notice' if @item.item_type == 'beverage'
+  def create
+    @beverage = Beverage.new(set_beverage_params)
+    @beverage.item_type = :beverage
+    @beverage.establishment = @establishment
+
+    if @beverage.save
+      flash[:notice] = t '.beverage_notice'
       redirect_to @establishment
     else
-      flash.now[:alert] = t '.dish_alert' if @item.item_type == 'dish'
-      flash.now[:alert] = t '.bevarage_alert' if @item.item_type == 'beverage'
+      flash.now[:alert] = t '.beverage_alert'
       render 'new'
     end
   end
-
+  
   def edit
   end
-
+  
   def update
-    if @item.update(set_item_params)
+    if @beverage.update(set_beverage_params)
       flash[:notice] = t '.edit_success'
       redirect_to @establishment
     else
@@ -34,9 +33,9 @@ class ItemsController < ApplicationController
       render 'edit'
     end
   end
-  
+
   def destroy
-    if @item.destroy
+    if @beverage.destroy
       flash[:notice] = t '.delete_success'
       redirect_to @establishment
     else
@@ -45,20 +44,20 @@ class ItemsController < ApplicationController
     end
   end
 
-
   private
 
-  def set_item
-    @item = Item.find(params[:id])
+  
+  def set_beverage
+    @beverage = Beverage.find(params[:id])
   end
 
   def set_establishment_check_user
     @establishment = Establishment.find(params[:establishment_id])
     return redirect_to root_path, alert: I18n.t('route_negated') if @establishment.user != current_user
   end
-
-  def set_item_params
-    params.require(:item).permit(:name, :description, :calories, :item_type, :image)
-  end  
+  
+  def set_beverage_params
+    params.require(:beverage).permit(:name, :description, :calories, :alcoholic, :image)
+  end
 
 end

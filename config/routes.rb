@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   resources :establishments, only: [:new, :create, :edit, :update, :show, :destroy] do
     resources :opening_hours, only: [:edit, :update, :new, :create, :destroy]
     resources :items, only: [:new, :create, :edit, :update, :destroy]
+    resources :beverages, only: [:new, :create, :edit, :update, :destroy]
   end
 end

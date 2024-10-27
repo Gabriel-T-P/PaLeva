@@ -1,6 +1,13 @@
-<h1> <%=t '.title'%> </h1>
+<div class="container text-center my-5">
+  <h1 class="display-4 mb-4"><%= t '.title' %></h1>
 
-
-<% if user_signed_in? %>
-  <%= link_to t('.my_establishment'), current_user.establishment %>
-<% end %>
+  <% if user_signed_in? %>
+    <%= link_to t('.my_establishment'), current_user.establishment, class: 'btn btn-dark btn-lg mx-2' %>
+    <% unless current_user.establishment.present? %>
+      <%= link_to t('.register_establishment'), new_establishment_path, class: 'btn btn-dark btn-lg mx-2' %>
+      <p class="lead"><%=t '.please_create_establishment'%></p>
+    <% end %>
+  <% else %>
+    <p class="lead"><%=t '.please_login'%></p>
+  <% end %>
+</div>

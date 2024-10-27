@@ -1,6 +1,6 @@
 <br>
-<div class="container-fluid">
-  <div class="row justify-content-begin">
+<div class="container">
+  <div class="row justify-content-center">
     <div class="col-md-5">
       <div class="card mb-4 shadow-sm">
         <div class="card-header">
@@ -21,7 +21,7 @@
 </div>
 
 <section id="OpeningHours">
-  <div class="d-flex align-items-center mb-3">
+  <div class="d-flex align-items-center justify-content-center mb-3">
     <h3> <%=t '.opening_hour_title'%> </h3>
     <% if @establishment.opening_hours.empty? %>
       <%= link_to t('.edit_opening_hour'), new_establishment_opening_hour_path(@establishment), class: 'btn btn-outline-dark ms-3' %>
@@ -30,35 +30,101 @@
 </section>
 
 <section id="Dishs">
-  <div class="d-flex align-items-center mb-3">
+  <div class="d-flex align-items-center justify-content-center mb-3">
     <h3><%= t '.dish_title' %></h3>
     <%= link_to t('.add_new_dish'), new_establishment_item_path(@establishment), class: 'btn btn-outline-dark ms-3' %>
   </div>
-
-  <div class="row">
-    <% @items.each do |item| %>
-      <% if item.dish? %>
-        <div class="col-md-4">
-          <div class="card mb-3 shadow-sm">
-            <% if item.image.attached? %>
-              <%= image_tag item.image, class: 'card-img-top img-fluid' %>
-            <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= item.name %></h5>
-              <p class="card-text"><%= item.description %></p>
-              <p class="card-text">
-                <small class="text-muted"><%= item.calories %> cal</small>
-              </p>
-              <div class="d-flex">
-                <%= link_to t('.edit'), edit_establishment_item_path(@establishment, item), class: 'btn btn-sm btn-outline-dark' %>
-                <%= button_to t('.delete'), establishment_item_path(@establishment, item), method: :delete, data: { confirm: t('.confirm') }, class: 'btn btn-sm btn-outline-danger ms-3' %>
+  
+  <% if @dishs.empty? %>
+    <p class="lead"><%=t '.no_dishes_found'%></p>  
+  <% else %>
+    <div class="d-flex justify-content-center">
+      <div id="dishCarousel" class="carousel slide col-md-6 col-lg-8" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <% @dishs.each_with_index do |item, index| %>
+            <div class="carousel-item <%= 'active' if index == 0 %>">
+              <div class="card mb-3 shadow-sm">
+                <% if item.image.attached? %>
+                  <%= image_tag item.image, class: 'card-img-top img-fluid', style: 'height: 300px; object-fit: cover;' %>
+                <% end %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= item.name %></h5>
+                  <p class="card-text"><%= item.description %></p>
+                  <p class="card-text">
+                    <small class="text-muted"><%= item.calories %> cal</small>
+                  </p>
+                  <div class="d-flex">
+                    <%= link_to t('.edit'), edit_establishment_item_path(@establishment, item), class: 'btn btn-sm btn-outline-dark' %>
+                    <%= button_to t('.delete'), establishment_item_path(@establishment, item), method: :delete, data: { confirm: t('.confirm') }, class: 'btn btn-sm btn-outline-danger ms-3' %>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          <% end %>
         </div>
-      <% end %>
-    <% end %>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#dishCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#dishCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  <% end %>
+</section>
+
+<section id="Beverages">
+  <div class="d-flex align-items-center justify-content-center mb-3">
+    <h3><%= t '.beverage_title' %></h3>
+    <%= link_to t('.add_new_beverage'), new_establishment_beverage_path(@establishment), class: 'btn btn-outline-dark ms-3' %>
   </div>
+   <% if @beverages.empty? %>
+    <p class="lead"><%=t '.no_beverages_found'%></p>
+  <% else %>
+    <div class="d-flex justify-content-center">
+      <div id="dishCarousel" class="carousel slide col-md-6 col-lg-8" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <% @beverages.each_with_index do |item, index| %>
+            <div class="carousel-item <%= 'active' if index == 0 %>">
+              <div class="card mb-3 shadow-sm">
+                <% if item.image.attached? %>
+                  <%= image_tag item.image, class: 'card-img-top img-fluid', style: 'height: 300px; object-fit: cover;' %>
+                <% end %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= item.name %></h5>
+                  <p class="card-text"><%= item.description %></p>
+                  <p class="card-text">
+                    <small class="text-muted"><%= item.calories %> cal</small>
+                  </p>
+                  <% if item.alcoholic %>
+                    <p class="card-text">
+                      <small class="text-muted"><%= Beverage.human_attribute_name :alcoholic %></small>
+                    </p>                    
+                  <% end %>
+                  <div class="d-flex">
+                    <%= link_to t('.edit'), edit_establishment_beverage_path(@establishment, item), class: 'btn btn-sm btn-outline-dark' %>
+                    <%= button_to t('.delete'), establishment_beverage_path(@establishment, item), method: :delete, data: { confirm: t('.confirm') }, class: 'btn btn-sm btn-outline-danger ms-3' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#dishCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#dishCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  <% end %>
 </section>
 
 

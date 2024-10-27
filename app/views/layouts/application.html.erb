@@ -23,17 +23,6 @@
         <div class="d-flex justify-content-between w-100">
           <div class="d-flex">
             <%= link_to 'PaLevá', root_path, class: 'navbar-brand' %>
-
-            <% unless Rails.env.test? %>
-              <% if user_signed_in? && current_user.establishment.present? %>    
-                <div class="dropdown me-4">
-                  <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">Cadastro</button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><%= link_to 'Cadastrar Item', new_establishment_item_path(current_user.establishment), class: 'dropdown-item' %></li>
-                  </ul>
-                </div>
-              <% end %>
-            <% end %>
           </div>
 
           <div class="d-inline-flex align-items-center">
@@ -49,9 +38,20 @@
 
     </header>
 
-    <div>
-      <%=notice%>
-      <%=alert%>
+    <div class="container my-3">
+      <% if notice %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= notice %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= alert %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
     </div>
 
     <%= yield %>

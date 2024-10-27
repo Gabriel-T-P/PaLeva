@@ -3,3 +3,6 @@ pt-BR:
    index:
     title: 'Você está no Home'
     my_establishment: 'Meu Estabelecimento'
+    register_establishment: 'Registrar Estabelecimento'
+    please_login: 'Para acessar suas informações, por favor faça login'
+    please_create_establishment: 'Para ver mais informações, por favor crie um estabelecimento'

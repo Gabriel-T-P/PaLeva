@@ -2,19 +2,24 @@ pt-BR:
   establishments:
     new:
       title: 'Register New Establishment'
-      errors_message: 'Check the following errors'
       alert: 'You can not register another establishment'
     create:
         notice: 'Establishment registered successfully'
         alert: 'Something went wrong'
     form:
       save: 'Register'
+      cancel: 'Cancelar'
+      errors_message: 'Check the following errors'
     show:
       title: 'More Info About the Establishment'
       opening_hour_title: "Establishment's Open Hours"
       edit_opening_hour: 'Change Open Hours'
       dish_title: 'Registered Dishs'
+      beverage_title: 'Registered Beverages'
       add_new_dish: 'Add New Dish'
+      add_new_dish: 'Add New Beverage'
       edit: 'Edit'
       delete: 'Delete'
       confirm: 'Confirm'
+      no_dishes_found: 'No registered dishes found'
+      no_dishes_found: 'No registered beverages found'

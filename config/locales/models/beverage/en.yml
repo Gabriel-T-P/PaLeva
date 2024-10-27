@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    attributes:
+      beverage:
+        name: "Beverage's Name"
+        alcoholic: 'Alcoholic'
+    models:
+      beverage:
+        one: 'Beverage'
+        other: 'Beverages'

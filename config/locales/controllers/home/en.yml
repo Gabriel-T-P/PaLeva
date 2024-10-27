@@ -3,3 +3,6 @@ en:
    index:
     title: 'You are in Home'
     my_establishment: 'My Establishment'
+    register_establishment: 'Register Establishment'
+    please_login: 'To view more info, please login'
+    please_create_establishment: 'To view more info, please create an establishment'

@@ -4,7 +4,8 @@ class EstablishmentsController < ApplicationController
   skip_before_action :check_admin_establishment, only: [:create, :new]
 
   def show
-    @items = @establishment.items
+    @dishs = @establishment.items.dish
+    @beverages = @establishment.items.beverage
   end
 
   def new

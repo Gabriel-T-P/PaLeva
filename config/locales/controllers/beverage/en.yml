@@ -1,0 +1,21 @@
+pt-BR:
+  beverages:
+    form:
+      errors_message: 'Check the folowwing errors'
+      dish: 'Prato'
+      beverage: 'Bebida'
+      save: 'Save'
+      cancel: 'Cancel'
+    new:
+      title: 'Add a new beverage'
+    create:
+      beverage_notice: 'Beverage created'
+      beverage_alert: 'Error in creating the beverage'
+    edit:
+      title: 'Edit Beverage'
+    update:
+      edit_success: 'Beverage edited'
+      edit_fail: 'Failed in editing the beverage'
+    destroy:
+      delete_success: 'Beverage deleted'
+      delete_fail: 'Failed in deleting the beverage'

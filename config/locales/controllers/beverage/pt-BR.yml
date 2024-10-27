@@ -1,0 +1,20 @@
+pt-BR:
+  beverages:
+    form:
+      image: 'Escolher Imagem'
+      errors_message: 'Verifique os seguintes erros'
+      save: 'Salvar Bebida'
+      cancel: 'Cancelar'
+    new:
+      title: 'Adicione uma nova bebida'
+    create:
+      beverage_notice: 'Bebida cadastrada com sucesso'
+      beverage_alert: 'Falha ao cadastrar a bebida'
+    edit:
+      title: 'Editar Bebida'
+    update:
+      edit_success: 'Bebida editada com sucesso'
+      edit_fail: 'Falha ao editar a bebida'
+    destroy:
+      delete_success: 'Bebida deletada com sucesso'
+      delete_fail: 'Falha ao deletar a bebida'
