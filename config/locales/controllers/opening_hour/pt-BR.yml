@@ -1,0 +1,19 @@
+pt-BR:
+  opening_hours:
+    form:
+      save: 'Salvar Horário'
+      cancel: 'Cancelar'
+      errors_message: 'Verifique os seguintes erros'
+    new:
+      title: 'Adicione Um Novo Horário'
+    create:
+      notice: 'Horário adicionado com sucesso'
+      alert: 'Erro ao adicionar o horário'
+    edit:
+      title: 'Editar Horário'
+    update:
+      edit_success: 'Horário editado com sucesso'
+      edit_fail: 'Falha ao editar o horário'
+    destroy:
+      delete_success: 'Horário deletado com sucesso'
+      delete_fail: 'Falha ao deletar o horário'

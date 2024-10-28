@@ -1,6 +1,6 @@
 class EstablishmentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_establishment_check_user, only: [:edit, :show]
+  before_action :set_establishment_check_user, only: [:edit, :update, :show]
   skip_before_action :check_admin_establishment, only: [:create, :new]
 
   def show
@@ -28,6 +28,17 @@ class EstablishmentsController < ApplicationController
 
   def edit
   end
+
+  def update
+    if @establishment.update(set_params)
+      flash[:notice] = t '.notice'
+      redirect_to @establishment
+    else
+      flash[:alert] = t '.alert'
+      render 'edit'
+    end
+  end
+  
   
   private
 

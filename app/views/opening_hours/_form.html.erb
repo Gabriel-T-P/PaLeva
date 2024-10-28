@@ -1,0 +1,54 @@
+<% if @opening_hour.errors.any? %>
+  <div class="alert alert-danger">
+    <h4 class="alert-heading"> <%=t '.errors_message'%>:</h4>
+    <ul class="mb-0">
+      <% @opening_hour.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="d-flex justify-content-center align-items-center">
+  <div class="col-md-6">
+    <%= form_with model: [establishment, opening_hour], class: 'form-horizontal' do |f| %>
+      <div class="form-group row">
+        <%= f.label :day_of_week, class: 'col-sm-4 col-form-label' %>
+        <div class="col-sm-8">
+          <%= f.select :day_of_week, I18n.t('date.day_names').each_with_index.map { |day, i| [day, i] }, {}, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :opening_time, class: 'col-sm-4 col-form-label' %>
+        <div class="col-sm-8">
+          <%= f.time_field :opening_time, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :closing_time, class: 'col-sm-4 col-form-label' %>
+        <div class="col-sm-8">
+          <%= f.time_field :closing_time, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :closed, class: 'col-sm-4 col-form-label' %>
+        <div class="col-sm-8">
+          <div class="form-check">
+            <%= f.check_box :closed, class: 'form-check-input' %>
+            <%= f.label :closed, class: 'form-check-label' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-8 offset-sm-4">
+          <%= f.submit t('.save'), class: 'btn btn-dark' %>
+          <%= link_to t('.cancel'), @establishment, class: 'btn btn-danger' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

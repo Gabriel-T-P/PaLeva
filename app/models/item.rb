@@ -4,7 +4,8 @@ class Item < ApplicationRecord
 
   validates :name, :description, :calories, :item_type, presence: true
   validates :name, uniqueness: { case_sensitive: false }
-  validates :calories, numericality: { only_integer: true }
+  validates :calories, numericality: { only_integer: true }  
+  
 
   enum :item_type, { :dish => 2, :beverage => 5 }
 end

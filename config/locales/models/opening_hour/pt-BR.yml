@@ -5,7 +5,7 @@ pt-BR:
         day_of_week: 'Dia da Semana'
         opening_time: 'Horário de Abertura'
         closing_time: 'Horário de Fechamento'
-        closed: 'Não Abre'
+        closed: 'Fechado'
     models:
       opening_hour:
         one: 'Horário de Funcionamento'

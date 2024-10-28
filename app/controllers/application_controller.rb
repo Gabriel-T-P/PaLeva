@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
   def check_admin_establishment
     return unless user_signed_in?
     return unless current_user.admin? && current_user.establishment.nil?
-    return if request.path == new_establishment_path
   
     redirect_to new_establishment_path, alert: I18n.t('redirect_establishment_alert')
   end

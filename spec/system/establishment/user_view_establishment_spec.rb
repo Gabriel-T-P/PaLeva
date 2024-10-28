@@ -67,13 +67,13 @@ describe 'usuário visita informações do estabelecimento' do
     login_as user
     visit root_path
     click_on 'Meu Estabelecimento'
-    click_on 'Editar Horário de Funcionamento'
+    click_on 'Adicionar Horário de Funcionamento'
 
     # Assert
     expect(page).to have_field 'Dia da Semana'
     expect(page).to have_field 'Horário de Abertura'
     expect(page).to have_field 'Horário de Fechamento' 
-    expect(page).to have_field 'Não Abre'
+    expect(page).to have_field 'Fechado'
     expect(page).to have_content 'segunda-feira'
     expect(page).to have_content 'terça-feira'  
     expect(page).to have_content 'quarta-feira'  

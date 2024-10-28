@@ -1,0 +1,19 @@
+pt-BR:
+  opening_hours:
+    form:
+      save: 'Save'
+      cancel: 'Cancel'
+      errors_message: 'Check the folowing errors'
+    new:
+      title: 'Add New Opening Hour'
+    create:
+      notice: 'Created with success'
+      alert: 'Something went wrong'
+    edit:
+      title: 'Edit Opening Hour'
+    update:
+      edit_success: 'Edited with success'
+      edit_fail: 'Something went wrong'
+    destroy:
+      delete_success: 'Deleted with success'
+      delete_fail: 'Something went wrong'

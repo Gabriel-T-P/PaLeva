@@ -4,15 +4,22 @@ pt-BR:
       title: 'Cadastrar Novo Estabelecimento'
       alert: 'Você não pode cadastrar outro estabelecimento'
     create:
-        notice: 'Estabelecimento criado com sucesso'
-        alert: 'Cadastro não foi concluído'
+      notice: 'Estabelecimento criado com sucesso'
+      alert: 'Cadastro não foi concluído'
+    edit:
+      title: 'Mudar as Informações do Estabelecimento'
+    update:
+      notice: 'Atualizado com sucesso'
+      alert: 'Erro ao atualizar os dados'
     form:
       save: 'Cadastrar'
       cancel: 'Cancelar'
       errors_message: 'Verifique os seguintes erros'
     show:
       title: 'Informações Sobre o Estabelecimento'
+      edit_establishment: 'Editar Informações'
       opening_hour_title: 'Horários de Funcionamento do Estabelecimento'
+      add_opening_hour: 'Adicionar Horário de Funcionamento'
       edit_opening_hour: 'Editar Horário de Funcionamento'
       dish_title: 'Pratos Cadastrados'
       beverage_title: 'Bebidas Cadastradas'
@@ -23,3 +30,4 @@ pt-BR:
       confirm: 'Confirmar'
       no_dishes_found: 'Nenhum prato cadastrado encontrado'
       no_beverages_found: 'Nenhuma bebida cadastrada encontrada'
+      please_add_opening_hour: 'Por favor adicione um horário de funcionamento'

@@ -179,7 +179,7 @@ RSpec.describe User, type: :model do
   describe '#set_default_role' do
     it 'adiciona admin quando criado pela 1ª vez' do
       # Arrange
-      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+      user = User.new(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
 
       # Act
       result = user.admin?
@@ -190,7 +190,7 @@ RSpec.describe User, type: :model do
     
     it 'não adiciona admin caso seja definido role' do
       # Arrange
-      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', role: 'user')
+      user = User.new(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', role: 'user')
 
       # Act
       result = user.admin?
