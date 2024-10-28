@@ -101,6 +101,39 @@ RSpec.describe OpeningHour, type: :model do
         expect(result).to be false  
       end
       
+      it 'já existir cadastro de outro estabelecimento' do
+        # Arrange
+        user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+        user2 = User.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011')
+        establishment1 = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: 'Rio Branco, Deodoro', user: user1, cnpj: CNPJ.generate, 
+                                              email: 'carlosjonas@email.com', phone_number: '99999043113')
+        establishment2 = Establishment.create!(corporate_name: 'Teste inc', trade_name: 'Teste Establishment', full_address: 'Av Teste, 213', user: user2, cnpj: CNPJ.generate, 
+                                              email: 'teste1234@email.com', phone_number: '99999043113')
+        opening_hour1 = OpeningHour.create!(day_of_week: 0, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment1)
+        opening_hour2 = OpeningHour.new(day_of_week: 0, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment2)
+
+        # Act
+        result = opening_hour2.valid?
+
+        # Assert
+        expect(result).to be true
+      end
+      
+      it 'já existir um cadastro e aparece mensagem personalizada' do
+        # Arrange
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+                                              email: 'carlosjonas@email.com', phone_number: '99999043113')
+        opening_hour1 = OpeningHour.create!(day_of_week: 0, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
+        opening_hour2 = OpeningHour.new(day_of_week: 0, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
+
+        # Act
+        opening_hour2.valid?
+        result = opening_hour2.errors.full_messages
+
+        # Assert
+        expect(result).to include 'Dia da Semana Dia da semana já cadastrado, por favor faça a edição do dia ao ínves de um novo cadastro'
+      end
     end
     
     context 'quando horário de abertura' do

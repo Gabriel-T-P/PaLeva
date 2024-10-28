@@ -154,7 +154,7 @@ describe 'usuário cadastra horário de abertura' do
 
     # Assert
     expect(page).to have_content 'Erro ao adicionar o horário'
-    expect(page).to have_content 'Dia da Semana já está em uso'
+    expect(page).to have_content 'Dia da Semana Dia da semana já cadastrado, por favor faça a edição do dia ao ínves de um novo cadastro'
   end
 
   it 'no estabelecimento de outro usuário' do

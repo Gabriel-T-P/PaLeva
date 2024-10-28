@@ -7,6 +7,7 @@ pt-BR:
   login: 'Entrar'
   logout: 'Sair'
   redirect_establishment_alert: 'Você precisa completar o cadastro do estabelecimento'
+  day_already_used: 'Dia da semana já cadastrado, por favor faça a edição do dia ao ínves de um novo cadastro'
   route_negated: 'Você não possui acesso a essa página'
   hour: 'horas'
   to: 'às'
