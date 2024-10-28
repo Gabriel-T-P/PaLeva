@@ -10,3 +10,5 @@ pt-BR:
   route_negated: 'Você não possui acesso a essa página'
   hour: 'horas'
   to: 'às'
+  yes: 'sim'
+  no: 'não'

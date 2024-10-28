@@ -1,7 +1,18 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_establishment_check_user
-  before_action :set_item, only: [:edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+
+  def index
+    if params[:query].present?
+      @items = Item.where("name LIKE :query OR description LIKE :query", query: "%#{params[:query]}%")
+    else
+      @items = Item.all
+    end
+  end
+
+  def show
+  end
 
   def new
     @item = Item.new

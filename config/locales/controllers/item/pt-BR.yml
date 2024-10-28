@@ -7,6 +7,18 @@ pt-BR:
       beverage: 'Bebida'
       save: 'Salvar'
       cancel: 'Cancelar'
+    show:
+      title: 'Informações do Prato'
+      no_image_found: 'Nenhuma imagem cadastrada'
+      edit: 'Editar Prato'
+      delete: 'Deletar Prato'
+      confirm: 'Confirmar'
+    index:
+      title: 'Pratos e Bebidas'
+      search_for: 'Buscar por nome ou descrição'
+      search: 'Buscar'
+      no_search_found: 'Nenhum item cadastrado com a informação pedida'
+      no_image_found: 'Nenhuma imagem encontrada'
     new:
       title: 'Cadastrar Novo Item'
     create:

@@ -7,6 +7,18 @@ pt-BR:
       beverage: 'Beverage'
       save: 'Save'
       cancel: 'Cancel'
+    show:
+      title: "Dish's Information"
+      no_image_found: 'No image found'
+      edit: 'Edit Dish'
+      delete: 'Delete Dish'
+      confirm: 'Confirm'
+    index:
+      title: 'Dishs and Beverages'
+      search_for: 'Search for name or description'
+      search: 'Search'
+      no_search_found: 'No item found'
+      no_image_found: 'No image found'
     new:
       title: 'Create New Item'
     create:

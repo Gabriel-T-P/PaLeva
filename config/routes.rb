@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   root "home#index"
   resources :establishments, only: [:new, :create, :edit, :update, :show, :destroy] do
     resources :opening_hours, only: [:edit, :update, :new, :create, :destroy]
-    resources :items, only: [:new, :create, :edit, :update, :destroy]
-    resources :beverages, only: [:new, :create, :edit, :update, :destroy]
+    resources :items, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    resources :beverages, only: [:show, :new, :create, :edit, :update, :destroy]
   end
 end

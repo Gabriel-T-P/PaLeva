@@ -6,6 +6,14 @@ pt-BR:
       beverage: 'Bebida'
       save: 'Save'
       cancel: 'Cancel'
+    show:
+      title: 'Edit Beverage'
+      no_image_found: 'No image found'
+      edit: 'Save'
+      delete: 'Delete'
+      confirm: 'Confirm'
+      yes: 'yes'
+      no: 'no'
     new:
       title: 'Add a new beverage'
     create:

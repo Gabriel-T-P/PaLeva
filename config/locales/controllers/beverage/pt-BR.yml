@@ -5,6 +5,13 @@ pt-BR:
       errors_message: 'Verifique os seguintes erros'
       save: 'Salvar Bebida'
       cancel: 'Cancelar'
+      confirm: 'Confirmar'
+    show:
+      title: 'Editar Informações da Bebida'
+      no_image_found: 'Nenhuma imagem cadastrada'
+      edit: 'Editar Bebida'
+      delete: 'Deletar Bebida'
+      confirm: 'Confirma'
     new:
       title: 'Adicione uma nova bebida'
     create:
