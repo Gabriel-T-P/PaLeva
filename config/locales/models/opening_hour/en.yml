@@ -10,3 +10,10 @@ pt-BR:
       opening_hour:
         one: 'Opening Hour'
         other: 'Opening Hours'
+    errors:
+      models:
+        opening_hour:
+          attributes:
+            opening_time:
+              before_closing_time: 'must be before Closing time'
+              opening_time_different_closing_time: 'must be different from Closing time'

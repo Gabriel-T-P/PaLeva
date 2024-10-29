@@ -10,3 +10,10 @@ pt-BR:
       opening_hour:
         one: 'Horário de Funcionamento'
         other: 'Horários de Funcionamento'
+    errors:
+      models:
+        opening_hour:
+          attributes:
+            opening_time:
+              before_closing_time: 'deve ser antes ho Horário de Fechamento'
+              opening_time_different_closing_time: 'deve ser diferente de Horário de Fechamento'

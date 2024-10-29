@@ -30,6 +30,52 @@ RSpec.describe OpeningHour, type: :model do
       expect(result).to be false
     end
   end
+
+  describe '#opening_time_before_closing_time' do
+    it 'horário de abertura menor que o horário de encerramento' do
+      # Arrange  
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+                                            email: 'carlosjonas@email.com', phone_number: '99999043113')
+      opening_hour = OpeningHour.new(day_of_week: 1, closed: true,opening_time:'10:00', closing_time: '20:00', establishment: establishment)
+
+      # Act
+      result = opening_hour.valid?
+
+      # Assert
+      expect(result).to be true  
+    end
+    
+    it 'horário de abertura maior que o horário de encerramento' do
+      # Arrange  
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+                                            email: 'carlosjonas@email.com', phone_number: '99999043113')
+      opening_hour = OpeningHour.new(day_of_week: 1, closed: true,opening_time:'22:00', closing_time: '20:00', establishment: establishment)
+
+      # Act
+      result = opening_hour.valid?
+
+      # Assert
+      expect(result).to be false
+      expect(opening_hour.errors.full_messages).to include 'Horário de Abertura deve ser antes ho Horário de Fechamento' 
+    end
+
+    it 'horário de abertura diferente do horário de fechamento' do
+      # Arrange  
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+                                            email: 'carlosjonas@email.com', phone_number: '99999043113')
+      opening_hour = OpeningHour.new(day_of_week: 1, closed: true,opening_time:'20:00', closing_time: '20:00', establishment: establishment)
+
+      # Act
+      result = opening_hour.valid?
+
+      # Assert
+      expect(result).to be false
+      expect(opening_hour.errors.full_messages).to include 'Horário de Abertura deve ser diferente de Horário de Fechamento' 
+    end
+  end
   
   describe '#valid?' do
 
@@ -183,7 +229,7 @@ RSpec.describe OpeningHour, type: :model do
       end
     end
     
-    context 'quando horário de fechamento' do
+    context 'quando horário de encerramento' do
       it 'estiver presente' do
         # Arrange  
         user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')

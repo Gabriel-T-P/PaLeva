@@ -4,10 +4,12 @@
   <% if user_signed_in? %>
     <%= link_to t('.my_establishment'), current_user.establishment, class: 'btn btn-dark btn-lg mx-2' %>
     <%= link_to t('.search_items'), establishment_items_path(current_user.establishment), class: 'btn btn-dark btn-lg mx-2' %>
+
     <% unless current_user.establishment.present? %>
       <%= link_to t('.register_establishment'), new_establishment_path, class: 'btn btn-dark btn-lg mx-2' %>
       <p class="lead"><%=t '.please_create_establishment'%></p>
     <% end %>
+
   <% else %>
     <p class="lead"><%=t '.please_login'%></p>
   <% end %>
