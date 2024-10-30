@@ -1,16 +1,25 @@
-
+<% if portion.errors.any? %>
+  <div class="alert alert-danger">
+    <h4 class="alert-heading"> <%=t '.errors_message'%>:</h4>
+    <ul class="mb-0">
+      <% portion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <div class="d-flex justify-content-center">
   <div class="col-md-6">
     <%= form_with model: [establishment, parent, portion], class: 'border p-4 shadow-sm' do |f| %>
 
       <div class="mb-3">
-        <%= f.label :name, class: 'form-label' %>:
+        <%= f.label :name, class: 'form-label' %>
         <%= f.text_field :name, class: 'form-control' %>
       </div>
 
       <div class="mb-3">
-        <%= f.label :description, class: 'form-label' %>:
+        <%= f.label :description, class: 'form-label' %>
         <%= f.text_field :description, class: 'form-control' %>
       </div>
 
@@ -29,7 +38,11 @@
 
       <div class="d-flex justify-content-between">
         <%= f.submit t('.save'), class: 'btn btn-dark' %>
-        <%= link_to t('.cancel'), establishment_path(establishment), class: 'btn btn-danger ms-3' %>
+        <% if parent.item_type == 'dish' %>
+          <%= link_to t('.cancel'), establishment_item_path(establishment, parent), class: 'btn btn-danger ms-3' %>
+        <% else %>
+          <%= link_to t('.cancel'), establishment_beverage_path(establishment, parent), class: 'btn btn-danger ms-3' %>
+        <% end %>
       </div>
 
     <% end %>

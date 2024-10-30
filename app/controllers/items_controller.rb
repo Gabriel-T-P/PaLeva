@@ -12,6 +12,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @portions = @item.portions
   end
 
   def new

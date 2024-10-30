@@ -6,6 +6,19 @@ class PortionsController < ApplicationController
     @portion = @parent.portions.new
   end
   
+  def create
+    @portion = Portion.new(portion_params)
+    @portion.item = @parent
+
+    if @portion.save
+      flash[:notice] = t '.notice'
+      redirect_to polymorphic_path([@establishment, @parent])
+    else
+      flash.now[:alert] = t '.alert'
+      render 'new'
+    end
+  end
+  
 
   private
 

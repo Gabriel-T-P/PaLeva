@@ -14,6 +14,7 @@ pt-BR:
       confirm: 'Confirma'
       portion_title: 'Porções'
       add_new_portion: 'Adicionar Porção'
+      not: 'Não'
     new:
       title: 'Adicione uma nova bebida'
     create:

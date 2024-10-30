@@ -16,8 +16,8 @@ pt-BR:
       dish_title: 'Nova Porção para o Prato'
       beverage_title: 'Nova Porção para a Bebida'
     create:
-      beverage_notice: 'Porção cadastrada com sucesso'
-      beverage_alert: 'Falha ao cadastrar a porção'
+      notice: 'Porção cadastrada com sucesso'
+      alert: 'Falha ao cadastrar a porção'
     edit:
       title: 'Editar Porção'
     update:
