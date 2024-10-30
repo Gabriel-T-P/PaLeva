@@ -7,11 +7,13 @@ pt-BR:
       cancel: 'Cancelar'
       confirm: 'Confirmar'
     show:
-      title: 'Editar Informações da Bebida'
+      title: 'Informações do Modelo da Bebida'
       no_image_found: 'Nenhuma imagem cadastrada'
       edit: 'Editar Bebida'
       delete: 'Deletar Bebida'
       confirm: 'Confirma'
+      portion_title: 'Porções'
+      add_new_portion: 'Adicionar Porção'
     new:
       title: 'Adicione uma nova bebida'
     create:

@@ -13,8 +13,9 @@ describe 'usuário deleta bebida' do
     visit root_path
     click_on 'Meu Estabelecimento'
     within '#Beverages' do
-      click_on 'Deletar'
+      click_on 'Cerveja'
     end
+    click_on 'Deletar'
 
     # Act
     expect(current_path).to eq establishment_path(establishment)

@@ -13,6 +13,8 @@ pt-BR:
       edit: 'Editar Prato'
       delete: 'Deletar Prato'
       confirm: 'Confirmar'
+      portion_title: 'Porções'
+      add_new_portion: 'Adicionar Porção'      
     index:
       title: 'Pratos e Bebidas'
       search_for: 'Buscar por nome ou descrição'

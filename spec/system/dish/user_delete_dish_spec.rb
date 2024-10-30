@@ -13,8 +13,9 @@ describe 'usuário deleta prato' do
     visit root_path
     click_on 'Meu Estabelecimento'
     within '#Dishs' do
-      click_on 'Deletar'
+      click_on 'Lasanha'
     end
+    click_on 'Deletar'
 
     # Act
     expect(current_path).to eq establishment_path(establishment)

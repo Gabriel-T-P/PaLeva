@@ -1,0 +1,3 @@
+<h1 class="display-4 text-center my-4"> <%= @parent.item_type=='dish' ? t('.dish_title') : t('.beverage_title') %> <%=@parent.name%></h1>
+
+<%= render 'form', portion: @portion, parent: @parent, establishment: @establishment %>

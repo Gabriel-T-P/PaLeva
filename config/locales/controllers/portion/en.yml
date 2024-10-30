@@ -1,0 +1,28 @@
+pt-BR:
+  portions:
+    form:
+      image: 'Choose Image'
+      errors_message: 'Check the following errors'
+      save: 'Save Portion'
+      cancel: 'Cancel'
+      confirm: 'Confirm'
+    show:
+      title: 'Informations of the Model'
+      no_image_found: 'No image found'
+      edit: 'Edit Portion'
+      delete: 'Delete Portion'
+      confirm: 'Confirm'
+    new:
+      dish_title: 'New Portion for the Dish'
+      beverage_title: 'New Portion for the Beverage'
+    create:
+      beverage_notice: 'Portion created with success'
+      beverage_alert: 'Something went wrong'
+    edit:
+      title: 'Edit Portion'
+    update:
+      edit_success: 'Portion edite with success'
+      edit_fail: 'Something went wrong'
+    destroy:
+      delete_success: 'Portion deleted with success'
+      delete_fail: 'Somethin went wrong'

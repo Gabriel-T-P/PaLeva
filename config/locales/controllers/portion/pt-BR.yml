@@ -1,0 +1,28 @@
+pt-BR:
+  portions:
+    form:
+      image: 'Escolher Imagem'
+      errors_message: 'Verifique os seguintes erros'
+      save: 'Salvar Porção'
+      cancel: 'Cancelar'
+      confirm: 'Confirmar'
+    show:
+      title: 'Editar Informações da Bebida'
+      no_image_found: 'Nenhuma imagem cadastrada'
+      edit: 'Editar Porção'
+      delete: 'Deletar Porção'
+      confirm: 'Confirma'
+    new:
+      dish_title: 'Nova Porção para o Prato'
+      beverage_title: 'Nova Porção para a Bebida'
+    create:
+      beverage_notice: 'Porção cadastrada com sucesso'
+      beverage_alert: 'Falha ao cadastrar a porção'
+    edit:
+      title: 'Editar Porção'
+    update:
+      edit_success: 'Porção editada com sucesso'
+      edit_fail: 'Falha ao editar a porção'
+    destroy:
+      delete_success: 'Porção deletada com sucesso'
+      delete_fail: 'Falha ao deletar a porção'

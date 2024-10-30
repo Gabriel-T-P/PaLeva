@@ -12,10 +12,10 @@ describe 'usuário edita prato' do
     login_as user
     visit root_path
     click_on 'Meu Estabelecimento'
-
     within '#Beverages' do
-      click_on 'Editar'
+      click_on 'Cerveja'
     end
+    click_on 'Editar'
 
     # Assert
     expect(page).to have_field 'Nome da Bebida'
@@ -38,8 +38,9 @@ describe 'usuário edita prato' do
     visit root_path
     click_on 'Meu Estabelecimento'
     within '#Beverages' do
-      click_on 'Editar'
+      click_on 'Cerveja'
     end
+    click_on 'Editar'
     fill_in 'Nome da Bebida',	with: 'Suco de Laranja'
     fill_in 'Descrição', with: 'Suco mais refrescante de todos'
     fill_in 'Calorias',	with: '120'
@@ -64,8 +65,9 @@ describe 'usuário edita prato' do
     visit root_path
     click_on 'Meu Estabelecimento'
     within '#Beverages' do
-      click_on 'Editar'
+      click_on 'Cerveja'
     end
+    click_on 'Editar'
     attach_file 'Escolher Imagem', Rails.root.join('spec', 'support', 'teste2.png')
     click_on 'Salvar'
 
@@ -89,8 +91,9 @@ describe 'usuário edita prato' do
     visit root_path
     click_on 'Meu Estabelecimento'
     within '#Beverages' do
-      click_on 'Editar'
+      click_on 'Cerveja'
     end
+    click_on 'Editar'
     uncheck 'Alcoólica'
     click_on 'Salvar'
 
@@ -130,8 +133,9 @@ describe 'usuário edita prato' do
     visit root_path
     click_on 'Meu Estabelecimento'
     within '#Beverages' do
-      click_on 'Editar'
+      click_on 'Cerveja'
     end
+    click_on 'Editar'
     fill_in 'Nome da Bebida',	with: ''
     fill_in 'Descrição',	with: '' 
     fill_in 'Calorias',	with: ''

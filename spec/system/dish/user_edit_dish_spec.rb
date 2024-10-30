@@ -12,10 +12,10 @@ describe 'usuário edita prato' do
     login_as user
     visit root_path
     click_on 'Meu Estabelecimento'
-
     within '#Dishs' do
-      click_on 'Editar'
+      click_on 'Lasanha'
     end
+    click_on 'Editar'
 
     # Assert
     expect(page).to have_field 'Nome do Item'
@@ -37,8 +37,9 @@ describe 'usuário edita prato' do
     visit root_path
     click_on 'Meu Estabelecimento'
     within '#Dishs' do
-      click_on 'Editar'
+      click_on 'Lasanha'
     end
+    click_on 'Editar'
     fill_in 'Nome do Item',	with: 'Churrasco'
     fill_in 'Descrição', with: 'Carne Bovina da mais saborosa e suculenta'
     fill_in 'Calorias',	with: '452'
@@ -63,8 +64,9 @@ describe 'usuário edita prato' do
     visit root_path
     click_on 'Meu Estabelecimento'
     within '#Dishs' do
-      click_on 'Editar'
+      click_on 'Lasanha'
     end
+    click_on 'Editar'
     attach_file 'Cadastrar Imagem', Rails.root.join('spec', 'support', 'teste2.png')
     click_on 'Salvar'
 
@@ -106,8 +108,9 @@ describe 'usuário edita prato' do
     visit root_path
     click_on 'Meu Estabelecimento'
     within '#Dishs' do
-      click_on 'Editar'
+      click_on 'Lasanha'
     end
+    click_on 'Editar'
     fill_in 'Nome do Item',	with: ''
     fill_in 'Descrição',	with: '' 
     fill_in 'Calorias',	with: ''

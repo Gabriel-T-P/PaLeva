@@ -7,13 +7,13 @@ pt-BR:
       save: 'Save'
       cancel: 'Cancel'
     show:
-      title: 'Edit Beverage'
+      title: 'More Infos of the Model'
       no_image_found: 'No image found'
       edit: 'Save'
       delete: 'Delete'
       confirm: 'Confirm'
-      yes: 'yes'
-      no: 'no'
+      portion_title: 'Portions'
+      add_new_portion: 'Add Portion'
     new:
       title: 'Add a new beverage'
     create:
