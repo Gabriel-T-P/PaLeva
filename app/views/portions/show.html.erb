@@ -21,21 +21,34 @@
           <% end %>
         </div>
 
-        <div class="card-body">
-          <p class="card-text">
-            <%= @portion.description %>
-          </p>
+        <div class="d-flex column">
+          <div class="card-body">
+            <p class="card-text">
+              <%= @portion.description %>
+            </p>
 
-          <h4 class="card-text">
-            Preço: <%= number_to_currency(@portion.price) %>
-          </h4>
+            <h4 class="card-text">
+              <%= Portion.human_attribute_name :price %>: <%= number_to_currency(@portion.price) %>
+            </h4>
 
-          <% if @portion.active %>
-            <%= link_to t('.buy'), '#', class: 'btn btn-dark' %>
-          <% else %>
-            <button class="btn btn-dark" disabled><%=t '.unavailable'%></button>
-          <% end %>
+            <% if @portion.active %>
+              <%= link_to t('.buy'), '#', class: 'btn btn-dark' %>
+            <% else %>
+              <button class="btn btn-dark" disabled><%=t '.unavailable'%></button>
+            <% end %>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <% if @parent.dish? %>
+              <%= link_to t('.edit'), edit_establishment_item_portion_path(@establishment, @parent, @portion), class: 'btn btn-outline-dark mx-1' %>
+              <%= button_to t('.delete'), root_path, class: 'btn btn-outline-danger mx-1' %>
+            <% else %>
+              <%= link_to t('.edit'), edit_establishment_beverage_portion_path(@establishment, @parent, @portion), class: 'btn btn-outline-dark mx-1' %>
+              <%= button_to t('.delete'), root_path, class: 'btn btn-outline-danger mx-1' %>
+            <% end %>
+          </div>
         </div>
+
       </div>
     </div>
   </div>

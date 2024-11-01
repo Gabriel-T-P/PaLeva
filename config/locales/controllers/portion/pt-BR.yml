@@ -23,10 +23,11 @@ pt-BR:
       notice: 'Porção cadastrada com sucesso'
       alert: 'Falha ao cadastrar a porção'
     edit:
-      title: 'Editar Porção'
+      dish_title: 'Editar Porção de um Prato'
+      beverage_title: 'Editar Porção de uma Bebida'
     update:
-      edit_success: 'Porção editada com sucesso'
-      edit_fail: 'Falha ao editar a porção'
+      notice: 'Porção editada com sucesso'
+      alert: 'Falha ao editar a porção'
     destroy:
       delete_success: 'Porção deletada com sucesso'
       delete_fail: 'Falha ao deletar a porção'

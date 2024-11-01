@@ -23,10 +23,11 @@ pt-BR:
       beverage_notice: 'Portion created with success'
       beverage_alert: 'Something went wrong'
     edit:
-      title: 'Edit Portion'
+      dish_title: "Edit Dish's Portion"
+      beverage_title: "Edit Beverage's Portion"
     update:
-      edit_success: 'Portion edite with success'
-      edit_fail: 'Something went wrong'
+      notice: 'Portion edite with success'
+      alert: 'Something went wrong'
     destroy:
       delete_success: 'Portion deleted with success'
       delete_fail: 'Somethin went wrong'

@@ -1,11 +1,10 @@
 class PortionsController < ApplicationController
   before_action :set_parent
-  before_action :set_portion, only: [:show]
+  before_action :set_portion, only: [:show, :edit, :update]
   before_action :set_establishment_check_user
 
   def show
   end
-  
 
   def new
     @portion = @parent.portions.new
@@ -21,6 +20,19 @@ class PortionsController < ApplicationController
     else
       flash.now[:alert] = t '.alert'
       render 'new'
+    end
+  end
+  
+  def edit
+  end
+  
+  def update
+    if @portion.update(portion_params)
+      flash[:notice] = t '.notice'
+      redirect_to establishment_item_portion_path(@establishment, @parent, @portion)
+    else
+      flash.now[:alert] = t '.alert'
+      render 'edit'
     end
   end
   
