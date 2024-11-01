@@ -35,7 +35,7 @@
   </div>
 </section>
 
-<section id="Portion">
+<section id="Portions">
   <div class="d-flex align-items-center justify-content-center mb-3">
     <h3 class="display-4 text-center my-4"> <%= t '.portion_title' %> </h3>
     <%= link_to t('.add_new_portion'), new_establishment_item_portion_path(@establishment, @item), class: 'btn btn-outline-dark ms-3 mt-3' %>
@@ -45,23 +45,25 @@
     <% @portions.each do |portion| %>
       <div class="col-md-4">
         <div class="card mb-4 <%= 'bg-light text-muted' unless portion.active %>">
-          <div class="card-body">
-            <% if portion.image.attached? %>
-              <%= image_tag portion.image, class: 'card-img-top img-fluid', style: 'height: 200px; object-fit: cover;' %>
-            <% else %>
-              <div class="d-flex card-img-top text-center justify-content-center bg-light" style="height: 200px;">
-                <p class="text-muted mt-5"> <%=t '.no_image_found'%> </p>
-              </div>
-            <% end %>
-            <h5 class="card-title"><%= portion.name %></h5>
-            <p class="card-text"><%= portion.description %></p>
-            <p class="card-text"><strong><%= number_to_currency(portion.price) %></strong></p>
-            <% if portion.active %>
-              <span class="badge bg-success"><%= Portion.human_attribute_name(:active) %></span>
-            <% else %>
-              <span class="badge bg-danger"><%=t '.not'%> <%= Portion.human_attribute_name(:active) %></span>
-            <% end %>
-          </div>
+          <%= link_to establishment_item_portion_path(@establishment, @item, portion) do %>
+            <div class="card-body">
+              <% if portion.image.attached? %>
+                <%= image_tag portion.image, class: 'card-img-top img-fluid', style: 'height: 200px; object-fit: cover;' %>
+              <% else %>
+                <div class="d-flex card-img-top text-center justify-content-center bg-light" style="height: 200px;">
+                  <p class="text-muted mt-5"> <%=t '.no_image_found'%> </p>
+                </div>
+              <% end %>
+              <h5 class="card-title"><%= portion.name %></h5>
+              <p class="card-text"><%= portion.description %></p>
+              <p class="card-text"><strong><%= number_to_currency(portion.price) %></strong></p>
+              <% if portion.active %>
+                <span class="badge bg-success"><%= Portion.human_attribute_name(:active) %></span>
+              <% else %>
+                <span class="badge bg-danger"><%=t '.not'%> <%= Portion.human_attribute_name(:active) %></span>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>

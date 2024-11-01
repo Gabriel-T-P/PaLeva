@@ -1,6 +1,11 @@
 class PortionsController < ApplicationController
   before_action :set_parent
+  before_action :set_portion, only: [:show]
   before_action :set_establishment_check_user
+
+  def show
+  end
+  
 
   def new
     @portion = @parent.portions.new
@@ -28,6 +33,10 @@ class PortionsController < ApplicationController
     elsif params[:beverage_id]
       @parent = Beverage.find(params[:beverage_id])
     end
+  end
+
+  def set_portion
+    @portion = Portion.find(params[:id])
   end
 
   def set_establishment_check_user

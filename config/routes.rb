@@ -15,10 +15,10 @@ Rails.application.routes.draw do
   resources :establishments, only: [:new, :create, :edit, :update, :show, :destroy] do
     resources :opening_hours, only: [:edit, :update, :new, :create, :destroy]
     resources :items, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-      resources :portions, only: [:new, :create, :edit, :update, :destroy]
+      resources :portions, only: [:show, :new, :create, :edit, :update, :destroy]
     end
     resources :beverages, only: [:show, :new, :create, :edit, :update, :destroy] do
-      resources :portions, only: [:new, :create, :edit, :update, :destroy]
+      resources :portions, only: [:show, :new, :create, :edit, :update, :destroy]
     end
   end
 end

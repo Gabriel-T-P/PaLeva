@@ -12,6 +12,10 @@ pt-BR:
       edit: 'Editar Porção'
       delete: 'Deletar Porção'
       confirm: 'Confirma'
+      active: 'Ativo'
+      inactive: 'Inativo'
+      buy: 'Comprar'
+      unavailable: 'Indisponível'
     new:
       dish_title: 'Nova Porção para o Prato'
       beverage_title: 'Nova Porção para a Bebida'

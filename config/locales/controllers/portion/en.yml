@@ -12,6 +12,10 @@ pt-BR:
       edit: 'Edit Portion'
       delete: 'Delete Portion'
       confirm: 'Confirm'
+      active: 'Active'
+      inactive: 'Inactive'
+      buy: 'Buy'
+      unavailable: 'Unavailable'
     new:
       dish_title: 'New Portion for the Dish'
       beverage_title: 'New Portion for the Beverage'

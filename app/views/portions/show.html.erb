@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card <%= 'bg-light text-muted' unless @portion.active %>">
+        <% if @portion.image.attached? %>
+            <div class="img-container text-center">
+              <%= image_tag @portion.image, class: 'card-img-top img-fluid rounded', style: 'height: 400px; object-fit: cover;' %>
+            </div>
+          <% else %>
+            <div class="card-img-top text-center bg-light" style="height: 300px;">
+              <p class="text-muted mt-5"> <%=t '.no_image_found'%> </p>
+            </div>
+          <% end %>
+
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h2 class="card-title mb-0"><%= @portion.name %></h2>
+          <% if @portion.active %>
+            <span class="badge bg-success"><%=t '.active'%></span>
+          <% else %>
+            <span class="badge bg-danger"><%=t '.inactive'%></span>
+          <% end %>
+        </div>
+
+        <div class="card-body">
+          <p class="card-text">
+            <%= @portion.description %>
+          </p>
+
+          <h4 class="card-text">
+            Preço: <%= number_to_currency(@portion.price) %>
+          </h4>
+
+          <% if @portion.active %>
+            <%= link_to t('.buy'), '#', class: 'btn btn-dark' %>
+          <% else %>
+            <button class="btn btn-dark" disabled><%=t '.unavailable'%></button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
