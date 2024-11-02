@@ -8,6 +8,7 @@ class Portion < ApplicationRecord
   validates :active, inclusion: [true], on: :create
   
   after_create :create_initial_price_history
+  after_update :add_price_history, if: :saved_change_to_price?
 
   private
 
@@ -15,4 +16,9 @@ class Portion < ApplicationRecord
     price_histories.create(price: price, current: true, added_at: Time.current)
   end
   
+  def add_price_history
+    price_histories.last.update(current: false, ended_at: Time.current)
+    price_histories.create(price: price, current: true, added_at: Time.current)
+  end
+
 end
