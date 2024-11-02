@@ -33,6 +33,7 @@ describe 'usuário vê status da porção' do
       click_on 'Lasanha'
       click_on 'Ativo'
   
+      expect(page).to have_content 'Desativado com sucesso'  
       expect(page).to have_content 'Inativo'
       expect(page).not_to have_content 'Ativo'  
     end
@@ -51,6 +52,7 @@ describe 'usuário vê status da porção' do
       click_on 'Lasanha'
       click_on 'Inativo'
   
+      expect(page).to have_content 'Ativado com sucesso'
       expect(page).not_to have_content 'Inativo'
       expect(page).to have_content 'Ativo'
     end
@@ -90,7 +92,8 @@ describe 'usuário vê status da porção' do
       end
       click_on 'Desativar'
   
-      expect(current_path).to eq establishment_item_path(establishment, dish)  
+      expect(current_path).to eq establishment_item_path(establishment, dish)
+      expect(page).to have_content 'Desativado com sucesso'
       expect(page).to have_button 'Inativo'
     end
     
@@ -111,7 +114,8 @@ describe 'usuário vê status da porção' do
       end
       click_on 'Ativar'
   
-      expect(current_path).to eq establishment_item_path(establishment, dish)  
+      expect(current_path).to eq establishment_item_path(establishment, dish)
+      expect(page).to have_content 'Ativado com sucesso'
       expect(page).to have_button 'Ativo'
     end
   end
@@ -148,6 +152,7 @@ describe 'usuário vê status da porção' do
       click_on 'Água'
       click_on 'Ativo'
   
+      expect(page).to have_content 'Desativado com sucesso'
       expect(page).to have_content 'Inativo'
       expect(page).not_to have_content 'Ativo' 
     end
@@ -166,6 +171,7 @@ describe 'usuário vê status da porção' do
       click_on 'Água'
       click_on 'Inativo'
   
+      expect(page).to have_content 'Ativado com sucesso'
       expect(page).not_to have_content 'Inativo'
       expect(page).to have_content 'Ativo'
     end
@@ -204,7 +210,8 @@ describe 'usuário vê status da porção' do
       end
       click_on 'Desativar'
   
-      expect(current_path).to eq establishment_beverage_path(establishment, beverage)  
+      expect(current_path).to eq establishment_beverage_path(establishment, beverage)
+      expect(page).to have_content 'Desativado com sucesso'
       expect(page).to have_button 'Inativo'
     end
     
@@ -225,7 +232,8 @@ describe 'usuário vê status da porção' do
       end
       click_on 'Ativar'
   
-      expect(current_path).to eq establishment_beverage_path(establishment, beverage)  
+      expect(current_path).to eq establishment_beverage_path(establishment, beverage)
+      expect(page).to have_content 'Ativado com sucesso'
       expect(page).to have_button 'Ativo'
     end
     
