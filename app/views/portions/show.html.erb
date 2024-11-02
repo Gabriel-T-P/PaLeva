@@ -63,3 +63,36 @@
     </div>
   </div>
 </div>
+
+<section id="PriceHistories">
+  <div class="container mt-4">
+    <h2>Histórico de Preços</h2>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Preço</th>
+          <th>Data de Adição</th>
+          <th>Data de Remoção</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @portion.price_histories.each do |price_history| %>
+          <tr>
+            <td><%= number_to_currency(price_history.price) %></td>
+            <td><%= price_history.added_at.strftime("%d/%m/%Y %H:%M") %></td>
+            <% if price_history.current %>
+              <td>  </td>
+            <% else %>
+              <td><%= price_history.ended_at.strftime("%d/%m/%Y %H:%M") %></td>
+            <% end %>
+            <td>            
+              <%= price_history.current ? 'Atual' : 'Inativo' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
