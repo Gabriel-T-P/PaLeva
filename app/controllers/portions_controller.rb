@@ -1,6 +1,6 @@
 class PortionsController < ApplicationController
   before_action :set_parent
-  before_action :set_portion, only: [:show, :edit, :update]
+  before_action :set_portion, only: [:show, :edit, :update, :destroy, :set_active, :set_unactive]
   before_action :set_establishment_check_user
 
   def show
@@ -29,13 +29,40 @@ class PortionsController < ApplicationController
   def update
     if @portion.update(portion_params)
       flash[:notice] = t '.notice'
-      redirect_to establishment_item_portion_path(@establishment, @parent, @portion)
+      redirect_to polymorphic_path([@establishment, @parent, @portion])
     else
       flash.now[:alert] = t '.alert'
       render 'edit'
     end
   end
   
+  def destroy
+    if @portion.destroy
+      flash[:notice] = t '.notice'
+      redirect_to polymorphic_path([@establishment, @parent])
+    else
+      flash[:alert] = t '.alert'
+      redirect_to polymorphic_path([@establishment, @parent, @portion])
+    end
+  end
+  
+  def set_unactive
+    if @portion.update(active: false)
+      flash[:notice] = t '.notice'
+    else
+      flash[:alert] = t '.alert'
+    end
+    redirect_to polymorphic_path([@establishment, @parent])
+  end
+  
+  def set_active
+    if @portion.update(active: true)
+      flash[:notice] = t '.notice'
+    else
+      flash[:alert] = t '.alert'
+    end
+    redirect_to polymorphic_path([@establishment, @parent])
+  end
 
   private
 
@@ -57,7 +84,7 @@ class PortionsController < ApplicationController
   end
 
   def portion_params
-    params.require(:portion).permit(:name, :description, :price, :image)
+    params.require(:portion).permit(:name, :description, :price, :image, :active)
   end
 
 end

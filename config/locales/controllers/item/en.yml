@@ -14,7 +14,8 @@ pt-BR:
       delete: 'Delete Dish'
       confirm: 'Confirm'
       portion_title: 'Portions'
-      add_new_portion: 'Add Portion'      
+      add_new_portion: 'Add Portion'   
+      not_active: 'Inactive'
     index:
       title: 'Dishs and Beverages'
       search_for: 'Search for name or description'

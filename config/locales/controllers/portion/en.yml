@@ -31,3 +31,9 @@ pt-BR:
     destroy:
       delete_success: 'Portion deleted with success'
       delete_fail: 'Somethin went wrong'
+    set_active:
+      notice: 'Success on activating'
+      alert: 'Something went wrong'
+    set_unactive:
+      notice: 'Failed on deactivating'
+      alert: 'Something went wrong'

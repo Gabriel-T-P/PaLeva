@@ -41,10 +41,20 @@
           <div class="d-flex align-items-center">
             <% if @parent.dish? %>
               <%= link_to t('.edit'), edit_establishment_item_portion_path(@establishment, @parent, @portion), class: 'btn btn-outline-dark mx-1' %>
-              <%= button_to t('.delete'), root_path, class: 'btn btn-outline-danger mx-1' %>
+              <%= button_to t('.delete'), establishment_item_portion_path(@establishment, @parent, @portion), method: :delete, class: 'btn btn-outline-danger mx-1' %>
+              <% if @portion.active %>
+                <%= button_to t('.set_unactive'), set_unactive_establishment_item_portion_path(@establishment, @parent, @portion), method: :patch, class:"btn btn-outline-secondary mx-1"%>
+              <% else %>
+                <%= button_to t('.set_active'), set_active_establishment_item_portion_path(@establishment, @parent, @portion), method: :patch, class:"btn btn-outline-success mx-1"%>
+              <% end %>
             <% else %>
               <%= link_to t('.edit'), edit_establishment_beverage_portion_path(@establishment, @parent, @portion), class: 'btn btn-outline-dark mx-1' %>
-              <%= button_to t('.delete'), root_path, class: 'btn btn-outline-danger mx-1' %>
+              <%= button_to t('.delete'), establishment_beverage_portion_path(@establishment, @parent, @portion), method: :delete, class: 'btn btn-outline-danger mx-1' %>
+              <% if @portion.active %>
+                <%= button_to t('.set_unactive'), set_unactive_establishment_beverage_portion_path(@establishment, @parent, @portion), method: :patch, class:"btn btn-outline-secondary mx-1"%>
+              <% else %>
+                <%= button_to t('.set_active'), set_active_establishment_beverage_portion_path(@establishment, @parent, @portion), method: :patch, class:"btn btn-outline-success mx-1"%>
+              <% end %>
             <% end %>
           </div>
         </div>

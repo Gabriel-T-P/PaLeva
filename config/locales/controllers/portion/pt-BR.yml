@@ -14,6 +14,8 @@ pt-BR:
       confirm: 'Confirma'
       active: 'Ativo'
       inactive: 'Inativo'
+      set_active: 'Ativar'
+      set_unactive: 'Desativar'
       buy: 'Comprar'
       unavailable: 'Indisponível'
     new:
@@ -31,3 +33,9 @@ pt-BR:
     destroy:
       delete_success: 'Porção deletada com sucesso'
       delete_fail: 'Falha ao deletar a porção'
+    set_active:
+      notice: 'Ativado com sucesso'
+      alert: 'Falha ao ativar porção'
+    set_unactive:
+      notice: 'Desativado com sucesso'
+      alert: 'Falha ao desativar porção'

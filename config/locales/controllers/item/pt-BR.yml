@@ -14,7 +14,8 @@ pt-BR:
       delete: 'Deletar Prato'
       confirm: 'Confirmar'
       portion_title: 'Porções'
-      add_new_portion: 'Adicionar Porção'      
+      add_new_portion: 'Adicionar Porção'
+      not_active: 'Inativo'
     index:
       title: 'Pratos e Bebidas'
       search_for: 'Buscar por nome ou descrição'
