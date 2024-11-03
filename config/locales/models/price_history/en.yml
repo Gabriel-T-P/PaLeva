@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    attributes:
+      price_history:
+        price: 'Price'
+        added_at: 'Added Date'
+        ended_at: 'Removed Date'
+        current: 'Status'
+    models:
+      price_history:
+        one: 'Price History'
+        other: 'Price Histories'

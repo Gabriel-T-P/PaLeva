@@ -30,12 +30,6 @@
             <h4 class="card-text">
               <%= Portion.human_attribute_name :price %>: <%= number_to_currency(@portion.price) %>
             </h4>
-
-            <% if @portion.active %>
-              <%= link_to t('.buy'), '#', class: 'btn btn-dark' %>
-            <% else %>
-              <button class="btn btn-dark" disabled><%=t '.unavailable'%></button>
-            <% end %>
           </div>
 
           <div class="d-flex align-items-center">
@@ -58,41 +52,48 @@
             <% end %>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </div>
 
-<section id="PriceHistories">
-  <div class="container mt-4">
-    <h2>Histórico de Preços</h2>
+<section id="PriceHistories" class="py-5">
+  <div class="container">
+    <h3 class="display-4 text-center my-4"> <%=t '.price_history_title'%> </h3>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Preço</th>
-          <th>Data de Adição</th>
-          <th>Data de Remoção</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @portion.price_histories.each do |price_history| %>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-bordered align-middle">
+        <thead class="table-dark text-center">
           <tr>
-            <td><%= number_to_currency(price_history.price) %></td>
-            <td><%= price_history.added_at.strftime("%d/%m/%Y %H:%M") %></td>
-            <% if price_history.current %>
-              <td>  </td>
-            <% else %>
-              <td><%= price_history.ended_at.strftime("%d/%m/%Y %H:%M") %></td>
-            <% end %>
-            <td>            
-              <%= price_history.current ? 'Atual' : 'Inativo' %>
-            </td>
+            <th><%=PriceHistory.human_attribute_name :price%></th>
+            <th><%=PriceHistory.human_attribute_name :added_at%></th>
+            <th><%=PriceHistory.human_attribute_name :ended_at%></th>
+            <th><%=PriceHistory.human_attribute_name :current%></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @portion.price_histories.each do |price_history| %>
+            <tr>
+              <td class="text-center"><%= number_to_currency(price_history.price) %></td>
+              <td class="text-center"><%= I18n.l(price_history.added_at, format: :short) %></td>
+              <td class="text-center">
+                <% if price_history.current %>
+                  <span class="text-muted">-</span>
+                <% else %>
+                  <%= I18n.l(price_history.ended_at, format: :short) %>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <% if price_history.current %>
+                  <span class="badge bg-info"><%=t'.actual'%></span>
+                <% else %>
+                  <span class="badge bg-secondary"><%=t'.removed'%></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>

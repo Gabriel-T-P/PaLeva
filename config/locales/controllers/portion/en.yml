@@ -14,8 +14,11 @@ pt-BR:
       confirm: 'Confirm'
       active: 'Active'
       inactive: 'Inactive'
-      buy: 'Buy'
-      unavailable: 'Unavailable'
+      set_active: 'Set Active'
+      set_unactive: 'Set Unactive'
+      price_history_title: 'Price'
+      actual: 'Current'
+      removed: 'Removed'
     new:
       dish_title: 'New Portion for the Dish'
       beverage_title: 'New Portion for the Beverage'

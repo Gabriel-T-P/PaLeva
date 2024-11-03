@@ -16,8 +16,9 @@ pt-BR:
       inactive: 'Inativo'
       set_active: 'Ativar'
       set_unactive: 'Desativar'
-      buy: 'Comprar'
-      unavailable: 'Indisponível'
+      price_history_title: 'Histórico de Preços'
+      actual: 'Atual'
+      removed: 'Removido'
     new:
       dish_title: 'Nova Porção para o Prato'
       beverage_title: 'Nova Porção para a Bebida'
