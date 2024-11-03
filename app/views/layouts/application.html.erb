@@ -23,6 +23,18 @@
         <div class="d-flex justify-content-between w-100">
           <div class="d-flex">
             <%= link_to 'PaLevá', root_path, class: 'navbar-brand' %>
+            <% if user_signed_in? %>
+              <div class="dropdown">
+                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Cadastros
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="cadastrosDropdown">
+                  <li>
+                    <%=link_to 'Marcadores', new_tag_path, class: 'dropdown-item'%>
+                  </li>
+                </ul>
+              </div>
+            <% end %>
           </div>
 
           <div class="d-inline-flex align-items-center">

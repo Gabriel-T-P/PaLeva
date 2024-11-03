@@ -1,4 +1,5 @@
 class PortionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_parent
   before_action :set_portion, only: [:show, :edit, :update, :destroy, :set_active, :set_unactive]
   before_action :set_establishment_check_user

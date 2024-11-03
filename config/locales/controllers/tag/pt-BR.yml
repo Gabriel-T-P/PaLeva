@@ -1,0 +1,20 @@
+pt-BR:
+  tags:
+    form:
+      errors_message: 'Verifique os seguintes erros'
+      save: 'Salvar Marcador'
+      cancel: 'Cancelar'
+      confirm: 'Confirmar'
+    new:
+      title: 'Novo Marcador'
+    create:
+      notice: 'Marcador criado com sucesso'
+      alert: 'Falha ao criar o marcador'
+    edit:
+      title: 'Ediar Marcador'
+    update:
+      notice: 'Marcador editado com sucesso'
+      alert: 'Falha ao editar o marcador'
+    destroy:
+      notice: 'Deletado com sucesso'
+      alert: 'Falha ao deletar o marcador'

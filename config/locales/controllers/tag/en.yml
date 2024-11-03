@@ -1,0 +1,20 @@
+pt-BR:
+  tags:
+    form:
+      errors_message: 'Check the folowing errors'
+      save: 'Save'
+      cancel: 'Cancel'
+      confirm: 'Confirm'
+    new:
+      title: 'New Tag'
+    create:
+      notice: 'Tag created'
+      alert: 'something went wrong'
+    edit:
+      title: 'Edit tag'
+    update:
+      notice: 'Tag edited'
+      alert: 'something went wrong'
+    destroy:
+      notice: 'Tag deleted'
+      alert: 'something went wrong'
