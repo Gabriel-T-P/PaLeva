@@ -89,7 +89,45 @@ describe 'usuário adiciona tag' do
 
       expect(page).to have_content 'Picante'  
     end
-    
   end
   
+  context 'à bebida' do
+    it 'na página da bebida' do
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      beverage = Beverage.create!(name: 'Limonada', description: 'Limão não Siciliano, expremido com gelo e açúcar', calories: '40', item_type: 'beverage',
+                                  establishment: establishment, alcoholic: false)
+      tag = Tag.create!(name: 'Refrescante', description: 'bebida refrescante')
+
+      login_as user
+      visit root_path
+      click_on 'Meu Estabelecimento'
+      click_on 'Limonada'
+      click_on 'Adicionar Marcador'
+  
+      expect(page).to have_content 'Selecione um Marcador'
+      expect(page).to have_button 'Refrescante'
+    end
+    
+    it 'e vê várias tags' do
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      beverage = Beverage.create!(name: 'Limonada', description: 'Limão não Siciliano, expremido com gelo e açúcar', calories: '40', item_type: 'beverage',
+                                  establishment: establishment, alcoholic: false)
+      Tag.create!(name: 'Refrescante')
+      Tag.create!(name: '100% Natural')
+      Tag.create!(name: 'Cítrico')
+
+      login_as user
+      visit establishment_beverage_path(establishment, beverage)
+      click_on 'Adicionar Marcador'
+
+      expect(page).to have_content 'Refrescante'
+      expect(page).to have_content '100% Natural'
+      expect(page).to have_content 'Cítrico'
+    end
+    
+  end
 end

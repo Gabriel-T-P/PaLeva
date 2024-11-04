@@ -1,7 +1,7 @@
 class BeveragesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_establishment_check_user
-  before_action :set_beverage, only: [:show, :edit, :update, :destroy]
+  before_action :set_beverage, only: [:show, :edit, :update, :destroy, :add_tag]
 
   def new
     @beverage = Beverage.new
@@ -9,6 +9,7 @@ class BeveragesController < ApplicationController
 
   def show
     @portions = @beverage.portions
+    @tags = @beverage.tags
   end
 
   def create
@@ -45,6 +46,17 @@ class BeveragesController < ApplicationController
     else
       flash[:alert] = t '.delete_fail'
       redirect_to @establishment
+    end
+  end
+
+  def add_tag
+    tag = Tag.find(params[:tag_id])
+
+    if @beverage.tags.include?(tag)
+      redirect_to establishment_beverage_path(@establishment, @beverage), alert: 'Esse prato já possui esse marcador'
+    else
+      @beverage.tags << tag
+      redirect_to establishment_beverage_path(@establishment, @beverage), notice: 'Marcador adicionado'
     end
   end
 

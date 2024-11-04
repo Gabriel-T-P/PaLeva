@@ -1,28 +1,6 @@
 <section id="Info">
   <h1 class="display-4 text-center my-4"> <%= t '.title' %> </h1>
 
-  <div class="modal fade" id="tagModal" tabindex="-1" aria-labelledby="tagModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="tagModalLabel"><%= t'.select_tag'%></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body">
-          <div class="row">
-            <% Tag.all.each do |tag| %>
-              <div class="col-6 col-md-4 mb-2">
-                <%= button_to tag.name, add_tag_establishment_item_path(@establishment, @item, tag_id: tag.id), method: :post, class: 'btn btn-sm btn-outline-info w-100' %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-8">
@@ -103,3 +81,26 @@
     <% end %>
   </div>
 </section>
+
+
+<div class="modal fade" id="tagModal" tabindex="-1" aria-labelledby="tagModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tagModalLabel"><%= t'.select_tag'%></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <% Tag.all.each do |tag| %>
+              <div class="col-6 col-md-4 mb-2">
+                <%= button_to tag.name, add_tag_establishment_item_path(@establishment, @item, tag_id: tag.id), method: :post, class: 'btn btn-sm btn-outline-info w-100' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
