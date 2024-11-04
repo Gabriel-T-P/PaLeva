@@ -13,6 +13,7 @@ pt-BR:
       edit: 'Editar Prato'
       delete: 'Deletar Prato'
       confirm: 'Confirmar'
+      tag_title: 'Marcadores'
       portion_title: 'Porções'
       add_new_portion: 'Adicionar Porção'
       not_active: 'Inativo'

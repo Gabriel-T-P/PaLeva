@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_establishment_check_user
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :add_tag]
 
   def index
     if params[:query].present?
@@ -56,6 +56,16 @@ class ItemsController < ApplicationController
     end
   end
 
+  def add_tag
+    tag = Tag.find(params[:tag_id])
+
+    if @item.tags.include?(tag)
+      redirect_to establishment_item_path(@establishment, @item), alert: 'Esse prato já possui esse marcador'
+    else
+      @item.tags << tag
+      redirect_to establishment_item_path(@establishment, @item), notice: 'Marcador adicionado'
+    end    
+  end
 
   private
 

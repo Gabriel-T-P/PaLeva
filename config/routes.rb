@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :establishments, only: [:new, :create, :edit, :update, :show, :destroy] do
     resources :opening_hours, only: [:edit, :update, :new, :create, :destroy]
     resources :items, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+        post :add_tag, on: :member
+        post :remove_tag, on: :member
       resources :portions, only: [:show, :new, :create, :edit, :update, :destroy] do
         patch :set_active, on: :member
         patch :set_unactive, on: :member

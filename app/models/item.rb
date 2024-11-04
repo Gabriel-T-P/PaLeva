@@ -1,6 +1,8 @@
 class Item < ApplicationRecord
   belongs_to :establishment
   has_many :portions
+  has_many :item_tags
+  has_many :tags, through: :item_tags
   has_one_attached :image
 
   validates :name, :description, :calories, :item_type, presence: true

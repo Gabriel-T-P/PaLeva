@@ -13,6 +13,7 @@ pt-BR:
       edit: 'Edit Dish'
       delete: 'Delete Dish'
       confirm: 'Confirm'
+      tag_title: 'Tags'
       portion_title: 'Portions'
       add_new_portion: 'Add Portion'   
       not_active: 'Inactive'

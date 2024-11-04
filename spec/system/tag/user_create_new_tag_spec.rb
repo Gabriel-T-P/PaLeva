@@ -37,9 +37,7 @@ describe 'usuário cria nova tag' do
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
     
     login_as user
-    visit root_path
-    click_on 'Cadastros'
-    click_on 'Marcadores'
+    visit new_tag_path
     fill_in 'Nome',	with: 'Picante'
     fill_in 'Descrição',	with: 'picancia moderada em pratos ou bebidas'
     click_on 'Salvar Marcador'
@@ -54,9 +52,7 @@ describe 'usuário cria nova tag' do
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
     
     login_as user
-    visit root_path
-    click_on 'Cadastros'
-    click_on 'Marcadores'
+    visit new_tag_path
     click_on 'Cancelar'
 
     expect(current_path).to eq root_path
@@ -69,9 +65,7 @@ describe 'usuário cria nova tag' do
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
     
     login_as user
-    visit root_path
-    click_on 'Cadastros'
-    click_on 'Marcadores'
+    visit new_tag_path
     fill_in 'Nome',	with: ''
     fill_in 'Descrição',	with: ''
     click_on 'Salvar Marcador'

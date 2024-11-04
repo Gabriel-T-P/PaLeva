@@ -41,8 +41,40 @@
   </div>
 </section>
 
+<section id="Tags">
+  <div class="d-flex align-items-center ms-3 mb-3">
+    <h3 class="display-4 text-center my-4"> <%= t '.tag_title' %> </h3>
+    <button type="button" class="btn btn-outline-dark ms-3 mt-3" data-bs-toggle="modal" data-bs-target="#tagModal">
+      Adicionar um Marcador
+    </button>
+  </div>
+
+  <div class="modal fade" id="tagModal" tabindex="-1" aria-labelledby="tagModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tagModalLabel">Selecione um Marcador</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <% Tag.all.each do |tag| %>
+              <div class="col-6 col-md-4 mb-2">
+                <!--atualizar esse link -->
+                <%= button_to tag.name, add_tag_establishment_item_path(@establishment, @beverage, tag_id: tag.id), method: :post, class: 'btn btn-sm btn-outline-info w-100' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="Portions">
-  <div class="d-flex align-items-center justify-content-center mb-3">
+  <div class="d-flex align-items-center ms-3 mb-3">
     <h3 class="display-4 text-center my-4"> <%= t '.portion_title' %> </h3>
     <%= link_to t('.add_new_portion'), new_establishment_beverage_portion_path(@establishment, @beverage), class: 'btn btn-outline-dark ms-3 mt-3' %>
   </div>
