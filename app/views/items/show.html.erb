@@ -64,6 +64,14 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <% @tags.each do |tag| %>
+      <div class="col-2 col-md-1 mx-2 mb-2">
+        <span class="badge bg-info rounded-pill text-dark w-100 mb-2"><%= tag.name %></span>
+      </div>
+    <% end %>
+  </div>
 </section>
 
 <section id="Portions">

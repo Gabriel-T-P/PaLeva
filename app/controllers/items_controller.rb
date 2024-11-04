@@ -13,6 +13,7 @@ class ItemsController < ApplicationController
 
   def show
     @portions = @item.portions
+    @tags = @item.tags
   end
 
   def new
