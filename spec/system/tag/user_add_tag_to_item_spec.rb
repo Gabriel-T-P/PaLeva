@@ -13,7 +13,7 @@ describe 'usuário adiciona tag' do
       visit root_path
       click_on 'Meu Estabelecimento'
       click_on 'Lasanha'
-      click_on 'Adicionar um Marcador'
+      click_on 'Adicionar Marcador'
   
       expect(page).to have_content 'Selecione um Marcador'
       expect(page).to have_button 'Picante'
@@ -30,7 +30,7 @@ describe 'usuário adiciona tag' do
 
       login_as user
       visit establishment_item_path(establishment, dish)
-      click_on 'Adicionar um Marcador'
+      click_on 'Adicionar Marcador'
 
       expect(page).to have_content 'Picante'
       expect(page).to have_content 'Vegano'
@@ -46,7 +46,7 @@ describe 'usuário adiciona tag' do
 
       login_as user
       visit establishment_item_path(establishment, dish)
-      click_on 'Adicionar um Marcador'
+      click_on 'Adicionar Marcador'
       click_on 'Picante'
 
       expect(current_path).to eq establishment_item_path(establishment, dish)
@@ -56,7 +56,7 @@ describe 'usuário adiciona tag' do
       end  
     end
     
-    it 'e adciciona tag que o prato já tinha antes' do
+    it 'e adiciciona tag que o prato já tinha antes' do
       user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
       establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
@@ -66,12 +66,30 @@ describe 'usuário adiciona tag' do
 
       login_as user
       visit establishment_item_path(establishment, dish)
-      click_on 'Adicionar um Marcador'
+      click_on 'Adicionar Marcador'
       click_on 'Picante'
 
       expect(current_path).to eq establishment_item_path(establishment, dish)
       expect(page).to have_content 'Esse prato já possui esse marcador'
     end
+
+    it 'e tag não é exclusiva de um item' do
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      dish1 = Item.create!(name: 'Lasanha', description: 'Carne, macarrão e molho picante', calories: '340', item_type: 'dish', establishment: establishment)
+      dish2 = Item.create!(name: 'Macarronada', description: 'Carne moída, macarrão e molho picante', calories: '320', item_type: 'dish', establishment: establishment)
+      tag = Tag.create!(name: 'Picante')
+      ItemTag.create!(item: dish1, tag: tag)
+
+      login_as user
+      visit establishment_item_path(establishment, dish2)
+      click_on 'Adicionar Marcador'
+      click_on 'Picante'
+
+      expect(page).to have_content 'Picante'  
+    end
+    
   end
   
 end
