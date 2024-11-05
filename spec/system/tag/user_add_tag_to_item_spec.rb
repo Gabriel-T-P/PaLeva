@@ -73,7 +73,7 @@ describe 'usuário adiciona tag' do
       expect(page).to have_content 'Esse prato já possui esse marcador'
     end
 
-    it 'e tag não é exclusiva de um item' do
+    it 'e tag não é exclusiva de um prato' do
       user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
       establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
@@ -87,7 +87,8 @@ describe 'usuário adiciona tag' do
       click_on 'Adicionar Marcador'
       click_on 'Picante'
 
-      expect(page).to have_content 'Picante'  
+      expect(page).to have_content 'Marcador adicionado'
+      expect(page).to have_content 'Picante' 
     end
   end
   
@@ -129,5 +130,61 @@ describe 'usuário adiciona tag' do
       expect(page).to have_content 'Cítrico'
     end
     
+    it 'com sucesso' do
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      beverage = Beverage.create!(name: 'Limonada', description: 'Limão não Siciliano, expremido com gelo e açúcar', calories: '40', item_type: 'beverage',
+                                  establishment: establishment, alcoholic: false)
+      tag = Tag.create!(name: 'Refrescante')
+
+      login_as user
+      visit establishment_beverage_path(establishment, beverage)
+      click_on 'Adicionar Marcador'
+      click_on 'Refrescante'
+
+      expect(current_path).to eq establishment_beverage_path(establishment, beverage)
+      expect(page).to have_content 'Marcador adicionado'
+      within '#Tags' do
+        expect(page).to have_content 'Refrescante'
+      end 
+    end
+    
+    it 'e adiciciona tag que a bebida já tinha antes' do
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      beverage = Beverage.create!(name: 'Limonada', description: 'Limão não Siciliano, expremido com gelo e açúcar', calories: '40', item_type: 'beverage',
+                                  establishment: establishment, alcoholic: false)
+      tag = Tag.create!(name: 'Refrescante')
+      ItemTag.create!(item: beverage, tag: tag)
+
+      login_as user
+      visit establishment_beverage_path(establishment, beverage)
+      click_on 'Adicionar Marcador'
+      click_on 'Refrescante'
+
+      expect(page).to have_content 'Essa bebida já possui esse marcador'
+    end
+    
+    it 'e tag não é exclusiva de uma bebida' do
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      beverage1 = Beverage.create!(name: 'Limonada', description: 'Limão não Siciliano, expremido com gelo e açúcar', calories: '40', item_type: 'beverage',
+                                  establishment: establishment, alcoholic: false)
+      beverage2 = Beverage.create!(name: 'Suco de Laranja', description: 'Suco de laranja dos bons', calories: '30', item_type: 'beverage',
+                                  establishment: establishment, alcoholic: false)
+      tag = Tag.create!(name: 'Refrescante')
+      ItemTag.create!(item: beverage1, tag: tag)
+
+      login_as user
+      visit establishment_beverage_path(establishment, beverage2)
+      click_on 'Adicionar Marcador'
+      click_on 'Refrescante'
+
+      expect(page).to have_content 'Marcador adicionado'
+      expect(page).to have_content 'Refrescante'  
+    end
   end
 end

@@ -40,3 +40,6 @@ pt-BR:
     destroy:
       delete_success: 'Success on delete'
       delete_fail: 'Fail on delete'
+    add_tag:
+      notice: 'Tag added'
+      alert: 'This dish already has this tag'

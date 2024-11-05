@@ -30,3 +30,6 @@ pt-BR:
     destroy:
       delete_success: 'Beverage deleted'
       delete_fail: 'Failed in deleting the beverage'
+    add_tag:
+      notice: 'Tag added'
+      alert: 'This beverage already has this tag'

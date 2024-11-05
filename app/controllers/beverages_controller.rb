@@ -53,10 +53,10 @@ class BeveragesController < ApplicationController
     tag = Tag.find(params[:tag_id])
 
     if @beverage.tags.include?(tag)
-      redirect_to establishment_beverage_path(@establishment, @beverage), alert: 'Esse prato já possui esse marcador'
+      redirect_to establishment_beverage_path(@establishment, @beverage), alert: t('.alert')
     else
       @beverage.tags << tag
-      redirect_to establishment_beverage_path(@establishment, @beverage), notice: 'Marcador adicionado'
+      redirect_to establishment_beverage_path(@establishment, @beverage), notice: t('.notice')
     end
   end
 

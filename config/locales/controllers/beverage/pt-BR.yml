@@ -7,11 +7,12 @@ pt-BR:
       cancel: 'Cancelar'
       confirm: 'Confirmar'
     show:
-      title: 'Informações do Modelo da Bebida'
+      title: 'Informações da Bebida'
       no_image_found: 'Nenhuma imagem cadastrada'
       edit: 'Editar Bebida'
       delete: 'Deletar Bebida'
       confirm: 'Confirma'
+      tag_title: 'Marcadores'
       portion_title: 'Porções'
       add_new_portion: 'Adicionar Porção'
       not_active: 'Inativo'
@@ -30,3 +31,6 @@ pt-BR:
     destroy:
       delete_success: 'Bebida deletada com sucesso'
       delete_fail: 'Falha ao deletar a bebida'
+    add_tag:
+      notice: 'Marcador adicionado'
+      alert: 'Essa bebida já possui esse marcador'
