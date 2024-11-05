@@ -34,3 +34,6 @@ pt-BR:
     add_tag:
       notice: 'Marcador adicionado'
       alert: 'Essa bebida já possui esse marcador'
+    remove_tag:
+      notice: 'Marcador removido da bebida'
+      alert: 'Essa bebida não possui esse marcador'

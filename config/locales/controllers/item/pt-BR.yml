@@ -42,3 +42,6 @@ pt-BR:
     add_tag:
       notice: 'Marcador adicionado'
       alert: 'Esse prato já possui esse marcador'
+    remove_tag:
+      notice: 'Marcador removido do prato'
+      alert: 'Esse prato não possui esse marcador'

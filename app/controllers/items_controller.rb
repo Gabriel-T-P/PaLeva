@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_establishment_check_user
-  before_action :set_item, only: [:show, :edit, :update, :destroy, :add_tag]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :add_tag, :remove_tag]
 
   def index
     if params[:query].present?
@@ -66,6 +66,16 @@ class ItemsController < ApplicationController
       @item.tags << tag
       redirect_to establishment_item_path(@establishment, @item), notice: t('.notice')
     end    
+  end
+
+  def remove_tag
+    tag = Tag.find(params[:tag_id])
+  
+    if @item.tags.destroy(tag)
+      redirect_to establishment_item_path(@establishment, @item), notice: t('.notice')
+    else
+      redirect_to establishment_item_path(@establishment, @item), alert: t('.alert')
+    end
   end
 
   private

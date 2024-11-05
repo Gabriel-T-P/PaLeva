@@ -33,3 +33,6 @@ pt-BR:
     add_tag:
       notice: 'Tag added'
       alert: 'This beverage already has this tag'
+    remove_tag:
+      notice: 'Tag removed from this beverage'
+      alert: 'This beverage does not contain this tag'

@@ -67,7 +67,9 @@ describe 'usuário adiciona tag' do
       login_as user
       visit establishment_item_path(establishment, dish)
       click_on 'Adicionar Marcador'
-      click_on 'Picante'
+      within '#tagModal' do
+        click_on 'Picante'
+      end
 
       expect(current_path).to eq establishment_item_path(establishment, dish)
       expect(page).to have_content 'Esse prato já possui esse marcador'
@@ -162,7 +164,9 @@ describe 'usuário adiciona tag' do
       login_as user
       visit establishment_beverage_path(establishment, beverage)
       click_on 'Adicionar Marcador'
-      click_on 'Refrescante'
+      within '#tagModal' do
+        click_on 'Refrescante'
+      end
 
       expect(page).to have_content 'Essa bebida já possui esse marcador'
     end

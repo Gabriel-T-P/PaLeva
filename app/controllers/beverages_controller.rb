@@ -1,7 +1,7 @@
 class BeveragesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_establishment_check_user
-  before_action :set_beverage, only: [:show, :edit, :update, :destroy, :add_tag]
+  before_action :set_beverage, only: [:show, :edit, :update, :destroy, :add_tag, :remove_tag]
 
   def new
     @beverage = Beverage.new
@@ -57,6 +57,16 @@ class BeveragesController < ApplicationController
     else
       @beverage.tags << tag
       redirect_to establishment_beverage_path(@establishment, @beverage), notice: t('.notice')
+    end
+  end
+
+  def remove_tag
+    tag = Tag.find(params[:tag_id])
+  
+    if @item.tags.destroy(tag)
+      redirect_to establishment_item_path(@establishment, @item), notice: t('.notice')
+    else
+      redirect_to establishment_item_path(@establishment, @item), alert: t('.alert')
     end
   end
 

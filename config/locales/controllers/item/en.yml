@@ -43,3 +43,6 @@ pt-BR:
     add_tag:
       notice: 'Tag added'
       alert: 'This dish already has this tag'
+    remove_tag:
+      notice: 'Tag removed from the dish'
+      alert: 'This dish does not have the tag'
