@@ -9,6 +9,7 @@ class MenusController < ApplicationController
   
   def create
     @menu = Menu.new(menu_params)
+    @menu.establishment = current_user.establishment
 
     if @menu.save
       flash[:notice] = t '.notice'
