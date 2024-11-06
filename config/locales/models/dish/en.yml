@@ -1,0 +1,5 @@
+en:
+  models:
+    dish:
+      one: 'Dish'
+      other: 'Dishs'

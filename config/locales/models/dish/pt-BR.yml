@@ -1,0 +1,5 @@
+pt-BR:
+  models:
+    dish:
+      one: 'Prato'
+      other: 'Pratos'

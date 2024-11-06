@@ -2,6 +2,7 @@ pt-BR:
   home:
    index:
     title: 'Você está no Home'
+    menu_title: 'Cardápios Disponíveis'
     my_establishment: 'Meu Estabelecimento'
     register_establishment: 'Registrar Estabelecimento'
     search_items: 'Buscar por Pratos e Bebidas'

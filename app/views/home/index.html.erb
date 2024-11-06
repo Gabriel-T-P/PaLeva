@@ -14,3 +14,52 @@
     <p class="lead"><%=t '.please_login'%></p>
   <% end %>
 </div>
+
+<h3 class="display-4 text-center mb-4"><%= t '.menu_title' %></h3>
+<% if @menus.any? %>
+  <div id="menuCarousel" class="carousel slide custom-carousel"  data-bs-interval="false">
+    <div class="carousel-inner">
+      <% @menus.each_with_index do |menu, index| %>
+        <div class="carousel-item <%= 'active' if index.zero? %>">
+          <div class="card shadow-sm">
+            <div class="card-header">
+              <h5><%= menu.name %></h5>
+            </div>
+            <div class="card-body">
+              <span><%=Dish.model_name.human(count: 2)%>:</span>
+              <ul class="list-unstyled">
+                <% menu.items.each do |item| %>
+                  <li>
+                    <% if item.dish? %>
+                      <strong><%= item.name %></strong> - <%= item.description %>                      
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+              <span><%=Beverage.model_name.human(count: 2)%>:</span>
+              <ul class="list-unstyled">
+                <% menu.items.each do |item| %>
+                  <li>
+                    <% if item.beverage? %>
+                      <strong><%= item.name %></strong> - <%= item.description %>                      
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <button class="carousel-control-prev outside-carousel" type="button" data-bs-target="#menuCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden"></span>
+  </button>
+  <button class="carousel-control-next outside-carousel" type="button" data-bs-target="#menuCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden"></span>
+  </button>
+<% else %>
+  <p></p>
+<% end %>

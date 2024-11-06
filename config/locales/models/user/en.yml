@@ -1,3 +1,4 @@
+en:
   activerecord:
     attributes:
       user:
@@ -24,6 +25,8 @@
         unconfirmed_email: Unconfirmed email
         unlock_token: Unlock token
         updated_at: Updated at
+        first_name: Name
+        last_name: Surname
     models:
       user:
         one: User

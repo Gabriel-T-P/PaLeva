@@ -1,10 +1,12 @@
-pt-BR:
+en:
   menus:
     form:
       errors_message: 'Check the following errors'
       save: 'Save'
       cancel: 'Cancel'
       confirm: 'Confirm'
+      menu_dishs: 'Dishs dor the menu'
+      menu_beverages: 'Beverages for the menu'
     new:
       title: 'Create New Menu'
     create:

@@ -5,6 +5,8 @@ pt-BR:
       save: 'Salvar Cardápio'
       cancel: 'Cancelar'
       confirm: 'Confirmar'
+      menu_dishs: 'Pratos para o cardápio'
+      menu_beverages: 'Bebidas para o cardápio'
     new:
       title: 'Criar Cardápio'
     create:

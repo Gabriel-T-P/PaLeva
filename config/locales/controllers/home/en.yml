@@ -2,6 +2,7 @@ en:
   home:
    index:
     title: 'You are in Home'
+    menu_title: 'Available Menus'
     my_establishment: 'My Establishment'
     register_establishment: 'Register Establishment'
     search_items: 'Search Beverages and Dishs'
