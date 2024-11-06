@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    attributes:
+      menu:
+        name: 'Nome'
+    models:
+      menu:
+        one: 'Cardápio'
+        other: 'Cardápios'

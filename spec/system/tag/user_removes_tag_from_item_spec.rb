@@ -13,10 +13,14 @@ describe 'usuário remove tag' do
     visit root_path
     click_on 'Meu Estabelecimento'
     click_on 'Lasanha'
-    find("##{dom_id(tag)}").click
+    within "##{dom_id(tag)}" do
+      click_on 'Picante'
+    end
 
     expect(page).to have_content 'Marcador removido do prato'
-    expect(page).not_to have_content 'Picante' 
+    within '#Tags' do
+      expect(page).not_to have_content 'Picante'
+    end
   end
     
   it 'pela página da bebida' do
@@ -32,9 +36,14 @@ describe 'usuário remove tag' do
     visit root_path
     click_on 'Meu Estabelecimento'
     click_on 'Limonada'
-    find("##{dom_id(tag)}").click
+    save_page
+    within "##{dom_id(tag)}" do
+      click_on 'Refrescante'
+    end
 
     expect(page).to have_content 'Marcador removido da bebida'
-    expect(page).not_to have_content 'Refrescante' 
+    within '#Tags' do
+      expect(page).not_to have_content 'Refrescante'
+    end
   end
 end

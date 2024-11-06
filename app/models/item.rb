@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   has_many :portions
   has_many :item_tags
   has_many :tags, through: :item_tags
+  has_many :item_menus
+  has_many :menus, through: :item_menus
   has_one_attached :image
 
   validates :name, :description, :calories, :item_type, presence: true

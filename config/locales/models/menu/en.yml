@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    attributes:
+      menu:
+        name: 'Name'
+    models:
+      menu:
+        one: 'Menu'
+        other: 'Menus'

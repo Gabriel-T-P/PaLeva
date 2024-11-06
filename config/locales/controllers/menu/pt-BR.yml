@@ -1,0 +1,20 @@
+pt-BR:
+  menus:
+    form:
+      errors_message: 'Verifique os seguintes erros'
+      save: 'Salvar Cardápio'
+      cancel: 'Cancelar'
+      confirm: 'Confirmar'
+    new:
+      title: 'Criar Cardápio'
+    create:
+      notice: 'Cardápio cadastrado com sucesso'
+      alert: 'Falha ao cadastrar o cardápio'
+    edit:
+      title: 'Editar Cardápio'
+    update:
+      notice: 'Cardápio editado com sucesso'
+      alert: 'Falha ao editar o cardápio'
+    destroy:
+      delete_success: 'Cardápio deletado com sucesso'
+      delete_fail: 'Falha ao deletar o cardápio'

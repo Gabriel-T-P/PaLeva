@@ -12,6 +12,7 @@ describe 'usuário cria nova tag' do
       click_on 'Cadastros'
       click_on 'Marcadores'
     end
+    
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Descrição'
     expect(page).to have_button 'Salvar Marcador'

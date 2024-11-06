@@ -1,0 +1,45 @@
+<% if @menu.errors.any? %>
+  <div class="alert alert-danger">
+    <h4 class="alert-heading"> <%=t '.errors_message'%>:</h4>
+    <ul class="mb-0">
+      <% @menu.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="d-flex justify-content-center">
+  <div class="col-md-6">
+    <%= form_with model: menu, class: 'border p-4 shadow-sm' do |f| %>
+
+      <div class="mb-3">
+        <%= f.label :name, class: 'form-label' %>:
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <h3>Pratos para o cardápio</h3>
+      <%= f.collection_check_boxes :item_ids, @dishs, :id, :name do |b| %>
+        <div class="checkbox">
+          <%= b.check_box %> <%= b.label %>
+        </div>
+      <% end %>
+
+      <h3>Bebidas para o cardápio</h3>
+      <%= f.collection_check_boxes :item_ids, @beverages, :id, :name do |b| %>
+        <div class="checkbox">
+          <%= b.check_box %> <%= b.label %>
+        </div>
+      <% end %>
+
+      <div class="d-flex justify-content-between">
+        <div>
+          <%= f.submit t('.save'), class: 'btn btn-dark' %>
+          <%= link_to t('.cancel'), root_path, class: 'btn btn-danger ms-3' %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>
+

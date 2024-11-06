@@ -1,0 +1,20 @@
+pt-BR:
+  menus:
+    form:
+      errors_message: 'Check the following errors'
+      save: 'Save'
+      cancel: 'Cancel'
+      confirm: 'Confirm'
+    new:
+      title: 'Create New Menu'
+    create:
+      notice: 'Menu registered'
+      alert: 'Something went wrong'
+    edit:
+      title: 'Edit Menu'
+    update:
+      notice: 'Menu edited'
+      alert: 'Something went wrong'
+    destroy:
+      delete_success: 'Menu deleted'
+      delete_fail: 'Something went wrong'

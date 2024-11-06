@@ -33,4 +33,5 @@ Rails.application.routes.draw do
   end
 
   resources :tags, only: [:new, :create, :edit, :update, :destroy]
+  resources :menus, only: [:new, :create, :edit, :update, :destory]
 end

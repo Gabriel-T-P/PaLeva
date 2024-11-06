@@ -63,10 +63,10 @@ class BeveragesController < ApplicationController
   def remove_tag
     tag = Tag.find(params[:tag_id])
   
-    if @item.tags.destroy(tag)
-      redirect_to establishment_item_path(@establishment, @item), notice: t('.notice')
+    if @beverage.tags.destroy(tag)
+      redirect_to establishment_beverage_path(@establishment, @beverage), notice: t('.notice')
     else
-      redirect_to establishment_item_path(@establishment, @item), alert: t('.alert')
+      redirect_to establishment_beverage_path(@establishment, @beverage), alert: t('.alert')
     end
   end
 
