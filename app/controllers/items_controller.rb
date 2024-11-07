@@ -5,9 +5,9 @@ class ItemsController < ApplicationController
 
   def index
     if params[:query].present?
-      @items = Item.where("name LIKE :query OR description LIKE :query", query: "%#{params[:query]}%")
+      @items = @establishment.items.where("name LIKE :query OR description LIKE :query", query: "%#{params[:query]}%")
     else
-      @items = Item.all
+      @items = @establishment.items
     end
   end
 

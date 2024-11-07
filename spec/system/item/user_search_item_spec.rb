@@ -232,4 +232,40 @@ describe 'usuário procura por bebidas e pratos' do
     # Assert
     expect(current_path).to eq edit_establishment_item_path(establishment, dish)
   end
+
+  it 'e não vê pratos e bebidas de outros estabelecimentos sem fazer pesquisa' do
+    user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    user2 = User.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011')
+    establishment1 = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user1, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    establishment2 = Establishment.create!(corporate_name: 'Teste inc', trade_name: 'Teste Lunch', full_address: "Av testes, 123", user: user2, 
+                                            cnpj: CNPJ.generate, email: 'teste123546@email.com', phone_number: '99999043113')
+    beverage = Beverage.create!(name: 'Limonada', description: 'Bebida mais refrescante', calories: '50', item_type: 'beverage', establishment: establishment1, alcoholic: false)
+    dish = Item.create!(name: 'Lasanha', description: 'Alma do macarrão', calories: '400', item_type: 'dish', establishment: establishment2)
+
+    login_as user1
+    visit establishment_items_path(establishment1)
+
+    expect(page).to have_content 'Limonada'
+    expect(page).not_to have_content 'Lasanha'
+  end
+  
+  it 'e não vê pratos ou bebidas de outros estabelecimentos ao fazer a pesquisa' do
+    user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    user2 = User.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011')
+    establishment1 = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user1, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    establishment2 = Establishment.create!(corporate_name: 'Teste inc', trade_name: 'Teste Lunch', full_address: "Av testes, 123", user: user2, 
+                                            cnpj: CNPJ.generate, email: 'teste123546@email.com', phone_number: '99999043113')
+    dish = Item.create!(name: 'Lasanha', description: 'Alma do macarrão', calories: '400', item_type: 'dish', establishment: establishment2)
+
+    login_as user1
+    visit establishment_items_path(establishment1)
+    fill_in 'Buscar por nome ou descrição',	with: 'Lasanha'
+    click_on 'Buscar'
+
+    expect(page).to have_content 'Nenhum item cadastrado com a informação pedida'
+    expect(page).not_to have_content 'Lasanha'
+  end
+  
 end

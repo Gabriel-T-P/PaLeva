@@ -3,8 +3,8 @@ class MenusController < ApplicationController
 
   def new
     @menu = Menu.new
-    @dishs = Item.dish
-    @beverages = Item.beverage
+    @dishs = current_user.establishment.items.dish
+    @beverages = current_user.establishment.items.beverage
   end
   
   def create
@@ -16,8 +16,8 @@ class MenusController < ApplicationController
       redirect_to root_path
     else
       flash.now[:alert] = t '.alert'
-      @dishs = Item.dish
-      @beverages = Item.beverage
+      @dishs = current_user.establishment.items.dish
+      @beverages = current_user.establishment.items.beverage
       render 'new'
     end
   end

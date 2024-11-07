@@ -72,6 +72,28 @@ describe 'usuário cadastra cardápio' do
     expect(page).to have_field 'Suco de Laranja'
   end
   
+  it 'e so vê pratos e bebidas do estabelecimento para cadastro' do
+    user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    user2 = User.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011')
+    establishment1 = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user1, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    establishment2 = Establishment.create!(corporate_name: 'Teste inc', trade_name: 'Teste Lunch', full_address: "Av testes, 123", user: user2, 
+                                            cnpj: CNPJ.generate, email: 'teste123546@email.com', phone_number: '99999043113')
+    dish1 = Item.create!(name: 'Lasanha', description: 'Carne, macarrão e molho picante', calories: '340', item_type: 'dish', establishment: establishment1)
+    dish2 = Item.create!(name: 'Macarronada', description: 'Carne moída, macarrão e molho picante', calories: '320', item_type: 'dish', establishment: establishment2)
+    beverage1 = Beverage.create!(name: 'Limonada', description: 'Limão não Siciliano, expremido com gelo e açúcar', calories: '40', item_type: 'beverage',
+                                            establishment: establishment1, alcoholic: false)
+    beverage2 = Beverage.create!(name: 'Suco de Laranja', description: 'Suco de laranja dos bons', calories: '30', item_type: 'beverage',
+                                            establishment: establishment2, alcoholic: false)
+    
+    login_as user1
+    visit new_menu_path
+
+    expect(page).to have_field 'Lasanha'  
+    expect(page).not_to have_field 'Macarronada'
+    expect(page).to have_field 'Limonada'
+    expect(page).not_to have_field 'Suco de Laranja'
+  end
 
   it 'com sucesso' do
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
