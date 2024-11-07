@@ -1,7 +1,9 @@
 class HomeController < ApplicationController
 
   def index
-    @menus = Menu.all
+    if user_signed_in?
+      @menus = current_user.establishment.menus
+    end
   end
   
 end

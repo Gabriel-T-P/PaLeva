@@ -1,10 +1,11 @@
 pt-BR:
   home:
    index:
-    title: 'Você está no Home'
+    title: 'Bem Vindo!'
     menu_title: 'Cardápios Disponíveis'
     my_establishment: 'Meu Estabelecimento'
     register_establishment: 'Registrar Estabelecimento'
     search_items: 'Buscar por Pratos e Bebidas'
     please_login: 'Para acessar suas informações, por favor faça login'
     please_create_establishment: 'Para ver mais informações, por favor crie um estabelecimento'
+    no_menus: 'Nenhum cardápio cadastrado'

@@ -15,51 +15,84 @@
   <% end %>
 </div>
 
-<h3 class="display-4 text-center mb-4"><%= t '.menu_title' %></h3>
-<% if @menus.any? %>
-  <div id="menuCarousel" class="carousel slide custom-carousel"  data-bs-interval="false">
-    <div class="carousel-inner">
-      <% @menus.each_with_index do |menu, index| %>
-        <div class="carousel-item <%= 'active' if index.zero? %>">
-          <div class="card shadow-sm">
-            <div class="card-header">
-              <h5><%= menu.name %></h5>
-            </div>
-            <div class="card-body">
-              <span><%=Dish.model_name.human(count: 2)%>:</span>
-              <ul class="list-unstyled">
-                <% menu.items.each do |item| %>
-                  <li>
+
+<% if user_signed_in? %>
+  <h3 class="display-4 text-center mb-4"><%= t '.menu_title' %></h3>
+  <% if @menus.any? %>
+    <div id="menuCarousel" class="carousel slide custom-carousel"  data-bs-interval="false">
+      <div class="carousel-inner">
+        <% @menus.each_with_index do |menu, index| %>
+          <div class="carousel-item <%= 'active' if index.zero? %>">
+
+            <div class="card shadow-sm">
+              <div class="card-header">
+                <h5><%= menu.name %></h5>
+              </div>
+              <div class="card-body">
+                <span><%= Dish.model_name.human(count: 2) %>:</span>
+                <ul class="list-unstyled">
+                  <% menu.items.each do |item| %>
                     <% if item.dish? %>
-                      <strong><%= item.name %></strong> - <%= item.description %>                      
+                      <li class="mb-3">
+                        <strong><%= item.name %></strong> - <%= item.description %>
+                        
+                        <% if item.portions.any? %>
+                          <div class="d-flex flex-wrap mt-2">
+                            <% item.portions.each do |portion| %>
+                              <span class="badge bg-primary rounded-pill me-2 mb-2">
+                                <%= portion.name %> - <%= number_to_currency(portion.price) %>
+                              </span>
+                            <% end %>
+                          </div>
+                        <% else %>
+                          <p class="text-muted">Nenhuma porção disponível</p>
+                        <% end %>
+                      </li>
                     <% end %>
-                  </li>
-                <% end %>
-              </ul>
-              <span><%=Beverage.model_name.human(count: 2)%>:</span>
-              <ul class="list-unstyled">
-                <% menu.items.each do |item| %>
-                  <li>
+                  <% end %>
+                </ul>
+                
+                <span><%= Beverage.model_name.human(count: 2) %>:</span>
+                <ul class="list-unstyled">
+                  <% menu.items.each do |item| %>
                     <% if item.beverage? %>
-                      <strong><%= item.name %></strong> - <%= item.description %>                      
+                      <li class="mb-3">
+                        <strong><%= item.name %></strong> - <%= item.description %>
+                        
+                        <% if item.portions.any? %>
+                          <div class="d-flex flex-wrap mt-2">
+                            <% item.portions.each do |portion| %>
+                              <span class="badge bg-info rounded-pill me-2 mb-2">
+                                <%= portion.name %> - <%= number_to_currency(portion.price) %>
+                              </span>
+                            <% end %>
+                          </div>
+                        <% else %>
+                          <p class="text-muted">Nenhuma porção disponível</p>
+                        <% end %>
+                      </li>
                     <% end %>
-                  </li>
-                <% end %>
-              </ul>
+                  <% end %>
+                </ul>
+              </div>
             </div>
+
+
+
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
-  <button class="carousel-control-prev outside-carousel" type="button" data-bs-target="#menuCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden"></span>
-  </button>
-  <button class="carousel-control-next outside-carousel" type="button" data-bs-target="#menuCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden"></span>
-  </button>
-<% else %>
-  <p></p>
+    <button class="carousel-control-prev outside-carousel" type="button" data-bs-target="#menuCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden"></span>
+    </button>
+    <button class="carousel-control-next outside-carousel" type="button" data-bs-target="#menuCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden"></span>
+    </button>
+  <% else %>
+    <p class="lead"><%=t '.no_menus'%></p>
+  <% end %>  
 <% end %>
+

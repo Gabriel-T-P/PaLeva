@@ -1,10 +1,11 @@
 en:
   home:
    index:
-    title: 'You are in Home'
+    title: 'Welcome!'
     menu_title: 'Available Menus'
     my_establishment: 'My Establishment'
     register_establishment: 'Register Establishment'
     search_items: 'Search Beverages and Dishs'
     please_login: 'To view more info, please login'
     please_create_establishment: 'To view more info, please create an establishment'
+    no_menus: 'No menu registered'
