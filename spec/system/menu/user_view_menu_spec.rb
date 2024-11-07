@@ -106,8 +106,92 @@ describe 'usuário vê cardápio' do
     expect(page).to have_content 'Limonada'
   end
 
-  it "description" do
-    
+  it 'e vê porções indisponíveis' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+    unactive_portion = Portion.create!(name: 'Grande', description: 'Uma unidade grande de pão de queijo', price: 5.99, item: dish)
+    unactive_portion.update(active: false)
+    menu = Menu.create!(name: 'Café da Manhã', establishment: establishment)
+    menu.items<<[dish]
+
+    login_as user
+    visit root_path
+
+    expect(page).to have_content 'Café da Manhã'
+    expect(page).to have_content 'Pão de Queijo'  
+    expect(page).to have_content 'Pequeno - R$ 1,50'
+    expect(page).to have_content 'Grande - Indisponível'
   end
   
+  it 'e existem pratos ou bebidas sem porções' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    menu = Menu.create!(name: 'Café da Manhã', establishment: establishment)
+    menu.items<<[dish]
+
+    login_as user
+    visit root_path
+
+    expect(page).to have_content 'Nenhuma porção para esse item'  
+  end
+  
+  it 'e não existem bebidas cadastradas no cardápio' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    menu = Menu.create!(name: 'Café da Manhã', establishment: establishment)
+    menu.items<<[dish]
+
+    login_as user
+    visit root_path
+
+    expect(page).to have_content 'Nenhuma bebida neste cardápio'  
+  end
+  
+  it 'e não existem pratos cadastrados no cardápio' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    beverage = Beverage.create!(name: 'Limonada', description: 'Limão não Siciliano, expremido com gelo e açúcar', calories: '40', item_type: 'beverage',
+                                            establishment: establishment, alcoholic: false)
+    menu = Menu.create!(name: 'Café da Manhã', establishment: establishment)
+    menu.items<<[beverage]
+
+    login_as user
+    visit root_path
+
+    expect(page).to have_content 'Nenhum prato neste cardápio'  
+  end
+  
+  it 'e não existem cardápios cadastrados' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    
+    login_as user
+    visit root_path
+
+    expect(page).to have_content 'Nenhum cardápio cadastrado'  
+  end
+
+  it 'e vê bebidas alcoólicas' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    beverage = Beverage.create!(name: 'Cerveja', description: 'A bebida mais comum do Brasil', calories: '140', item_type: 'beverage',
+                                            establishment: establishment, alcoholic: true)
+    menu = Menu.create!(name: 'Barzinho da Noite', establishment: establishment)
+    menu.items<<[beverage]
+
+    login_as user
+    visit root_path
+
+    expect(page).to have_content 'Cerveja - A bebida mais comum do Brasil - Alcoólica' 
+  end
 end

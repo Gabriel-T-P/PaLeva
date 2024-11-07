@@ -29,56 +29,71 @@
                 <h5><%= menu.name %></h5>
               </div>
               <div class="card-body">
-                <span><%= Dish.model_name.human(count: 2) %>:</span>
+                <span><%= t '.dish_title' %>:</span>
                 <ul class="list-unstyled">
-                  <% menu.items.each do |item| %>
-                    <% if item.dish? %>
-                      <li class="mb-3">
-                        <strong><%= item.name %></strong> - <%= item.description %>
-                        
+                  <div class="border rounded p-2 mb-2">
+                    <% if menu.items.dish.empty? %>
+                      <p class="text-muted"><%= t '.no_dishs' %></p>
+                    <% end %>
+                    <% menu.items.dish.each do |item| %>
+                      <li class="mb-1">
+                        <strong><%= item.name %></strong> - <span class="text-muted"><%= item.description %></span>
                         <% if item.portions.any? %>
                           <div class="d-flex flex-wrap mt-2">
                             <% item.portions.each do |portion| %>
-                              <span class="badge bg-primary rounded-pill me-2 mb-2">
-                                <%= portion.name %> - <%= number_to_currency(portion.price) %>
-                              </span>
+                              <% if portion.active %>
+                                <span class="badge bg-primary rounded-pill me-2 mb-2">
+                                  <%= portion.name %> - <%= number_to_currency(portion.price) %>
+                                </span>
+                              <% else %>
+                                <span class="badge bg-secondary rounded-pill me-2 mb-2">
+                                  <%= portion.name %> - <%= t '.unavailable' %>
+                                </span>
+                              <% end %>
                             <% end %>
                           </div>
                         <% else %>
-                          <p class="text-muted">Nenhuma porção disponível</p>
+                          <p class="text-muted"><%= t '.no_portions' %></p>
                         <% end %>
                       </li>
                     <% end %>
-                  <% end %>
+                  </div>
                 </ul>
-                
                 <span><%= Beverage.model_name.human(count: 2) %>:</span>
                 <ul class="list-unstyled">
-                  <% menu.items.each do |item| %>
-                    <% if item.beverage? %>
-                      <li class="mb-3">
-                        <strong><%= item.name %></strong> - <%= item.description %>
-                        
+                  <div class="border rounded p-2 mb-2">
+                    <% if menu.items.beverage.empty? %>
+                      <p class="text-muted"><%= t '.no_beverages' %></p>
+                    <% end %>
+                    <% menu.items.beverage.each do |item| %>
+                      <li class="mb-1">
+                        <strong><%= item.name %></strong> - <span class="text-muted"><%= item.description %></span> 
+                        <% if item.alcoholic? %>
+                          <span class="text-muted">- <i> <%= Beverage.human_attribute_name(:alcoholic) %> </i> </span>
+                        <% end %>
                         <% if item.portions.any? %>
                           <div class="d-flex flex-wrap mt-2">
                             <% item.portions.each do |portion| %>
-                              <span class="badge bg-info rounded-pill me-2 mb-2">
-                                <%= portion.name %> - <%= number_to_currency(portion.price) %>
-                              </span>
+                              <% if portion.active %>
+                                <span class="badge bg-primary rounded-pill me-2 mb-2">
+                                  <%= portion.name %> - <%= number_to_currency(portion.price) %>
+                                </span>
+                              <% else %>
+                                <span class="badge bg-secondary rounded-pill me-2 mb-2">
+                                  <%= portion.name %> - <%= t '.unavailable' %>
+                                </span>
+                              <% end %>
                             <% end %>
                           </div>
                         <% else %>
-                          <p class="text-muted">Nenhuma porção disponível</p>
+                          <p class="text-muted"><%= t '.no_portions' %></p>
                         <% end %>
                       </li>
                     <% end %>
-                  <% end %>
+                  </div>
                 </ul>
               </div>
             </div>
-
-
-
           </div>
         <% end %>
       </div>
