@@ -45,7 +45,10 @@
                   </svg>
                   <% if @order && @order.portions.any? %>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                      <%= @order.portions.count %>
+                      <%sum = 0%>
+                      <% @order.portion_orders.each do |portion_order| %>
+                         <%=sum += portion_order.quantity%>
+                      <% end %>
                     </span>
                   <% end %>
                 </button>
