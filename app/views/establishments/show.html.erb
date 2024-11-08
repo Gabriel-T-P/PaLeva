@@ -36,11 +36,11 @@
       <p class="lead text-muted text-center"><%= t '.please_add_opening_hour' %></p>
     </div>
   <% else %>
-    <div class="row">
+    <div class="row justify-content-center mx-3">
       <% @establishment.opening_hours.order(:day_of_week).each do |hour| %>
-        <div class="col-md-2 my-4">
+        <div class="col-md-3 my-4">
           <div class="card h-100">
-            <div class="card-header font-weight-bold">
+            <div class="card-header d-flex justify-content-between">
               <%= I18n.t('date.day_names')[hour.day_of_week] %>
               <%= link_to 'Editar', edit_establishment_opening_hour_path(@establishment, hour), class: 'btn btn-outline-dark btn-sm ms-4' %>
             </div>

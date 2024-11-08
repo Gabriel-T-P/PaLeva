@@ -56,7 +56,17 @@
           <% if @portion.active %>
             <div class="card p-3 border rounded shadow-sm">
               <%= form_with model: @portion_order, class: "row g-3" do |f| %>
-              
+
+                <% if flash[:error].present? %>
+                  <div class="alert alert-danger" style="border: 1px solid red; border-radius: 5px;">
+                    <ul>
+                      <% flash[:error].each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+
                 <div>
                   <%= f.hidden_field :portion_id, value: @portion_order.portion.id %>
                 </div>

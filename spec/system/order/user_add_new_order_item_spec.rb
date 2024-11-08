@@ -59,7 +59,7 @@ describe 'usuário registra item a um pedido' do
     click_on 'Adicionar'
     
     expect(current_path).to eq root_path
-    expect(page).to have_content 'Pão de Queijo, Pequeno - R$ 1,50'
+    expect(page).to have_content 'Pão de Queijo, Pequeno - R$ 1,50 x 1'
     expect(page).to have_link 'Ver Pedido'  
   end
 
@@ -87,9 +87,9 @@ describe 'usuário registra item a um pedido' do
 
     within 'nav' do
       expect(page).to have_content 3
-      expect(page).to have_content 'Pão de Queijo, Pequeno - R$ 1,50'
-      expect(page).to have_content 'Pão de Queijo, Grande - R$ 5,99'
-      expect(page).to have_content 'Suco de Laranja, 300 ml - R$ 8,00'
+      expect(page).to have_content 'Pão de Queijo, Pequeno - R$ 1,50 x 1'
+      expect(page).to have_content 'Pão de Queijo, Grande - R$ 5,99 x 2'
+      expect(page).to have_content 'Suco de Laranja, 300 ml - R$ 8,00 x 1'
     end  
   end
   
@@ -109,7 +109,9 @@ describe 'usuário registra item a um pedido' do
     fill_in 'Quantidade',	with: 2
     click_on 'Adicionar'
 
-    expect(page).to have_content 5
+    within 'nav' do
+      expect(page).to have_content 5
+    end
   end
 
   it 'e não vê campos de adicionar item ao pedido se porção indisponível' do
@@ -144,18 +146,42 @@ describe 'usuário registra item a um pedido' do
     click_on 'Adicionar'
 
     within 'nav' do
-      expect(page).to have_content 'Pão de Queijo, Pequeno - R$ 1,50'
-      expect(page).not_to have_content 'Pão de Queijo, Grande - R$ 5,99'
+      expect(page).to have_content 'Pão de Queijo, Pequeno - R$ 1,50 x 3'
+      expect(page).not_to have_content 'Pão de Queijo, Grande - R$ 5,99 x 1'
     end
   end
   
-  it 'e ao falhar em salvar é renderiza corretamente a página da porção' do
-    
+  it 'e ao falhar em salvar renderiza corretamente a página da porção' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+
+    login_as user
+    visit establishment_item_portion_path(establishment, dish, portion)
+    fill_in 'Quantidade',	with: '1.5'
+    click_on 'Adicionar'
+
+    expect(current_path).to eq establishment_item_portion_path(establishment, dish, portion)
+    expect(page).to have_content 'Quantidade não é um número inteiro' 
   end
   
-
   it 'e vê mensagens de erros' do
-    
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+
+    login_as user
+    visit establishment_item_portion_path(establishment, dish, portion)
+    fill_in 'Quantidade',	with: ''
+    fill_in 'Observação',	with: 'abcd' 
+    click_on 'Adicionar'
+
+    expect(page).to have_content 'Quantidade não é um número'
+    expect(page).to have_content 'Observação possui 6 caracteres como mínimo permitido'
   end
   
 end

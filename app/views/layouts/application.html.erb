@@ -47,16 +47,17 @@
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                       <%sum = 0%>
                       <% @order.portion_orders.each do |portion_order| %>
-                         <%=sum += portion_order.quantity%>
+                         <%sum += portion_order.quantity%>
                       <% end %>
+                      <%=sum%>
                     </span>
                   <% end %>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="orderDropdown">
-                  <% if @order && @order.portions.any? %>
-                    <% @order.portions.each do |portion| %>
+                  <% if @order && @order.portion_orders.any? %>
+                    <% @order.portion_orders.each do |portion_order| %>
                       <li class="dropdown-item">
-                        <%= portion.item.name %>, <%=portion.name%> - <%= number_to_currency(portion.price) %>
+                        <%= portion_order.portion.item.name %>, <%=portion_order.portion.name%> - <%=number_to_currency(portion_order.portion.price)%> x <%=portion_order.quantity%>
                       </li>
                     <% end %>
                     <li><hr class="dropdown-divider"></li>

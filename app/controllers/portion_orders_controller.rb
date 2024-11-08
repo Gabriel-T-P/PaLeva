@@ -8,10 +8,9 @@ class PortionOrdersController < ApplicationController
       flash[:notice] = "Object successfully created"
       redirect_to root_path
     else
-      flash.now[:alert] = "Something went wrong"
-      render 'portions/show'
+      flash[:error] = @portion_order.errors.full_messages
+      redirect_to polymorphic_path([current_user.establishment, @portion_order.portion.item, @portion_order.portion])
     end
   end
-  
 
 end
