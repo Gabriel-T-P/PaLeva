@@ -25,16 +25,10 @@
             <%= link_to 'PaLevá', root_path, class: 'navbar-brand' %>
             <% if user_signed_in? %>
               <div class="dropdown">
-                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Cadastros
-                </button>
+                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastros</button>
                 <ul class="dropdown-menu" aria-labelledby="cadastrosDropdown">
-                  <li>
-                    <%=link_to Tag.model_name.human(count: 2), new_tag_path, class: 'dropdown-item'%>
-                  </li>
-                  <li>
-                    <%=link_to Menu.model_name.human(count: 2), new_menu_path, class: 'dropdown-item'%>
-                  </li>
+                  <li><%= link_to Tag.model_name.human(count: 2), new_tag_path, class: 'dropdown-item' %></li>
+                  <li><%= link_to Menu.model_name.human(count: 2), new_menu_path, class: 'dropdown-item' %></li>
                 </ul>
               </div>
             <% end %>
@@ -42,7 +36,35 @@
 
           <div class="d-inline-flex align-items-center">
             <% if user_signed_in? %>
-              <span class="navbar-text"> Olá, <%= current_user.first_name %> </span>
+              <span class="navbar-text">Olá, <%= current_user.first_name %></span>
+
+              <div class="dropdown ms-3">
+                <button class="btn btn-outline-dark position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                  </svg>
+                  <% if @order && @order.portions.any? %>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      <%= @order.portions.count %>
+                    </span>
+                  <% end %>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="orderDropdown">
+                  <% if @order && @order.portions.any? %>
+                    <% @order.portions.each do |portion| %>
+                      <li class="dropdown-item">
+                        <%= portion.item.name %>, <%=portion.name%> - <%= number_to_currency(portion.price) %>
+                      </li>
+                    <% end %>
+                    <li><hr class="dropdown-divider"></li>
+                    <li class="dropdown-item text-center">
+                      <%= link_to "Ver Pedido", root_path, class: 'btn btn-primary' %>
+                    </li>
+                  <% else %>
+                    <li class="dropdown-item text-muted">Nenhum item adicionado</li>
+                  <% end %>
+                </ul>
+              </div>
               <%= button_to I18n.t('logout'), destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark ms-3 py-1' %>
             <% else %>
               <%= link_to I18n.t('login'), new_user_session_path, class: 'btn btn-outline-primary py-1' %>
@@ -50,7 +72,6 @@
           </div>
         </div>
       </nav>
-
     </header>
 
     <div class="container my-3">

@@ -5,6 +5,7 @@ class PortionsController < ApplicationController
   before_action :set_establishment_check_user
 
   def show
+    @portion_order = @portion.portion_orders.new
   end
 
   def new

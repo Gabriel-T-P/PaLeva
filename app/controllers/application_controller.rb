@@ -19,4 +19,13 @@ class ApplicationController < ActionController::Base
     redirect_to new_establishment_path, alert: I18n.t('redirect_establishment_alert')
   end
 
+  def current_order
+    last_order = current_user.orders.last
+    if last_order&.status == 'open'
+      @current_order = last_order  
+    else
+      @current_order = Order.new(user: current_user)
+    end
+  end
+
 end

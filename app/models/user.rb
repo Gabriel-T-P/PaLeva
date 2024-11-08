@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validate :valid_cpf
 
   has_one :establishment
+  has_many :orders
   enum :role, { :admin => 2, :user => 5 }
   after_initialize :set_default_role, :if => :new_record?
 

@@ -17,6 +17,8 @@ pt-BR:
       set_active: 'Ativar'
       set_unactive: 'Desativar'
       price_history_title: 'Histórico de Preços'
+      create_order_title: 'Adicionar ao Pedido'
+      submit: 'Adicionar'
       actual: 'Atual'
       removed: 'Removido'
     new:

@@ -17,6 +17,8 @@ en:
       set_active: 'Set Active'
       set_unactive: 'Set Unactive'
       price_history_title: 'Price'
+      create_order_title: 'Add Order'
+      submit: 'Add'
       actual: 'Current'
       removed: 'Removed'
     new:

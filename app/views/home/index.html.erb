@@ -16,98 +16,103 @@
 </div>
 
 
-<% if user_signed_in? %>
-  <h3 class="display-4 text-center mb-4"><%= t '.menu_title' %></h3>
-  <% if @menus.any? %>
-    <div id="menuCarousel" class="carousel slide custom-carousel"  data-bs-interval="false">
-      <div class="carousel-inner">
-        <% @menus.each_with_index do |menu, index| %>
-          <div class="carousel-item <%= 'active' if index.zero? %>">
+<section id="Menus">
+  <% if user_signed_in? %>
+    <h3 class="display-4 text-center mb-4"><%= t '.menu_title' %></h3>
+    <% if @menus.any? %>
+      <div id="menuCarousel" class="carousel slide custom-carousel"  data-bs-interval="false">
+        <div class="carousel-inner">
+          <% @menus.each_with_index do |menu, index| %>
+            <div class="carousel-item <%= 'active' if index.zero? %>">
 
-            <div class="card shadow-sm">
-              <div class="card-header">
-                <h5><%= menu.name %></h5>
-              </div>
-              <div class="card-body">
-                <span><%= t '.dish_title' %>:</span>
-                <ul class="list-unstyled">
-                  <div class="border rounded p-2 mb-2">
-                    <% if menu.items.dish.empty? %>
-                      <p class="text-muted"><%= t '.no_dishs' %></p>
-                    <% end %>
-                    <% menu.items.dish.each do |item| %>
-                      <li class="mb-1">
-                        <strong><%= item.name %></strong> - <span class="text-muted"><%= item.description %></span>
-                        <% if item.portions.any? %>
-                          <div class="d-flex flex-wrap mt-2">
-                            <% item.portions.each do |portion| %>
-                              <% if portion.active %>
-                                <span class="badge bg-primary rounded-pill me-2 mb-2">
-                                  <%= portion.name %> - <%= number_to_currency(portion.price) %>
-                                </span>
-                              <% else %>
-                                <span class="badge bg-secondary rounded-pill me-2 mb-2">
-                                  <%= portion.name %> - <%= t '.unavailable' %>
-                                </span>
+              <div class="card shadow-sm">
+                <div class="card-header">
+                  <h5><%= menu.name %></h5>
+                </div>
+                <div class="card-body">
+                  <span><%= t '.dish_title' %>:</span>
+                  <ul class="list-unstyled">
+                    <div class="border rounded p-2 mb-2">
+                      <% if menu.items.dish.empty? %>
+                        <p class="text-muted"><%= t '.no_dishs' %></p>
+                      <% end %>
+                      <% menu.items.dish.each do |item| %>
+                        <li class="mb-1">
+                          <strong><%= item.name %></strong> - <span class="text-muted"><%= item.description %></span>
+                          <% if item.portions.any? %>
+                            <div class="d-flex flex-wrap mt-2">
+                              <% item.portions.each do |portion| %>
+                                <% if portion.active %>
+                                  <%= link_to establishment_item_portion_path(current_user.establishment, item, portion) do %>
+                                    <span class="badge bg-primary rounded-pill me-2 mb-2">
+                                      <%= portion.name %> - <%= number_to_currency(portion.price) %>
+                                    </span>
+                                  <% end %>
+                                <% else %>
+                                  <span class="badge bg-secondary rounded-pill me-2 mb-2">
+                                    <%= portion.name %> - <%= t '.unavailable' %>
+                                  </span>
+                                <% end %>
                               <% end %>
-                            <% end %>
-                          </div>
-                        <% else %>
-                          <p class="text-muted"><%= t '.no_portions' %></p>
-                        <% end %>
-                      </li>
-                    <% end %>
-                  </div>
-                </ul>
-                <span><%= Beverage.model_name.human(count: 2) %>:</span>
-                <ul class="list-unstyled">
-                  <div class="border rounded p-2 mb-2">
-                    <% if menu.items.beverage.empty? %>
-                      <p class="text-muted"><%= t '.no_beverages' %></p>
-                    <% end %>
-                    <% menu.items.beverage.each do |item| %>
-                      <li class="mb-1">
-                        <strong><%= item.name %></strong> - <span class="text-muted"><%= item.description %></span> 
-                        <% if item.alcoholic? %>
-                          <span class="text-muted">- <i> <%= Beverage.human_attribute_name(:alcoholic) %> </i> </span>
-                        <% end %>
-                        <% if item.portions.any? %>
-                          <div class="d-flex flex-wrap mt-2">
-                            <% item.portions.each do |portion| %>
-                              <% if portion.active %>
-                                <span class="badge bg-primary rounded-pill me-2 mb-2">
-                                  <%= portion.name %> - <%= number_to_currency(portion.price) %>
-                                </span>
-                              <% else %>
-                                <span class="badge bg-secondary rounded-pill me-2 mb-2">
-                                  <%= portion.name %> - <%= t '.unavailable' %>
-                                </span>
+                            </div>
+                          <% else %>
+                            <p class="text-muted"><%= t '.no_portions' %></p>
+                          <% end %>
+                        </li>
+                      <% end %>
+                    </div>
+                  </ul>
+                  <span><%= Beverage.model_name.human(count: 2) %>:</span>
+                  <ul class="list-unstyled">
+                    <div class="border rounded p-2 mb-2">
+                      <% if menu.items.beverage.empty? %>
+                        <p class="text-muted"><%= t '.no_beverages' %></p>
+                      <% end %>
+                      <% menu.items.beverage.each do |item| %>
+                        <li class="mb-1">
+                          <strong><%= item.name %></strong> - <span class="text-muted"><%= item.description %></span> 
+                          <% if item.alcoholic? %>
+                            <span class="text-muted">- <i> <%= Beverage.human_attribute_name(:alcoholic) %> </i> </span>
+                          <% end %>
+                          <% if item.portions.any? %>
+                            <div class="d-flex flex-wrap mt-2">
+                              <% item.portions.each do |portion| %>
+                                <% if portion.active %>
+                                  <%= link_to establishment_beverage_portion_path(current_user.establishment, item, portion) do %>
+                                    <span class="badge bg-primary rounded-pill me-2 mb-2">
+                                      <%= portion.name %> - <%= number_to_currency(portion.price) %>
+                                    </span>
+                                  <% end %>
+                                <% else %>
+                                  <span class="badge bg-secondary rounded-pill me-2 mb-2">
+                                    <%= portion.name %> - <%= t '.unavailable' %>
+                                  </span>
+                                <% end %>
                               <% end %>
-                            <% end %>
-                          </div>
-                        <% else %>
-                          <p class="text-muted"><%= t '.no_portions' %></p>
-                        <% end %>
-                      </li>
-                    <% end %>
-                  </div>
-                </ul>
+                            </div>
+                          <% else %>
+                            <p class="text-muted"><%= t '.no_portions' %></p>
+                          <% end %>
+                        </li>
+                      <% end %>
+                    </div>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <button class="carousel-control-prev outside-carousel" type="button" data-bs-target="#menuCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden"></span>
-    </button>
-    <button class="carousel-control-next outside-carousel" type="button" data-bs-target="#menuCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden"></span>
-    </button>
-  <% else %>
-    <p class="lead"><%=t '.no_menus'%></p>
-  <% end %>  
-<% end %>
-
+      <button class="carousel-control-prev outside-carousel" type="button" data-bs-target="#menuCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden"></span>
+      </button>
+      <button class="carousel-control-next outside-carousel" type="button" data-bs-target="#menuCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden"></span>
+      </button>
+    <% else %>
+      <p class="lead"><%=t '.no_menus'%></p>
+    <% end %>  
+  <% end %>
+</section>

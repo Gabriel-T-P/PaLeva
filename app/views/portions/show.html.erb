@@ -52,6 +52,33 @@
             <% end %>
           </div>
         </div>
+        <section id="OrderCreate">
+          <% if @portion.active %>
+            <div class="card p-3 border rounded shadow-sm">
+              <%= form_with model: @portion_order, class: "row g-3" do |f| %>
+              
+                <div>
+                  <%= f.hidden_field :portion_id, value: @portion_order.portion.id %>
+                </div>
+
+                <div class="col-auto">
+                  <%= f.label :quantity, class: "form-label" %>
+                  <%= f.number_field :quantity, class: "form-control form-control-sm w-auto", min: 1, value: 1 %>
+                </div>
+                
+                <div class="col-auto">
+                  <%= f.label :observation, class: "form-label" %>
+                  <%= f.text_area :observation, class: "form-control form-control-sm h-25 w-auto" %>
+                </div>
+
+                <div class="col-auto">
+                  <%= f.submit t('.submit'), class: "btn btn-primary btn-sm mt-4" %>
+                </div>
+
+              <% end %>
+            </div>
+          <% end %>
+        </section>
       </div>
     </div>
   </div>

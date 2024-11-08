@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    attributes:
+      portion_order:
+        quantity: 'Quantidade'
+        observation: 'Observação'
+    models:
+      portion_order:
+        one: 'Porção do pedido'
+        other: 'Porções do pedido'
