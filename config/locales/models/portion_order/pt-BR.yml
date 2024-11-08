@@ -4,7 +4,15 @@ pt-BR:
       portion_order:
         quantity: 'Quantidade'
         observation: 'Observação'
+        order: 'Pedido'
+        portion: 'Porção'
     models:
       portion_order:
         one: 'Porção do pedido'
         other: 'Porções do pedido'
+    errors:
+      models:
+        portion_order:
+          attributes:
+            observation:
+              too_short: "possui %{count} caracteres como mínimo permitido"

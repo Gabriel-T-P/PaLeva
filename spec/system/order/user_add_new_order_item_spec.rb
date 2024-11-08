@@ -136,7 +136,7 @@ describe 'usuário registra item a um pedido' do
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     portion2 = Portion.create!(name: 'Grande', description: 'Uma unidade grande de pão de queijo', price: 5.99, item: dish)
     order = Order.create!(name: 'Teste', email: 'teste123.email.com', status: 'delivered', user: user)
-    order.portions << portion2
+    PortionOrder.create!(order: order, portion: portion2, quantity: 1)
 
     login_as user
     visit establishment_item_portion_path(establishment, dish, portion)
@@ -149,6 +149,11 @@ describe 'usuário registra item a um pedido' do
     end
   end
   
+  it 'e ao falhar em salvar é renderiza corretamente a página da porção' do
+    
+  end
+  
+
   it 'e vê mensagens de erros' do
     
   end

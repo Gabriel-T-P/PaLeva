@@ -4,7 +4,15 @@ pt-BR:
       portion_order:
         quantity: 'Quantity'
         observation: 'Observation'
+        order: 'Order'
+        portion: 'Portion'
     models:
       portion_order:
         one: 'Portion Order'
         other: 'Portions Orders'
+    errors:
+      models:
+        portion_order:
+          attributes:
+            observation:
+              too_short: " allow %{count} caracters as the minimun"
