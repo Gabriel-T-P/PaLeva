@@ -25,7 +25,7 @@
             <%= link_to 'PaLevá', root_path, class: 'navbar-brand' %>
             <% if user_signed_in? %>
               <div class="dropdown">
-                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastros</button>
+                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><%=I18n.t('register')%></button>
                 <ul class="dropdown-menu" aria-labelledby="cadastrosDropdown">
                   <li><%= link_to Tag.model_name.human(count: 2), new_tag_path, class: 'dropdown-item' %></li>
                   <li><%= link_to Menu.model_name.human(count: 2), new_menu_path, class: 'dropdown-item' %></li>
@@ -36,7 +36,7 @@
 
           <div class="d-inline-flex align-items-center">
             <% if user_signed_in? %>
-              <span class="navbar-text">Olá, <%= current_user.first_name %></span>
+              <span class="navbar-text"><%=I18n.t('hello')%>, <%= current_user.first_name %></span>
 
               <div class="dropdown ms-3">
                 <button class="btn btn-outline-dark position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,19 +53,27 @@
                     </span>
                   <% end %>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="orderDropdown">
+                <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="orderDropdown" style="width: 300px;">
                   <% if @order && @order.portion_orders.any? %>
                     <% @order.portion_orders.each do |portion_order| %>
-                      <li class="dropdown-item">
-                        <%= portion_order.portion.item.name %>, <%=portion_order.portion.name%> - <%=number_to_currency(portion_order.portion.price)%> x <%=portion_order.quantity%>
+                      <li class="dropdown-item d-flex justify-content-between align-items-center">
+                        <div>
+                          <strong><%= portion_order.portion.item.name %></strong>,
+                          <small class="d-block text-muted"><%= portion_order.portion.name %></small>
+                        </div>
+                        <div class="text-end">
+                          <span><%= number_to_currency(portion_order.portion.price) %></span>
+                          <small class="text-muted"> x <%= portion_order.quantity %></small>
+                        </div>
                       </li>
+                      <li><hr class="dropdown-divider my-1"></li>
                     <% end %>
-                    <li><hr class="dropdown-divider"></li>
-                    <li class="dropdown-item text-center">
-                      <%= link_to "Ver Pedido", root_path, class: 'btn btn-primary' %>
+                    
+                    <li class="dropdown-item text-center mt-2">
+                      <%= link_to I18n.t('see_orders'), root_path, class: 'btn btn-dark btn-sm w-100' %>
                     </li>
                   <% else %>
-                    <li class="dropdown-item text-muted">Nenhum item adicionado</li>
+                    <li class="dropdown-item text-muted text-center"><%=I18n.t('no_item')%></li>
                   <% end %>
                 </ul>
               </div>

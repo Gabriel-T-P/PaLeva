@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :check_admin_establishment
   skip_before_action :check_admin_establishment, if: :devise_controller?
+  before_action :current_order, if: -> { user_signed_in? }
 
   protected
 
@@ -20,11 +21,13 @@ class ApplicationController < ActionController::Base
   end
 
   def current_order
-    last_order = current_user.orders.last
-    if last_order&.status == 'open'
-      @current_order = last_order  
-    else
-      @current_order = Order.new(user: current_user)
+    @order ||= begin
+      last_order = current_user.orders.last
+      if last_order&.status == 'open'
+        last_order
+      else
+        Order.new(user: current_user)
+      end
     end
   end
 

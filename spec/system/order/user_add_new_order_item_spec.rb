@@ -59,7 +59,8 @@ describe 'usuário registra item a um pedido' do
     click_on 'Adicionar'
     
     expect(current_path).to eq root_path
-    expect(page).to have_content 'Pão de Queijo, Pequeno - R$ 1,50 x 1'
+    expect(page).to have_content 'Pão de Queijo, Pequeno'
+    expect(page).to have_content 'R$ 1,50 x 1'
     expect(page).to have_link 'Ver Pedido'  
   end
 
@@ -87,9 +88,12 @@ describe 'usuário registra item a um pedido' do
 
     within 'nav' do
       expect(page).to have_content 3
-      expect(page).to have_content 'Pão de Queijo, Pequeno - R$ 1,50 x 1'
-      expect(page).to have_content 'Pão de Queijo, Grande - R$ 5,99 x 2'
-      expect(page).to have_content 'Suco de Laranja, 300 ml - R$ 8,00 x 1'
+      expect(page).to have_content 'Pão de Queijo, Pequeno'
+      expect(page).to have_content 'R$ 1,50 x 1'
+      expect(page).to have_content 'Pão de Queijo, Grande'
+      expect(page).to have_content 'R$ 5,99 x 2'
+      expect(page).to have_content 'Suco de Laranja, 300 ml'
+      expect(page).to have_content 'R$ 8,00 x 1'
     end  
   end
   
@@ -146,8 +150,10 @@ describe 'usuário registra item a um pedido' do
     click_on 'Adicionar'
 
     within 'nav' do
-      expect(page).to have_content 'Pão de Queijo, Pequeno - R$ 1,50 x 3'
-      expect(page).not_to have_content 'Pão de Queijo, Grande - R$ 5,99 x 1'
+      expect(page).to have_content 'Pão de Queijo, Pequeno'
+      expect(page).to have_content 'R$ 1,50 x 3'
+      expect(page).not_to have_content 'Pão de Queijo, Grande'
+      expect(page).not_to have_content 'R$ 5,99 x 1'
     end
   end
   
