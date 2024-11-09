@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   end
 
   resources :portion_orders, only: [:new, :create, :destroy]
+  resources :orders, only: [:new, :create, :edit, :update, :show, :destroy]
   resources :tags, only: [:new, :create, :edit, :update, :destroy]
   resources :menus, only: [:new, :create, :edit, :update, :destory]
 end

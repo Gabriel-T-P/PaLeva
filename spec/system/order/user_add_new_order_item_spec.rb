@@ -141,7 +141,7 @@ describe 'usuário registra item a um pedido' do
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     portion2 = Portion.create!(name: 'Grande', description: 'Uma unidade grande de pão de queijo', price: 5.99, item: dish)
-    order = Order.create!(name: 'Teste', email: 'teste123.email.com', status: 'delivered', user: user)
+    order = Order.create!(name: 'Teste', email: 'teste123@email.com', status: 'delivered', user: user)
     PortionOrder.create!(order: order, portion: portion2, quantity: 1)
 
     login_as user

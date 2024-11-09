@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    attributes:
+      order:
+        name: "Customer's Name"
+        email: 'Email'
+        cpf: 'CPF'
+        phone_number: 'Phone Number'
+    models:
+      order:
+        one: 'Pedido'
+        other: 'Pedidos'

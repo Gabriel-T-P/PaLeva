@@ -10,14 +10,15 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
     order = Order.create!(email: 'teste123@email.com', user: user)
     portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)
 
+    login_as user
     visit root_path
+    click_on 'Sair'
 
     within 'nav' do
       expect(page).not_to have_content 'Pão de Queijo, Pequeno'  
       expect(page).not_to have_content 'R$ 1,50 x 3'
     end
   end
-  
 
   it 'pela página inicial' do
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')

@@ -24,6 +24,6 @@ class User < ApplicationRecord
     unless CPF.valid?(cpf)
       errors.add(:cpf, 'não é válido')
     end
-  end      
+  end
          
 end
