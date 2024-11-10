@@ -2,10 +2,11 @@ class PortionOrdersController < ApplicationController
 
   def create
     @portion_order = PortionOrder.new(params.require(:portion_order).permit(:portion_id, :quantity, :observation))
-    @portion_order.order = current_order
-
-    if @portion_order.save
-      flash[:notice] = "Object successfully created"
+    @portion_order.order = Order.new(name: 'Default', phone_number: '1', user: current_user)
+  
+    if @portion_order.valid?
+      @cart.add_item(@portion_order)
+      flash[:notice] = t('.notice')
       redirect_to root_path
     else
       flash[:error] = @portion_order.errors.full_messages

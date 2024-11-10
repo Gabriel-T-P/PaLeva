@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :check_admin_establishment
   skip_before_action :check_admin_establishment, if: :devise_controller?
-  before_action :current_order, if: -> { user_signed_in? }
+  before_action :initialize_cart, if: -> { user_signed_in? }
 
   protected
 
@@ -20,15 +20,8 @@ class ApplicationController < ActionController::Base
     redirect_to new_establishment_path, alert: I18n.t('redirect_establishment_alert')
   end
 
-  def current_order
-    @order ||= begin
-      last_order = current_user.orders.last
-      if last_order&.status == 'open'
-        last_order
-      else
-        Order.new(user: current_user)
-      end
-    end
+  def initialize_cart
+    @cart ||= Cart.new(session)
   end
 
 end

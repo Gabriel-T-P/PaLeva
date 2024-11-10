@@ -8,10 +8,11 @@ describe 'usuário registra pedido' do
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     order = Order.create!(email: 'teste123@email.com', user: user)
-    portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)
 
     login_as user
-    visit root_path
+    visit establishment_item_portion_path(establishment, dish, portion)
+    fill_in 'Quantidade',	with: 3 
+    click_on 'Adicionar'
     within 'nav' do
       click_on 'Ver Pedido'
     end

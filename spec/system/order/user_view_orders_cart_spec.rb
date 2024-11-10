@@ -16,7 +16,7 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
 
     within 'nav' do
       expect(page).not_to have_content 'Pão de Queijo, Pequeno'  
-      expect(page).not_to have_content 'R$ 1,50 x 3'
+      expect(page).not_to have_content 'R$ 1,50 x 1'
     end
   end
 
@@ -27,14 +27,15 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     order = Order.create!(email: 'teste123@email.com', user: user)
-    portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)
 
     login_as user
+    visit establishment_item_portion_path(establishment, dish, portion)
+    click_on 'Adicionar'
     visit root_path
 
     within 'nav' do
       expect(page).to have_content 'Pão de Queijo, Pequeno'  
-      expect(page).to have_content 'R$ 1,50 x 3'
+      expect(page).to have_content 'R$ 1,50 x 1'
     end
   end
   
@@ -48,11 +49,13 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
     portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)
 
     login_as user
+    visit establishment_item_portion_path(establishment, dish, portion)
+    click_on 'Adicionar'
     visit establishment_path(establishment)
 
     within 'nav' do
       expect(page).to have_content 'Pão de Queijo, Pequeno'  
-      expect(page).to have_content 'R$ 1,50 x 3'
+      expect(page).to have_content 'R$ 1,50 x 1'
     end
   end
   
@@ -66,11 +69,13 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
     portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)
 
     login_as user
+    visit establishment_item_portion_path(establishment, dish, portion)
+    click_on 'Adicionar'
     visit establishment_item_path(establishment, dish)
 
     within 'nav' do
       expect(page).to have_content 'Pão de Queijo, Pequeno'  
-      expect(page).to have_content 'R$ 1,50 x 3'
+      expect(page).to have_content 'R$ 1,50 x 1'
     end
   end
 
@@ -85,11 +90,13 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
     portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)
 
     login_as user
+    visit establishment_beverage_portion_path(establishment, beverage, portion)
+    click_on 'Adicionar'
     visit establishment_beverage_path(establishment, beverage)
 
     within 'nav' do
       expect(page).to have_content 'Suco de Laranja, 300 ml'  
-      expect(page).to have_content 'R$ 8,00 x 3'
+      expect(page).to have_content 'R$ 8,00 x 1'
     end
   end
 
@@ -104,10 +111,12 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
 
     login_as user
     visit establishment_item_portion_path(establishment, dish, portion)
+    click_on 'Adicionar'
+    visit establishment_item_portion_path(establishment, dish, portion)
 
     within 'nav' do
       expect(page).to have_content 'Pão de Queijo, Pequeno'  
-      expect(page).to have_content 'R$ 1,50 x 3'
+      expect(page).to have_content 'R$ 1,50 x 1'
     end
   end
 
@@ -121,11 +130,13 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
     portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)
 
     login_as user
+    visit establishment_item_portion_path(establishment, dish, portion)
+    click_on 'Adicionar'
     visit establishment_items_path(establishment)
 
     within 'nav' do
       expect(page).to have_content 'Pão de Queijo, Pequeno'  
-      expect(page).to have_content 'R$ 1,50 x 3'
+      expect(page).to have_content 'R$ 1,50 x 1'
     end
   end
 end
