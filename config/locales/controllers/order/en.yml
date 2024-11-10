@@ -1,0 +1,23 @@
+pt-BR:
+  orders:
+    form:
+      errors_message: 'Check the following errors'
+      order_items: 'Items'
+      save: 'Save'
+      cancel: 'Cancel'
+      confirm: 'Comfirm'
+    show:
+      title: "Order's Informations"
+    new:
+      title: 'Register the order'
+    create:
+      notice: 'Order registered with success'
+      alert: 'Something went wrong'
+    edit:
+      title: 'Edit Order'
+    update:
+      notice: 'Order edited'
+      alert: 'Something went wrong'
+    destroy:
+      notice: 'Order deleteds'
+      alert: 'Something went wrong'

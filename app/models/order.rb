@@ -3,7 +3,7 @@ class Order < ApplicationRecord
   has_many :portion_orders, dependent: :destroy
   has_many :portions, through: :portion_orders
 
-  enum :status, { :open => 2, :canceled => 5, :waiting_cook_confirmation => 7, :cooking => 9, :ready => 11, :delivered => 13 }, default: :open
+  enum :status, { :canceled => 5, :waiting_cook_confirmation => 7, :cooking => 9, :ready => 11, :delivered => 13 }
 
   validates :phone_number, presence: true, unless: -> { email.present? }
   validates :email, presence: true, unless: -> { phone_number.present? }

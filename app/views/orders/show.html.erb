@@ -1,0 +1,23 @@
+<h1 class="display-4 text-center my-4"> <%= t '.title' %> </h1>
+
+<div class="container mt-5">
+  <div class="card shadow-lg p-4">
+    <div class="mb-4">
+      <h4><%=t '.order_items'%>:</h4>
+      <ul class="list-group">
+        <% @cart.items.each do |_, item| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <strong><%= item['item_name'] %></strong>
+              <small class="d-block text-muted"><%= item['portion_name'] %></small>
+            </div>
+            <div>
+              <span><%= number_to_currency(item['price']) %></span>
+              <small class="text-muted"> x <%= item['quantity'] %></small>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -17,6 +17,7 @@ class Cart
         'portion_name' => portion_order.portion.name,
         'item_name' => portion_order.portion.item.name,
         'quantity' => portion_order.quantity,
+        'observation' => portion_order.observation,
         'price' => portion_order.portion.price
       }
     end

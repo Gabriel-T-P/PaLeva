@@ -1,0 +1,23 @@
+pt-BR:
+  orders:
+    form:
+      errors_message: 'Verifique os seguintes erros'
+      order_items: 'Itens do seu pedido'
+      save: 'Salvar Pedido'
+      cancel: 'Cancelar'
+      confirm: 'Confirmar'
+    show:
+      title: 'Informações do Pedido'
+    new:
+      title: 'Cadastro do Pedido'
+    create:
+      notice: 'Pedido registrado com sucesso'
+      alert: 'Falha ao cadastrar o pedido'
+    edit:
+      title: 'Editar Pedido'
+    update:
+      notice: 'Pedido editado com sucesso'
+      alert: 'Falha ao editar o pedido'
+    destroy:
+      notice: 'Pedido deletado com sucesso'
+      alert: 'Falha ao deletar o pedido'
