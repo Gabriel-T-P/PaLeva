@@ -39,10 +39,11 @@ class Cart
   end
 
   def clear
+    @items = {}
     @session[:cart] = {}
   end
 
   def total_price
-    @items.sum { |_, item| item['price'] * item['quantity'] }
+    @items.sum { |_, item| item['price'].to_f * item['quantity'].to_i }
   end
 end

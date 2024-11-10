@@ -21,6 +21,8 @@ describe 'usuário registra pedido' do
     expect(page).to have_content 'Pão de Queijo'
     expect(page).to have_content 'Pequeno'     
     expect(page).to have_content 'R$ 1,50 x 3'
+    expect(page).to have_content 'Total'
+    expect(page).to have_content 'R$ 4,50'
     expect(page).to have_field 'Nome do Cliente'
     expect(page).to have_field 'E-mail'    
     expect(page).to have_field 'CPF'    
@@ -53,6 +55,7 @@ describe 'usuário registra pedido' do
     login_as user
     visit establishment_item_portion_path(establishment, dish, portion)
     fill_in 'Quantidade',	with: 3
+    fill_in 'Observação',	with: 'sometext' 
     click_on 'Adicionar'
     within 'nav' do
       click_on 'Ver Pedido'
@@ -67,7 +70,60 @@ describe 'usuário registra pedido' do
     expect(page).to have_content 'Informações do Pedido'
     expect(page).to have_content 'Pão de Queijo'  
     expect(page).to have_content 'Pequeno'
+    expect(page).to have_content 'sometext'
     expect(page).to have_content 'R$ 1,50 x 3'
+  end
+  
+  it 'e carrinho fica vazio após registro do pedido' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+
+    login_as user
+    visit establishment_item_portion_path(establishment, dish, portion)
+    fill_in 'Quantidade',	with: 3
+    click_on 'Adicionar'
+    within 'nav' do
+      click_on 'Ver Pedido'
+    end
+    fill_in 'Nome do Cliente',	with: 'Teste'
+    fill_in 'E-mail',	with: 'teste123@email.com'
+    fill_in 'CPF',	with: CPF.generate
+    fill_in 'Número de Telefone',	with: '99999043113'
+    click_on 'Salvar Pedido'
+
+    within 'nav' do
+      expect(page).to have_content 'Nenhum item adicionado'  
+      expect(page).not_to have_content 'Pão de Queijo'  
+      expect(page).not_to have_content 'Pequeno'
+      expect(page).not_to have_content 'R$ 1,50 x 3'
+    end
+  end
+  
+  it 'e vê mensagens de erro' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+
+    login_as user
+    visit establishment_item_portion_path(establishment, dish, portion)
+    fill_in 'Quantidade',	with: 3
+    click_on 'Adicionar'
+    within 'nav' do
+      click_on 'Ver Pedido'
+    end
+    fill_in 'Nome do Cliente',	with: '' 
+    fill_in 'E-mail',	with: '' 
+    fill_in 'CPF',	with: ''
+    fill_in 'Número de Telefone',	with: ''
+    click_on 'Salvar Pedido'
+
+    expect(page).to have_content 'Número de Telefone não pode ficar em branco'  
+    expect(page).to have_content 'E-mail não pode ficar em branco'
   end
   
 end

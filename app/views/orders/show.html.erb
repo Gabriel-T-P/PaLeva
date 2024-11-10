@@ -5,15 +5,18 @@
     <div class="mb-4">
       <h4><%=t '.order_items'%>:</h4>
       <ul class="list-group">
-        <% @cart.items.each do |_, item| %>
+        <% @order.portion_orders.each do |portion_order| %>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <div>
-              <strong><%= item['item_name'] %></strong>
-              <small class="d-block text-muted"><%= item['portion_name'] %></small>
+              <strong><%= portion_order.portion.item.name %></strong>
+              <small class="d-block text-muted"><%= portion_order.portion.name %></small>
             </div>
             <div>
-              <span><%= number_to_currency(item['price']) %></span>
-              <small class="text-muted"> x <%= item['quantity'] %></small>
+              <small><%=portion_order.observation%></small>
+            </div>
+            <div>
+              <span><%= number_to_currency(portion_order.portion.price) %></span>
+              <small class="text-muted"> x <%= portion_order.quantity %></small>
             </div>
           </li>
         <% end %>

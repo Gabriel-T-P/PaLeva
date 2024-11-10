@@ -10,6 +10,7 @@ en:
   day_already_used: 'Day of week already in use, please make a edition and not a register'
   route_negated: "You don't have access to this page"
   register: 'Registers'
+  total: 'Total'
   see_orders: 'See Order'
   no_item: 'No item added'
   hour: 'hour'

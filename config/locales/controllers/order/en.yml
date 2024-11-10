@@ -8,6 +8,7 @@ pt-BR:
       confirm: 'Comfirm'
     show:
       title: "Order's Informations"
+      order_items: 'Items'
     new:
       title: 'Register the order'
     create:

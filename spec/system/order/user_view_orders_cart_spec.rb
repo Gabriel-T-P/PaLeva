@@ -20,6 +20,46 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
     end
   end
 
+  it 'e vê total do carrinho' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+    order = Order.create!(email: 'teste123@email.com', user: user)
+
+    login_as user
+    3.times do
+      visit establishment_item_portion_path(establishment, dish, portion)
+      click_on 'Adicionar'
+    end
+    visit root_path
+
+    within 'nav' do
+      expect(page).to have_content 'Pão de Queijo, Pequeno'  
+      expect(page).to have_content 'R$ 1,50 x 3'
+      expect(page).to have_content 'Total:'
+      expect(page).to have_content 'R$ 4,50'
+    end
+  end
+  
+  it 'e não tem itens no carrinho para calcular total' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+    order = Order.create!(email: 'teste123@email.com', user: user)
+
+    login_as user
+    visit root_path
+
+    within 'nav' do
+      expect(page).to have_content 'Nenhum item adicionado'
+    end
+  end
+  
+
   it 'pela página inicial' do
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 

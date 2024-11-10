@@ -11,6 +11,7 @@ pt-BR:
   route_negated: 'Você não possui acesso a essa página'
   hour: 'horas'
   to: 'às'
+  total: 'Total'
   register: 'Cadastros'
   see_orders: 'Ver Pedido'
   no_item: 'Nenhum item adicionado'

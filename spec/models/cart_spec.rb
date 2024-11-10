@@ -27,6 +27,7 @@ RSpec.describe Cart, type: :model do
       expect(cart.items['1']).to eq({
         'portion_name' => 'Pequeno',
         'item_name' => 'Pão de Queijo',
+        "observation"=>nil,
         'quantity' => 3,
         'price' => 1.50
       })
@@ -71,9 +72,30 @@ RSpec.describe Cart, type: :model do
       expect(cart.items['1']).to eq({
         'portion_name' => 'Pequeno',
         'item_name' => 'Pão de Queijo',
+        "observation"=>nil,
         'quantity' => 4,
         'price' => 1.50
       })
     end
+  end
+
+  describe '#clear' do
+    it 'limpa o carrinho de pedidos' do
+      session = {}
+      cart = Cart.new(session)
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011')
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                              cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+      portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+      order = Order.create!(email: 'teste123@email.com', user: user)
+      portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)
+      cart.add_item(portion_order)
+
+      cart.clear
+
+      expect(cart.items.length).to eq 0  
+    end
+    
   end
 end

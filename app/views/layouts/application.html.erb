@@ -68,7 +68,15 @@
                       </li>
                       <li><hr class="dropdown-divider my-1"></li>
                     <% end %>
-                    
+                    <li class="dropdown-item d-flex justify-content-between align-items-center">
+                      <div>
+                        <strong><%=I18n.t('total')%></strong>:
+                      </div>
+                      <div class="text-end">
+                        <span><%= number_to_currency(@cart.total_price) %></span>
+                      </div>
+                    </li>
+                    <li><hr class="dropdown-divider my-1"></li>
                     <li class="dropdown-item text-center mt-2">
                       <%= link_to I18n.t('see_orders'), new_order_path, class: 'btn btn-dark btn-sm w-100' %>
                     </li>

@@ -9,9 +9,11 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.user = current_user
 
-    @cart.items.each do |portion_id, item|
-      portion = Portion.find(portion_id)
-      PortionOrder.create!(portion: portion, order: @order, quantity: item['quantity'], observation: item['observation'])
+    if @order.valid?
+      @cart.items.each do |portion_id, item|
+        portion = Portion.find(portion_id)
+        PortionOrder.create!(portion: portion, order: @order, quantity: item['quantity'], observation: item['observation'])
+      end
     end
 
     if @order.save

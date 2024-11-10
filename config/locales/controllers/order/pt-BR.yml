@@ -8,6 +8,7 @@ pt-BR:
       confirm: 'Confirmar'
     show:
       title: 'Informações do Pedido'
+      order_items: 'Itens do seu pedido'
     new:
       title: 'Cadastro do Pedido'
     create:
