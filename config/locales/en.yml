@@ -11,6 +11,13 @@ en:
   route_negated: "You don't have access to this page"
   register: 'Registers'
   total: 'Total'
+  status:
+    open: 'Open'
+    canceled: 'Canceled'
+    waiting_cook_confirmation: 'Waiting kitchen confirmation'
+    cooking: 'Cooking'
+    ready: 'Ready'
+    delivered: 'Delivered'
   see_orders: 'See Order'
   no_item: 'No item added'
   hour: 'hour'

@@ -15,6 +15,13 @@ pt-BR:
   register: 'Cadastros'
   see_orders: 'Ver Pedido'
   no_item: 'Nenhum item adicionado'
+  status:
+    open: 'Aberto'
+    canceled: 'Cancelado'
+    waiting_cook_confirmation: 'Aguardando confirmação da cozinha'
+    cooking: 'Em preparação'
+    ready: 'Pronto'
+    delivered: 'Entregue'
   comun:
       yes: 'sim'
       no: 'não'

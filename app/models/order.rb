@@ -3,6 +3,8 @@ class Order < ApplicationRecord
   has_many :portion_orders, dependent: :destroy
   has_many :portions, through: :portion_orders
 
+  before_validation :set_alphamumeric_code_and_status, on: :create
+
   enum :status, { :canceled => 5, :waiting_cook_confirmation => 7, :cooking => 9, :ready => 11, :delivered => 13 }
 
   validates :phone_number, presence: true, unless: -> { email.present? }
@@ -16,6 +18,11 @@ class Order < ApplicationRecord
     unless CPF.valid?(cpf)
       errors.add(:cpf, 'não é válido')
     end
+  end
+
+  def set_alphamumeric_code_and_status
+    self.code = SecureRandom.alphanumeric(8)
+    self.status = :waiting_cook_confirmation
   end
 
 end

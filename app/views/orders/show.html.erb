@@ -1,5 +1,27 @@
 <h1 class="display-4 text-center my-4"> <%= t '.title' %> </h1>
 
+<section id="OrderInfos">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h2><%=Order.model_name.human%> <%=@order.code.upcase%></h2>
+            <% #link_to t('.edit_order'), edit_order_path(@order), class: 'btn btn-outline-dark ms-3'%>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong><%= Order.human_attribute_name(:name) %>:</strong> <%= @order.name %></li>
+            <li class="list-group-item"><strong><%= Order.human_attribute_name(:cpf) %>:</strong> <%= @order.cpf %></li>
+            <li class="list-group-item"><strong><%= Order.human_attribute_name(:email) %>:</strong> <%= @order.email %></li>
+            <li class="list-group-item"><strong><%= Order.human_attribute_name(:phone_number) %>:</strong> <%= @order.phone_number %></li>
+            <li class="list-group-item"><strong><%= Order.human_attribute_name(:status) %>:</strong> <%= I18n.t("status.#{@order.status}") %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="container mt-5">
   <div class="card shadow-lg p-4">
     <div class="mb-4">
@@ -20,6 +42,18 @@
             </div>
           </li>
         <% end %>
+        <li class="list-group-item d-flex justify-content-between align-items-center bg-info">
+          <div>
+            <strong><%=I18n.t('total')%></strong>:
+          </div>
+          <div class="text-end">
+            <%total_price = 0%>
+            <%@order.portion_orders.each do |portion_order|%>
+              <%total_price += portion_order.portion.price * portion_order.quantity%>
+            <% end %>
+            <span><%= number_to_currency(total_price) %></span>
+          </div>
+        </li>
       </ul>
     </div>
   </div>
