@@ -1,0 +1,4 @@
+en:
+  portion_orders:
+    create:
+      notice: 'Item added to the order cart'

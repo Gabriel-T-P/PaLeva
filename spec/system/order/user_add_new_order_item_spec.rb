@@ -190,4 +190,26 @@ describe 'usuário registra item a um pedido' do
     expect(page).to have_content 'Observação possui 6 caracteres como mínimo permitido'
   end
   
+  it 'e adiciona item que já estava no carrinho' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+
+    login_as user
+    visit establishment_item_portion_path(establishment, dish, portion)
+    fill_in 'Quantidade',	with: 1
+    click_on 'Adicionar'
+    visit establishment_item_portion_path(establishment, dish, portion)
+    fill_in 'Quantidade',	with: 2
+    click_on 'Adicionar'
+
+    expect(page).to have_content 'Item adicionado ao carrinho'
+    within 'nav' do
+      expect(page).to have_content 'Pão de Queijo, Pequeno'
+      expect(page).to have_content 'R$ 1,50 x 3'
+    end 
+  end
+  
 end

@@ -1,0 +1,4 @@
+pt-BR:
+  portion_orders:
+    create:
+      notice: 'Item adicionado ao carrinho'
