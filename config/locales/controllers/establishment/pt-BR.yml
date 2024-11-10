@@ -30,4 +30,5 @@ pt-BR:
       confirm: 'Confirmar'
       no_dishes_found: 'Nenhum prato cadastrado encontrado'
       no_beverages_found: 'Nenhuma bebida cadastrada encontrada'
+      no_image_found: 'Nenhuma imagem encontrada'
       please_add_opening_hour: 'Por favor adicione um horário de funcionamento'

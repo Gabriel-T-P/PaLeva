@@ -81,6 +81,5 @@ describe 'usuário visita informações do estabelecimento' do
     expect(page).to have_content 'sexta-feira'  
     expect(page).to have_content 'sábado'  
     expect(page).to have_content 'domingo'
-
   end
 end

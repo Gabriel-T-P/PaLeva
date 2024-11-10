@@ -27,7 +27,7 @@ dish2 = Item.create!(name: 'Pizza', description: 'O clássico italiano', calorie
   portion_dish2_1 = Portion.create!(name: 'Pequeno', description: '4 pedaços de pizza', price: 15.00, item: dish2)
   portion_dish2_2 = Portion.create!(name: 'Médio', description: '6 pedaços de pizza', price: 20.50, item: dish2)
   portion_dish2_3 = Portion.create!(name: 'Grande', description: '8 pedaços de pizza', price: 25.50, item: dish2)
-dish3 = Item.create!(name: 'Espetinho', description: 'Alma do macarrão', calories: '400', item_type: 'dish', establishment: establishment)
+dish3 = Item.create!(name: 'Espetinho', description: 'A carne mais suculenta', calories: '400', item_type: 'dish', establishment: establishment)
   portion_dish3_1 = Portion.create!(name: '4 pedaços', description: '4 pedaços de carne em cubos', price: 8.00, item: dish3)
   portion_dish3_2 = Portion.create!(name: '6 pedaços', description: '6 pedaços de carne em cubos', price: 12.50, item: dish3)
   portion_dish3_3 = Portion.create!(name: '8 pedaços', description: '8 pedaços de carne em cubos', price: 20.00, item: dish3)
@@ -58,7 +58,7 @@ tag6 = Tag.create!(name: 'Alto Teor Alcoólico')
 ItemTag.create!(item: beverage2, tag: tag5)
 ItemTag.create!(item: beverage3, tag: tag6)
 
-menu1 = Menu.create!(name: 'Acompanhantes da Noite', establishment: establishment1)
+menu1 = Menu.create!(name: 'Acompanhantes da Noite', establishment: establishment)
   menu1.items<<[beverage1, beverage3]
-menu2 = Menu.create!(name: 'Jantar', establishment: establishment2)
+menu2 = Menu.create!(name: 'Jantar', establishment: establishment)
   menu2.items<<[dish1, dish2, dish3, beverage1, beverage2]

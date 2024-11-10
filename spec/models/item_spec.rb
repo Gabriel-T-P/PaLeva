@@ -49,6 +49,20 @@ RSpec.describe Item, type: :model do
         expect(result).to be false
       end
       
+      it 'já existe entre estabelecimentos diferentes' do
+        user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+        establishment1 = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user1, cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user2 = User.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011')
+        establishment2 = Establishment.create!(corporate_name: 'Teste LTDA', trade_name: 'Teste', full_address: 'Av teste, 132', user: user2, cnpj: CNPJ.generate, 
+                                          email: 'teste12312@email.com', phone_number: '99999043113')
+        other_dish = Item.create!(name: 'Lasanha', description: 'Alma do macarrão', calories: '400', item_type: 'dish', establishment: establishment1)
+        dish = Item.new(name: 'Lasanha', description: 'A melhor lasanha', calories: '350', item_type: 'dish', establishment: establishment2)
+
+        result = dish.valid?
+
+        expect(result).to be true
+      end
     end
     
     context 'quando Descrição' do

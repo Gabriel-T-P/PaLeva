@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   validates :name, :description, :calories, :item_type, presence: true
-  validates :name, uniqueness: { case_sensitive: false }
+  validates :name, uniqueness: { scope: :establishment_id }
   validates :calories, numericality: { only_integer: true }  
   
 

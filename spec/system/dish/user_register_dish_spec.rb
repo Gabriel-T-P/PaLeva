@@ -49,6 +49,31 @@ describe 'usuário cadastra prato' do
     end
   end  
   
+  it ' e não cadastra imagem' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+
+    login_as user
+    visit root_path
+    click_on 'Meu Estabelecimento'
+    click_on 'Adicionar Novo Prato'
+    fill_in 'Nome do Item',	with: 'Lasanha'
+    fill_in 'Descrição',	with: 'Macarrão, carne moída ou frango e molho' 
+    fill_in 'Calorias',	with: '400'
+    click_on 'Salvar'
+
+    expect(page).to have_content 'Prato cadastrado com sucesso'
+    within '#Dishs' do
+      expect(page).to have_content 'Pratos Cadastrados'
+      expect(page).to have_content 'Lasanha'
+      expect(page).to have_content 'Macarrão, carne moída ou frango e molho'
+      expect(page).to have_content '400 cal'
+      expect(page).to have_content 'Nenhuma imagem encontrada'
+    end
+  end
+  
+
   it 'e vê mensagens de erro' do
     # Arrange
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')

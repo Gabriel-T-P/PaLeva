@@ -29,4 +29,5 @@ en:
       confirm: 'Confirm'
       no_dishes_found: 'No registered dishes found'
       no_dishes_found: 'No registered beverages found'
+      no_image_found: 'No image found'
       please_add_opening_hour: 'Please add an opening hour'
