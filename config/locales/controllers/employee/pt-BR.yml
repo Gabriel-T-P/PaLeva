@@ -1,0 +1,14 @@
+pt-BR:
+  employees:
+    new:
+      title: 'Criar Pré-Cadastro'
+      errors_message: 'Verifique os seguintes erros'
+      save: 'Salvar'
+      cancel: 'Cancelar'
+      confirm: 'Confirmar'
+    create:
+      notice: 'Pré-Cadastro registrado'
+      alert: 'Falha ao registrar o pré-cadastro'
+    destroy:
+      notice: 'Deletado com sucesso'
+      alert: 'Falha ao deletar o pré-cadastro'
