@@ -9,8 +9,12 @@ describe 'usuário admin realiza pré cadastro de funcionário' do
     login_as user
     visit root_path
     click_on 'Cadastros'
+    click_on 'Funcionários'
     
-    expect(page).to have_link 'Funcionários'
+    expect(page).to have_content 'Criar Pré-Cadastro'  
+    expect(page).to have_field 'E-mail'
+    expect(page).to have_field 'CPF'
+    expect(page).to have_button 'Salvar'
   end
 
   it 'e não é admin' do
@@ -21,7 +25,7 @@ describe 'usuário admin realiza pré cadastro de funcionário' do
     login_as user
     visit root_path
     
-    expect(page).not_to have_button 'Cadastros'  
+    expect(page).not_to have_button 'Cadastros'
   end
   
 end

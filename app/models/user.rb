@@ -4,13 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  validates :first_name, :last_name, :cpf, presence: true
+  validates :first_name, :last_name, :password, presence: true, unless: :pre_registered?
   validates :cpf, uniqueness: true
   validate :valid_cpf
 
   has_one :establishment
   has_many :orders
+  
   enum :role, { :admin => 2, :employee => 5 }
+  enum :status, { :pre_registered => 2, :active => 5 }, default: :active
   after_initialize :set_default_role, :if => :new_record?
 
   private
