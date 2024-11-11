@@ -45,4 +45,24 @@ describe 'usuário faz o cadastro' do
     
   end
   
+  it 'e possui pré-cadastro feito' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', role: 'employee')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: 'Rio Branco, Deodoro', user: user, cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+    Employee.create!(email: 'teste13@email.com', cpf: '05513333325', establishment: establishment)
+
+    visit root_path
+    click_on 'Entrar'
+    click_on 'Inscrever-se'
+    fill_in 'Nome',	with: 'Carlos'
+    fill_in 'Sobrenome',	with: 'Jonas'
+    fill_in 'CPF',	with: '05513333325'
+    fill_in 'E-mail',	with: 'teste13@email.com'
+    fill_in 'Senha',	with: '1234567891011'
+    fill_in 'Confirme sua senha',	with: '1234567891011'
+    click_on 'Enviar'
+
+    expect(page).to have_content 'Pré-Cadastro encontrado'
+  end
+  
 end

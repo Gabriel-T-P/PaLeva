@@ -6,6 +6,7 @@ class EmployeesController < ApplicationController
   
   def create
     @employee = Employee.new(params.require(:employee).permit(:cpf, :email))
+    @employee.establishment = current_user.establishment
 
     if @employee.save
       flash[:notice] = t '.notice'
