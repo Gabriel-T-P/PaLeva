@@ -1,0 +1,7 @@
+pt-BR:
+  shared:
+    user_sidebar:
+      title: 'Account Settings'
+      profile: 'Profile'
+      settings: 'Configurations'
+      logout: 'Log Out'

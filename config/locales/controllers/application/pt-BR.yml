@@ -1,0 +1,8 @@
+pt-BR:
+  layouts:
+    application:
+      navbar:
+        welcome: "Olá, %{name}"
+        login: 'Entrar'
+        register: 'Cadastros'
+        employee_register: 'Funcionários'

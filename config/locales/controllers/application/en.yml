@@ -1,0 +1,8 @@
+en:
+  layouts:
+    application:
+      navbar:
+        welcome: "Welcome, %{name}"
+        login: 'Log In'
+        register: 'Registers'
+        employee_register: 'Employees'

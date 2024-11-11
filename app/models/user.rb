@@ -10,12 +10,11 @@ class User < ApplicationRecord
 
   has_one :establishment
   has_many :orders
-  enum :role, { :admin => 2, :user => 5 }
+  enum :role, { :admin => 2, :employee => 5 }
   after_initialize :set_default_role, :if => :new_record?
 
   private
 
-  #temporário
   def set_default_role
     self.role ||= :admin
   end

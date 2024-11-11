@@ -190,7 +190,7 @@ RSpec.describe User, type: :model do
     
     it 'não adiciona admin caso seja definido role' do
       # Arrange
-      user = User.new(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', role: 'user')
+      user = User.new(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', role: 'employee')
 
       # Act
       result = user.admin?

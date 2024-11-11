@@ -1,0 +1,14 @@
+<div class="offcanvas offcanvas-end" tabindex="-1" id="userSidebar" aria-labelledby="userSidebarLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="userSidebarLabel"><%= t('.title') %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+
+    <div class="list-group">
+      <a href="/perfil" class="list-group-item list-group-item-action"><%= t('.profile') %></a>
+      <a href="/configuracoes" class="list-group-item list-group-item-action"><%= t('.settings') %></a>
+      <%= button_to t('.logout'), destroy_user_session_path, method: :delete, class: 'list-group-item list-group-item-action' %>
+    </div>
+  </div>
+</div>

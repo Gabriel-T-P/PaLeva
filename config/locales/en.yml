@@ -9,7 +9,6 @@ en:
   redirect_establishment_alert: 'You need to register a stablishment'
   day_already_used: 'Day of week already in use, please make a edition and not a register'
   route_negated: "You don't have access to this page"
-  register: 'Registers'
   total: 'Total'
   status:
     open: 'Open'

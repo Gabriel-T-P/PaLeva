@@ -1,0 +1,7 @@
+pt-BR:
+  shared:
+    user_sidebar:
+      title: 'Configurações da Conta'
+      profile: 'Perfil'
+      settings: 'Configurações'
+      logout: 'Sair'

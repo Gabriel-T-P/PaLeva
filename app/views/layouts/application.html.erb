@@ -23,12 +23,13 @@
         <div class="d-flex justify-content-between w-100">
           <div class="d-flex">
             <%= link_to 'PaLevá', root_path, class: 'navbar-brand' %>
-            <% if user_signed_in? %>
+            <% if user_signed_in? && current_user.admin?%>
               <div class="dropdown">
-                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><%=I18n.t('register')%></button>
+                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><%=t '.navbar.register'%></button>
                 <ul class="dropdown-menu" aria-labelledby="cadastrosDropdown">
                   <li><%= link_to Tag.model_name.human(count: 2), new_tag_path, class: 'dropdown-item' %></li>
                   <li><%= link_to Menu.model_name.human(count: 2), new_menu_path, class: 'dropdown-item' %></li>
+                  <li><%= link_to t('.navbar.employee_register'), new_menu_path, class: 'dropdown-item' %></li>
                 </ul>
               </div>
             <% end %>
@@ -36,58 +37,13 @@
 
           <div class="d-inline-flex align-items-center">
             <% if user_signed_in? %>
-              <span class="navbar-text"><%=I18n.t('hello')%>, <%= current_user.first_name %></span>
-
-              <div class="dropdown ms-3">
-                <button class="btn btn-outline-dark position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                  </svg>
-                  <% if @cart && @cart.items.any? %>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                      <%sum = 0%>
-                      <% @cart.items.each do |_, item| %>
-                        <%sum += item['quantity']%>
-                      <% end %>
-                      <%=sum%>
-                    </span>
-                  <% end %>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="orderDropdown" style="width: 300px;">
-                  <% if @cart && @cart.items.any? %>
-                    <% @cart.items.each do |_, item| %>
-                      <li class="dropdown-item d-flex justify-content-between align-items-center">
-                        <div>
-                          <strong><%= item['item_name'] %></strong>,
-                          <small class="d-block text-muted"><%= item['portion_name'] %></small>
-                        </div>
-                        <div class="text-end">
-                          <span><%= number_to_currency(item['price']) %></span>
-                          <small class="text-muted"> x <%= item['quantity'] %></small>
-                        </div>
-                      </li>
-                      <li><hr class="dropdown-divider my-1"></li>
-                    <% end %>
-                    <li class="dropdown-item d-flex justify-content-between align-items-center">
-                      <div>
-                        <strong><%=I18n.t('total')%></strong>:
-                      </div>
-                      <div class="text-end">
-                        <span><%= number_to_currency(@cart.total_price) %></span>
-                      </div>
-                    </li>
-                    <li><hr class="dropdown-divider my-1"></li>
-                    <li class="dropdown-item text-center mt-2">
-                      <%= link_to I18n.t('see_orders'), new_order_path, class: 'btn btn-dark btn-sm w-100' %>
-                    </li>
-                  <% else %>
-                    <li class="dropdown-item text-muted text-center"><%=I18n.t('no_item')%></li>
-                  <% end %>
-                </ul>
-              </div>
-              <%= button_to I18n.t('logout'), destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark ms-3 py-1' %>
+              <%= render 'shared/user_cart' %>
+              <a class="nav-link" href="#" data-bs-toggle="offcanvas" data-bs-target="#userSidebar">
+                <span class="navbar-text ms-3"><%= t('.navbar.welcome', name: current_user.first_name) %></span>
+              </a>
+              <%= render 'shared/user_sidebar' %>
             <% else %>
-              <%= link_to I18n.t('login'), new_user_session_path, class: 'btn btn-outline-primary py-1' %>
+              <%= link_to t('.navbar.login'), new_user_session_path, class: 'btn btn-outline-primary py-1' %>
             <% end %>
           </div>
         </div>
