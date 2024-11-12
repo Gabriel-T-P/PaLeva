@@ -10,10 +10,8 @@ class Establishment < ApplicationRecord
   validates :email , format: { with: Devise.email_regexp }
   validates :email , :cnpj, :code, uniqueness: true
   validate :valid_cnpj
-  
-  
 
-
+  
   private
 
   def valid_cnpj
