@@ -43,7 +43,7 @@ describe 'usuário cria novo estabelecimento' do
     
     visit new_establishment_path
 
-    expect(current_path).to new_user_session_path  
+    expect(current_path).to eq new_user_session_path  
   end
 
   it 'com sucesso' do

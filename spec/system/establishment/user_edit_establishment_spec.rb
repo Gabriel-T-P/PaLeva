@@ -35,8 +35,21 @@ describe 'usuário edita estabelecimento' do
     visit root_path
 
     # Assert
+    expect(page).not_to have_link 'Meu Estabelecimento'
+  end
+
+  it 'e deve ser admin para aparecer o botão' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    employee = Employee.create!(first_name: 'Juan', last_name: 'Jonas', cpf: CPF.generate, email: 'juanjonas@email.com', password: '1234567891011', establishment: establishment)
+
+    login_as employee
+    visit root_path
+
     expect(page).not_to have_link 'Meu Estabelecimento' 
   end
+  
 
   it 'e deve estar autenticado' do
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 

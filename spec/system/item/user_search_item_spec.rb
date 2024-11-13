@@ -32,6 +32,18 @@ describe 'usuário procura por bebidas e pratos' do
     expect(page).not_to have_link 'Buscar por Pratos e Bebidas' 
   end
 
+  it 'e deve ser admin para aparecer o botão' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    employee = Employee.create!(first_name: 'Juan', last_name: 'Jonas', cpf: CPF.generate, email: 'juanjonas@email.com', password: '1234567891011', establishment: establishment)
+
+    login_as employee
+    visit root_path
+
+    expect(page).not_to have_link 'Buscar por Pratos e Bebidas' 
+  end
+
   it 'e deve estar autenticado' do
     # Arrange
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
@@ -43,6 +55,16 @@ describe 'usuário procura por bebidas e pratos' do
 
     # Assert
     expect(current_path).to eq new_user_session_path 
+  end
+
+  it 'e deve ser admin' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    employee = Employee.create!(first_name: 'Juan', last_name: 'Jonas', cpf: CPF.generate, email: 'juanjonas@email.com', password: '1234567891011', establishment: establishment)
+
+    login_as employee
+    visit establishment_items_path(establishment)
   end
 
   it 'com sucesso e mostra todos os cadastros' do
