@@ -174,6 +174,27 @@ RSpec.describe User, type: :model do
       end
     end
     
+    context 'quando establishment' do
+      it 'existir = true' do
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                              cnpj: '42.182.510/0001-77', email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.new(first_name: 'Juan', last_name: 'Jonas', cpf: '05513333325', email: 'juanjonas@email.com', password: '1234567891011', establishment: establishment)
+  
+        result = user.valid?
+  
+        expect(result).to be true
+      end
+      
+      it 'faltar = false' do
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                              cnpj: '42.182.510/0001-77', email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.new(first_name: 'Juan', last_name: 'Jonas', cpf: '05513333325', email: 'juanjonas@email.com', password: '1234567891011')
+  
+        result = user.valid?
+  
+        expect(result).to be true
+      end
+    end
   end
   
   describe '#set_default_role' do

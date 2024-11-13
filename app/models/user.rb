@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :cpf, uniqueness: true
   validate :valid_cpf
 
-  has_one :establishment
+  belongs_to :establishment, optional: true
   has_many :orders
   
   enum :role, { :admin => 2, :employee => 5 }

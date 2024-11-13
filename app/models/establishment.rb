@@ -2,8 +2,9 @@ class Establishment < ApplicationRecord
   has_many :opening_hours, dependent: :destroy
   has_many :items, dependent: :destroy
   has_many :menus, dependent: :destroy
-  belongs_to :user
-  
+  has_many :users
+  belongs_to :admin_user, class_name: 'User', optional: true
+
   before_validation :generate_code, on: :create
 
   validates :corporate_name, :trade_name, :cnpj, :email, :full_address, :phone_number, presence: :true
@@ -11,7 +12,7 @@ class Establishment < ApplicationRecord
   validates :email , :cnpj, :code, uniqueness: true
   validate :valid_cnpj
 
-  
+
   private
 
   def valid_cnpj

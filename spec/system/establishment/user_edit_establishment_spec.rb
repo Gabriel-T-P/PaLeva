@@ -3,9 +3,9 @@ require 'rails_helper'
 describe 'usuário edita estabelecimento' do
   it 'a partir da tela inicial do estabelecimento' do
     # Arrange
-    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                           email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
 
     # Act
     login_as user
@@ -25,11 +25,11 @@ describe 'usuário edita estabelecimento' do
     expect(page).to have_button 'Cadastrar' 
   end
 
-  it 'e deve estar autenticado' do
+  it 'e deve estar autenticado para aparecer botão' do
     # Arrange
-    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: CNPJ.generate, 
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
                                           email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
 
     # Act
     visit root_path
@@ -38,11 +38,21 @@ describe 'usuário edita estabelecimento' do
     expect(page).not_to have_link 'Meu Estabelecimento' 
   end
 
+  it 'e deve estar autenticado' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+
+    visit edit_establishment_path(establishment)
+    
+    expect(current_path).to eq new_user_session_path
+  end
+
   it 'com sucesso' do
     # Arrange
-    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                             email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
 
     # Act
     login_as user
@@ -69,9 +79,9 @@ describe 'usuário edita estabelecimento' do
   
   it 'e vê mensagens de erros' do
     # Arrange
-    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                             email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
 
     # Act
     login_as user
@@ -98,12 +108,12 @@ describe 'usuário edita estabelecimento' do
   
   it 'e não pode alterar email para um já existente' do
     # Arrange
-    user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-    user2 = User.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011')
-    establishment1 = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user1, cnpj: '42.182.510/0001-77', 
+    establishment1 = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                             email: 'carlosjonas@email.com', phone_number: '99999043113')
-    establishment2 = Establishment.create!(corporate_name: 'Teste inc', trade_name: "Teste's Café", full_address: "Av Teste, 123", user: user2, cnpj: CNPJ.generate, 
+    establishment2 = Establishment.create!(corporate_name: 'Teste inc', trade_name: "Teste's Café", full_address: "Av Teste, 123", cnpj: CNPJ.generate, 
                                             email: 'teste123@email.com', phone_number: '99999043113')
+    user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment1)
+    user2 = User.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011', establishment: establishment2)
 
     # Act
     login_as user1
@@ -120,12 +130,12 @@ describe 'usuário edita estabelecimento' do
   
   it 'com erro de CNPJ inválido' do
     # Arrange
-    user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-    user2 = User.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011')
-    establishment1 = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user1, cnpj: '42.182.510/0001-77', 
+    establishment1 = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                             email: 'carlosjonas@email.com', phone_number: '99999043113')
-    establishment2 = Establishment.create!(corporate_name: 'Teste inc', trade_name: "Teste's Café", full_address: "Av Teste, 123", user: user2, cnpj: CNPJ.generate, 
+    establishment2 = Establishment.create!(corporate_name: 'Teste inc', trade_name: "Teste's Café", full_address: "Av Teste, 123", cnpj: CNPJ.generate, 
                                             email: 'teste123@email.com', phone_number: '99999043113')
+    user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment1)
+    user2 = User.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011', establishment: establishment2)
 
     # Act
     login_as user2

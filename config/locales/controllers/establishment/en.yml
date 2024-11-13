@@ -18,6 +18,7 @@ en:
     show:
       title: 'More Info About the Establishment'
       edit_establishment: 'Edit'
+      add_opening_hour: 'Add Opening Hour'
       opening_hour_title: "Establishment's Open Hours"
       edit_opening_hour: 'Change Open Hours'
       dish_title: 'Registered Dishs'

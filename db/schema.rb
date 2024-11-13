@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_11_011145) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_12_181549) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,8 +49,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_011145) do
     t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.index ["user_id"], name: "index_establishments_on_user_id"
+    t.integer "admin_user_id"
+    t.index ["admin_user_id"], name: "index_establishments_on_admin_user_id"
   end
 
   create_table "item_menus", force: :cascade do |t|
@@ -168,13 +168,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_011145) do
     t.datetime "updated_at", null: false
     t.integer "role"
     t.integer "status"
+    t.integer "establishment_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["establishment_id"], name: "index_users_on_establishment_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "establishments", "users"
+  add_foreign_key "establishments", "users", column: "admin_user_id"
   add_foreign_key "item_menus", "items"
   add_foreign_key "item_menus", "menus"
   add_foreign_key "item_tags", "items"
@@ -187,4 +189,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_011145) do
   add_foreign_key "portion_orders", "portions"
   add_foreign_key "portions", "items"
   add_foreign_key "price_histories", "portions"
+  add_foreign_key "users", "establishments"
 end

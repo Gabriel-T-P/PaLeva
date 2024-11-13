@@ -82,7 +82,7 @@ class PortionsController < ApplicationController
 
   def set_establishment_check_user
     @establishment = Establishment.find(params[:establishment_id])
-    return redirect_to root_path, alert: I18n.t('route_negated') if @establishment.user != current_user
+    return redirect_to root_path, alert: I18n.t('route_negated') unless @establishment.users.exists?(current_user.id)
   end
 
   def portion_params

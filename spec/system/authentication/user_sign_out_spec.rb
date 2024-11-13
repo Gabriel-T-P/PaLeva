@@ -7,7 +7,7 @@ describe 'usuário desloga' do
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
 
     # Act
-    login_as user, :scope => :user
+    login_as user
     visit root_path
 
     # Assert
@@ -24,7 +24,7 @@ describe 'usuário desloga' do
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
 
     # Act
-    login_as user, :scope => :user
+    login_as user
     visit root_path
     click_on 'Sair'
 
@@ -35,7 +35,4 @@ describe 'usuário desloga' do
     expect(page).to have_content 'Logout efetuado com sucesso.'
     
   end
-  
-  
-  
 end

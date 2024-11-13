@@ -4,9 +4,9 @@ RSpec.describe OpeningHour, type: :model do
   describe '#open_today?' do
     it 'quando horário não fechado' do
       # Arrange  
-      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                             email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
       opening_hour = OpeningHour.create!(day_of_week: 1, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
     
       # Act
@@ -18,9 +18,9 @@ RSpec.describe OpeningHour, type: :model do
     
     it 'quando horário fechado' do
       # Arrange  
-      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                             email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
       opening_hour = OpeningHour.create!(day_of_week: 1, closed: true, establishment: establishment)
     
       # Act
@@ -34,9 +34,9 @@ RSpec.describe OpeningHour, type: :model do
   describe '#opening_time_before_closing_time' do
     it 'horário de abertura menor que o horário de encerramento' do
       # Arrange  
-      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                             email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
       opening_hour = OpeningHour.new(day_of_week: 1, closed: true,opening_time:'10:00', closing_time: '20:00', establishment: establishment)
 
       # Act
@@ -48,9 +48,9 @@ RSpec.describe OpeningHour, type: :model do
     
     it 'horário de abertura maior que o horário de encerramento' do
       # Arrange  
-      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                             email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
       opening_hour = OpeningHour.new(day_of_week: 1, closed: true,opening_time:'22:00', closing_time: '20:00', establishment: establishment)
 
       # Act
@@ -63,9 +63,9 @@ RSpec.describe OpeningHour, type: :model do
 
     it 'horário de abertura diferente do horário de fechamento' do
       # Arrange  
-      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                             email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
       opening_hour = OpeningHour.new(day_of_week: 1, closed: true,opening_time:'20:00', closing_time: '20:00', establishment: establishment)
 
       # Act
@@ -82,9 +82,9 @@ RSpec.describe OpeningHour, type: :model do
     context 'quando dia da semana' do
       it 'tem valor entre 0 e 6' do
         # Arrange  
-        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                               email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
         opening_hour0 = OpeningHour.new(day_of_week: 0, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
         opening_hour1 = OpeningHour.new(day_of_week: 1, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
         opening_hour2 = OpeningHour.new(day_of_week: 2, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
@@ -114,9 +114,9 @@ RSpec.describe OpeningHour, type: :model do
       
       it 'não tem valor entre 0 e 6' do
         # Arrange  
-        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                               email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
         opening_hour0 = OpeningHour.new(day_of_week: -1, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
         opening_hour1 = OpeningHour.new(day_of_week: 7, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
         opening_hour2 = OpeningHour.new(day_of_week: 25, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
@@ -134,9 +134,9 @@ RSpec.describe OpeningHour, type: :model do
       
       it 'já existir um cadastro' do
         # Arrange
-        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                               email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
         opening_hour1 = OpeningHour.create!(day_of_week: 0, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
         opening_hour2 = OpeningHour.new(day_of_week: 0, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
 
@@ -149,12 +149,12 @@ RSpec.describe OpeningHour, type: :model do
       
       it 'já existir cadastro de outro estabelecimento' do
         # Arrange
-        user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-        user2 = User.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011')
-        establishment1 = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: 'Rio Branco, Deodoro', user: user1, cnpj: CNPJ.generate, 
+        establishment1 = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: 'Rio Branco, Deodoro', cnpj: CNPJ.generate, 
                                               email: 'carlosjonas@email.com', phone_number: '99999043113')
-        establishment2 = Establishment.create!(corporate_name: 'Teste inc', trade_name: 'Teste Establishment', full_address: 'Av Teste, 213', user: user2, cnpj: CNPJ.generate, 
+        establishment2 = Establishment.create!(corporate_name: 'Teste inc', trade_name: 'Teste Establishment', full_address: 'Av Teste, 213', cnpj: CNPJ.generate, 
                                               email: 'teste1234@email.com', phone_number: '99999043113')
+        user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment1)
+        user2 = User.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011', establishment: establishment2)
         opening_hour1 = OpeningHour.create!(day_of_week: 0, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment1)
         opening_hour2 = OpeningHour.new(day_of_week: 0, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment2)
 
@@ -167,9 +167,9 @@ RSpec.describe OpeningHour, type: :model do
       
       it 'já existir um cadastro e aparece mensagem personalizada' do
         # Arrange
-        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                               email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
         opening_hour1 = OpeningHour.create!(day_of_week: 0, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
         opening_hour2 = OpeningHour.new(day_of_week: 0, closed: false, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
 
@@ -185,9 +185,9 @@ RSpec.describe OpeningHour, type: :model do
     context 'quando horário de abertura' do
       it 'estiver presente' do
         # Arrange  
-        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                               email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
         opening_hour = OpeningHour.new(opening_time: '10:00', establishment: establishment)
 
         # Act
@@ -200,9 +200,9 @@ RSpec.describe OpeningHour, type: :model do
       
       it 'estiver ausente' do
         # Arrange  
-        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                               email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
         opening_hour = OpeningHour.new(day_of_week: 1, closed: false, closing_time: '20:00', establishment: establishment)
 
         # Act
@@ -215,9 +215,9 @@ RSpec.describe OpeningHour, type: :model do
       
       it 'se fechado for true' do
         # Arrange  
-        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                               email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
         opening_hour = OpeningHour.new(day_of_week: 1, closed: true, closing_time: '20:00', establishment: establishment)
 
         # Act
@@ -232,9 +232,9 @@ RSpec.describe OpeningHour, type: :model do
     context 'quando horário de encerramento' do
       it 'estiver presente' do
         # Arrange  
-        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                               email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
         opening_hour = OpeningHour.new(closing_time: '10:00', establishment: establishment)
 
         # Act
@@ -247,9 +247,9 @@ RSpec.describe OpeningHour, type: :model do
       
       it 'estiver ausente' do
         # Arrange  
-        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                               email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
         opening_hour = OpeningHour.new(day_of_week: 1, closed: false, opening_time: '20:00', establishment: establishment)
 
         # Act
@@ -262,9 +262,9 @@ RSpec.describe OpeningHour, type: :model do
       
       it 'se fechado for true' do
         # Arrange  
-        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                               email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
         opening_hour = OpeningHour.new(day_of_week: 1, closed: true, opening_time: '20:00', establishment: establishment)
 
         # Act
@@ -279,9 +279,9 @@ RSpec.describe OpeningHour, type: :model do
     context 'quando fechado' do
       it 'for válido' do
         # Arrange  
-        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
-        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", user: user, cnpj: '42.182.510/0001-77', 
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
                                               email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
         opening_hour = OpeningHour.new(day_of_week: 0, closed: true, opening_time: '10:00', closing_time: '20:00', establishment: establishment)
 
         # Act

@@ -39,6 +39,13 @@ describe 'usuário cria novo estabelecimento' do
     expect(page).to have_button 'Cadastrar'
   end
 
+  it 'e não está logado' do
+    
+    visit new_establishment_path
+
+    expect(current_path).to new_user_session_path  
+  end
+
   it 'com sucesso' do
     # Arrange
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
@@ -129,4 +136,35 @@ describe 'usuário cria novo estabelecimento' do
     expect(page).to have_content 'CNPJ não é válido'
   end
   
+  it 'e o usuário que criou o estabelecimento recebe o estabelecimento' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+
+    login_as user
+    visit new_establishment_path
+    fill_in 'Razão Social',	with: 'Carlos Burguer LTDA'
+    fill_in 'Nome Fantasia',	with: 'Carlos Burguer'
+    fill_in 'CNPJ',	with: '42.182.510/0001-77'
+    fill_in 'Endereço',	with: 'Rio Branco, Deodoro'
+    fill_in 'Número de Telefone',	with: '11_1111_1111'
+    fill_in 'E-mail',	with: 'carlos_burguer@email.com'
+    click_on 'Cadastrar'
+
+    expect(user.establishment.nil?).to be false
+  end
+
+  it 'e o usuário que criou o estabelecimento é feito admin dele' do
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+
+    login_as user
+    visit new_establishment_path
+    fill_in 'Razão Social',	with: 'Carlos Burguer LTDA'
+    fill_in 'Nome Fantasia',	with: 'Carlos Burguer'
+    fill_in 'CNPJ',	with: '42.182.510/0001-77'
+    fill_in 'Endereço',	with: 'Rio Branco, Deodoro'
+    fill_in 'Número de Telefone',	with: '11_1111_1111'
+    fill_in 'E-mail',	with: 'carlos_burguer@email.com'
+    click_on 'Cadastrar'
+
+    expect(user.establishment.admin_user).to eq user.id
+  end
 end

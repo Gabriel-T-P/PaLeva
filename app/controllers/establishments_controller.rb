@@ -1,7 +1,7 @@
 class EstablishmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_establishment_check_user, only: [:edit, :update, :show]
-  skip_before_action :check_admin_establishment, only: [:create, :new]
+  skip_before_action :check_user_establishment, only: [:create, :new]
 
   def show
     @dishs = @establishment.items.dish
@@ -15,9 +15,10 @@ class EstablishmentsController < ApplicationController
 
   def create
     @establishment = Establishment.new(set_params)
-    @establishment.user = current_user
 
     if @establishment.save
+      @establishment.users << current_user
+
       flash[:notice] = t '.notice'
       redirect_to @establishment
     else
@@ -44,7 +45,7 @@ class EstablishmentsController < ApplicationController
 
   def set_establishment_check_user
     @establishment = Establishment.find(params[:id])
-    return redirect_to root_path, alert: I18n.t('route_negated') if @establishment.user != current_user
+    return redirect_to root_path, alert: I18n.t('route_negated') unless @establishment.users.exists?(current_user.id)
   end
 
   def set_params
