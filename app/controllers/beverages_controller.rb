@@ -77,15 +77,6 @@ class BeveragesController < ApplicationController
   def set_beverage
     @beverage = Beverage.find(params[:id])
   end
-
-  def set_establishment_check_user
-    @establishment = Establishment.find(params[:establishment_id])
-    return redirect_to root_path, alert: I18n.t('route_negated') unless @establishment.users.exists?(current_user.id)
-  end
-
-  def check_admin
-    return redirect_to root_path, alert: I18n.t('route_negated') unless current_user.admin?
-  end
   
   def set_beverage_params
     params.require(:beverage).permit(:name, :description, :calories, :alcoholic, :image)

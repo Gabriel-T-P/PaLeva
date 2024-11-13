@@ -1,5 +1,6 @@
 class MenusController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_admin
 
   def new
     @menu = Menu.new
@@ -27,5 +28,5 @@ class MenusController < ApplicationController
   def menu_params
     params.require(:menu).permit(:name, item_ids: [])
   end
-  
+
 end

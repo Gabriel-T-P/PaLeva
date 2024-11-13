@@ -39,11 +39,6 @@ class OpeningHoursController < ApplicationController
     @opening_hour = OpeningHour.find(params[:id])
   end
 
-  def set_establishment_check_user
-    @establishment = Establishment.find(params[:establishment_id])
-    return redirect_to root_path, alert: I18n.t('route_negated') unless @establishment.users.exists?(current_user.id)
-  end
-
   def opening_hour_params
     params.require(:opening_hour).permit(:day_of_week, :opening_time, :closing_time, :closed)
   end

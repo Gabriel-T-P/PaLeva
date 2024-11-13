@@ -81,17 +81,9 @@ class ItemsController < ApplicationController
 
   private
 
-  def check_admin
-    return redirect_to root_path, alert: I18n.t('route_negated') unless current_user.admin?
-  end
 
   def set_item
     @item = Item.find(params[:id])
-  end
-
-  def set_establishment_check_user
-    @establishment = Establishment.find(params[:establishment_id])
-    return redirect_to root_path, alert: I18n.t('route_negated') unless @establishment.users.exists?(current_user.id)
   end
 
   def set_item_params

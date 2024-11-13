@@ -28,6 +28,17 @@ describe 'usuário cadastra cardápio' do
     end
   end
   
+  it 'e não admin não vê botão de cadastro de cardápios' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    employee = Employee.create!(first_name: 'Jan', last_name: 'Jonas', cpf: CPF.generate, email: 'juanjonas@email.com', password: '1234567891011', establishment: establishment)
+    
+    visit root_path
+
+    expect(page).not_to have_button 'Cadastros'
+  end
+
   it 'e usuário não logado' do
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
@@ -39,6 +50,19 @@ describe 'usuário cadastra cardápio' do
     expect(page).to have_content 'Para continuar, faça login ou registre-se'  
   end
   
+  it 'e não admin não acessa a página' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    employee = Employee.create!(first_name: 'Jan', last_name: 'Jonas', cpf: CPF.generate, email: 'juanjonas@email.com', password: '1234567891011', establishment: establishment)
+    
+    login_as employee
+    visit new_menu_path(establishment)
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você não possui acesso a essa página'  
+  end
+
   it 'e cancela' do
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
@@ -50,7 +74,6 @@ describe 'usuário cadastra cardápio' do
 
     expect(current_path).to eq root_path
   end
-  
 
   it 'e esperá ver pratos e bebidas para cadastro' do
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 

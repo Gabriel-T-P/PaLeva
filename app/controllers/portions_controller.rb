@@ -80,11 +80,6 @@ class PortionsController < ApplicationController
     @portion = Portion.find(params[:id])
   end
 
-  def set_establishment_check_user
-    @establishment = Establishment.find(params[:establishment_id])
-    return redirect_to root_path, alert: I18n.t('route_negated') unless @establishment.users.exists?(current_user.id)
-  end
-
   def portion_params
     params.require(:portion).permit(:name, :description, :price, :image, :active)
   end
