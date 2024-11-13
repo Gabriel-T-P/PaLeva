@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_establishment_check_user
+  before_action :check_admin
   before_action :set_item, only: [:show, :edit, :update, :destroy, :add_tag, :remove_tag]
 
   def index
@@ -79,6 +80,10 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def check_admin
+    return redirect_to root_path, alert: I18n.t('route_negated') unless current_user.admin?
+  end
 
   def set_item
     @item = Item.find(params[:id])
