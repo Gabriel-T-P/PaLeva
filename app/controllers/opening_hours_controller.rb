@@ -1,6 +1,7 @@
 class OpeningHoursController < ApplicationController
   before_action :authenticate_user!
   before_action :set_establishment_check_user
+  before_action :check_admin
   before_action :set_opening_hour, only: [:edit, :update]
 
   def new

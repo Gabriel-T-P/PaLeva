@@ -73,7 +73,7 @@ describe 'usuário registra bebida' do
     visit new_establishment_beverage_path(establishment)
 
     expect(current_path).to eq root_path
-    expect(page).to have_content 'Você não possui acesso a essa página'  
+    expect(page).to have_content 'Você não possui acesso a essa página'
   end
 
   it 'e não cadastra imagem' do
