@@ -34,7 +34,7 @@ describe 'usuário deleta bebida' do
     user2 = Employee.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011', role: 'employee', establishment: establishment)
 
     login_as user2
-    put establishment_beverage_path(establishment, beverage)
+    delete establishment_beverage_path(establishment, beverage)
 
     expect(response).to redirect_to(root_path)
   end
