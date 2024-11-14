@@ -1,4 +1,5 @@
 class PortionOrdersController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     @portion_order = PortionOrder.new(params.require(:portion_order).permit(:portion_id, :quantity, :observation))
