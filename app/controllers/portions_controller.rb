@@ -3,6 +3,7 @@ class PortionsController < ApplicationController
   before_action :set_parent
   before_action :set_portion, only: [:show, :edit, :update, :destroy, :set_active, :set_unactive]
   before_action :set_establishment_check_user
+  before_action :check_admin, except: [:show]
 
   def show
     @portion_order = @portion.portion_orders.new

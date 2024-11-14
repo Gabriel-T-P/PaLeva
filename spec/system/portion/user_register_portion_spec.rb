@@ -48,7 +48,7 @@ describe 'usuário cadastra porção' do
     expect(page).to have_field 'Preço'
   end
 
-  it 'e não está logado - dish' do
+  it 'e não está logado - beverage' do
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
                                           cnpj: '42.182.510/0001-77', email: 'carlosjonas@email.com', phone_number: '99999043113')
     beverage = Beverage.create!(name: 'Cerveja', description: 'Bebida alcoólica mais comum do Brasil', calories: '140', item_type: 'beverage', 
@@ -58,8 +58,22 @@ describe 'usuário cadastra porção' do
 
     expect(current_path).to eq new_user_session_path  
   end
+
+  it 'e não é admin - beverage' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', role: 'admin', establishment: establishment)
+    user2 = Employee.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011', role: 'employee', establishment: establishment)
+    beverage = Beverage.create!(name: 'Cerveja', description: 'Bebida alcoólica mais comum do Brasil', calories: '140', item_type: 'beverage', establishment: establishment, alcoholic: true)
+
+    login_as user2
+    visit new_establishment_beverage_portion_path(establishment, beverage)
   
-  it 'e não está logado - beverage' do
+    expect(current_path).to eq root_path  
+    expect(page).to have_content 'Você não possui acesso a essa página'  
+  end
+  
+  it 'e não está logado - dish' do
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
                                           cnpj: '42.182.510/0001-77', email: 'carlosjonas@email.com', phone_number: '99999043113')
     dish = Item.create!(name: 'Lasanha', description: 'Carne, macarrão e molho', calories: '340', item_type: 'dish', establishment: establishment)
@@ -67,6 +81,20 @@ describe 'usuário cadastra porção' do
     visit new_establishment_item_portion_path(establishment, dish)
 
     expect(current_path).to eq new_user_session_path  
+  end
+
+  it 'e não é admin - dish' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', role: 'admin', establishment: establishment)
+    user2 = Employee.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011', role: 'employee', establishment: establishment)
+    dish = Item.create!(name: 'Lasanha', description: 'Carne, macarrão e molho', calories: '340', item_type: 'dish', establishment: establishment)
+
+    login_as user2
+    visit new_establishment_item_portion_path(establishment, dish)
+    
+    expect(current_path).to eq root_path  
+    expect(page).to have_content 'Você não possui acesso a essa página'  
   end
 
   it 'pela página do modelo do item a ser criado como bebida e cancela' do

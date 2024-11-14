@@ -20,6 +20,20 @@ describe 'usuário deleta porção' do
       expect(page).to have_button 'Deletar'
     end
     
+    it 'e não é admin e não vê botão de deletar' do
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', role: 'admin', establishment: establishment)
+      user2 = Employee.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011', role: 'employee', establishment: establishment)
+      dish = Item.create!(name: 'Lasanha', description: 'Carne, macarrão e molho', calories: '340', item_type: 'dish', establishment: establishment)
+      portion = Portion.create!(name: 'Meia Lasanha', description: 'Lasanha de carne para 1 pessoa', price: 7.50, item: dish)
+
+      login_as user2
+      visit establishment_item_portion_path(establishment, dish, portion)
+
+      expect(page).not_to have_button 'Deletar'
+    end
+
     it 'com sucesso' do
       establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
                                             cnpj: '42.182.510/0001-77', email: 'carlosjonas@email.com', phone_number: '99999043113')
@@ -62,6 +76,20 @@ describe 'usuário deleta porção' do
       expect(page).to have_button 'Deletar'  
     end
     
+    it 'e não é admin e não vê botão de deletar' do
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user1 = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', role: 'admin', establishment: establishment)
+      user2 = Employee.create!(first_name: 'Teste', last_name: 'Teste', cpf: CPF.generate, email: 'teste123@email.com', password: '1234567891011', role: 'employee', establishment: establishment)
+      beverage = Beverage.create!(name: 'Água', description: 'Água mineral', calories: '40', item_type: 'beverage', establishment: establishment, alcoholic: false)
+      portion = Portion.create!(name: 'Água 250 ml', description: 'Água mineral em copo plástico de 250ml', price: 2.50, item: beverage)
+
+      login_as user2
+      visit establishment_beverage_portion_path(establishment, beverage, portion)
+
+      expect(page).not_to have_button 'Deletar'
+    end
+
     it 'com sucesso' do
       establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
                                             cnpj: '42.182.510/0001-77', email: 'carlosjonas@email.com', phone_number: '99999043113')

@@ -8,9 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-master = User.create!(first_name: 'Master', last_name: 'Master', cpf: CPF.generate, email: 'master@email.com', password: '12345678')
-establishment = Establishment.create!(corporate_name: 'Master LTDA', trade_name: 'Master', full_address: 'Av Teste, 132', user: master, cnpj: CNPJ.generate, 
+establishment = Establishment.create!(corporate_name: 'Master LTDA', trade_name: 'Master', full_address: 'Av Teste, 132', cnpj: CNPJ.generate, 
                                       email: 'masterteste123@email.com', phone_number: '1111111111')
+master = User.create!(first_name: 'Master', last_name: 'Master', cpf: CPF.generate, email: 'master@email.com', password: '12345678', establishment: establishment)
+employee = Employee.create!(first_name: 'Employee', last_name: 'Employee', cpf: CPF.generate, email: 'employee@email.com', password: '12345678', establishment: establishment)
 
 OpeningHour.create!(day_of_week: 0, closed: true, establishment: establishment)
 OpeningHour.create!(day_of_week: 1, closed: true, establishment: establishment)
