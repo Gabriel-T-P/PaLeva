@@ -1,7 +1,6 @@
 en:
   beverages:
     form:
-      errors_message: 'Check the folowwing errors'
       dish: 'Prato'
       beverage: 'Bebida'
       save: 'Save'

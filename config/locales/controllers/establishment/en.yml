@@ -14,7 +14,6 @@ en:
     form:
       save: 'Register'
       cancel: 'Cancelar'
-      errors_message: 'Check the following errors'
     show:
       title: 'More Info About the Establishment'
       edit_establishment: 'Edit'

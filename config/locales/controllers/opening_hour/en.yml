@@ -3,7 +3,6 @@ en:
     form:
       save: 'Save'
       cancel: 'Cancel'
-      errors_message: 'Check the folowing errors'
     new:
       title: 'Add New Opening Hour'
     create:

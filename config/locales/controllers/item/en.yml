@@ -2,7 +2,6 @@ en:
   items:
     form:
       image: 'Register Image'
-      errors_message: 'Check the following errors'
       dish: 'Dish'
       beverage: 'Beverage'
       save: 'Save'

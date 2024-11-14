@@ -1,7 +1,6 @@
 en:
   menus:
     form:
-      errors_message: 'Check the following errors'
       save: 'Save'
       cancel: 'Cancel'
       confirm: 'Confirm'

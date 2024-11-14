@@ -1,7 +1,6 @@
 pt-BR:
   orders:
     form:
-      errors_message: 'Check the following errors'
       order_items: 'Items'
       save: 'Save'
       cancel: 'Cancel'

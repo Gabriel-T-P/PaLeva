@@ -10,6 +10,7 @@
       <p class="lead"><%=t '.please_create_establishment'%></p>
     <% end %>
 
+  <% elsif user_signed_in? && current_user.employee? %>
   <% else %>
     <p class="lead"><%=t '.please_login'%></p>
   <% end %>

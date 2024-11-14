@@ -5,3 +5,5 @@ pt-BR:
       profile: 'Profile'
       settings: 'Configurations'
       logout: 'Log Out'
+    errors_form:
+      errors_message: 'Please, verify the following errors'

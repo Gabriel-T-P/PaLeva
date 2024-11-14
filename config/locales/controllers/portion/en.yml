@@ -2,7 +2,6 @@ en:
   portions:
     form:
       image: 'Choose Image'
-      errors_message: 'Check the following errors'
       save: 'Save Portion'
       cancel: 'Cancel'
       confirm: 'Confirm'

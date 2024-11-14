@@ -2,7 +2,6 @@ pt-BR:
   beverages:
     form:
       image: 'Escolher Imagem'
-      errors_message: 'Verifique os seguintes erros'
       save: 'Salvar Bebida'
       cancel: 'Cancelar'
       confirm: 'Confirmar'

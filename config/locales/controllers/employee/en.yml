@@ -2,7 +2,6 @@ en:
   employees:
     new:
       title: 'Pre Register'
-      errors_message: 'Check the following errors'
       save: 'Save'
       cancel: 'Cancel'
       confirm: 'Confirm'

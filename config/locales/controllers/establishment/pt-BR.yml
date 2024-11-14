@@ -14,7 +14,6 @@ pt-BR:
     form:
       save: 'Cadastrar'
       cancel: 'Cancelar'
-      errors_message: 'Verifique os seguintes erros'
     show:
       title: 'Informações Sobre o Estabelecimento'
       edit_establishment: 'Editar Informações'

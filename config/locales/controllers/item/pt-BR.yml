@@ -2,7 +2,6 @@ pt-BR:
   items:
     form:
       image: 'Cadastrar Imagem'
-      errors_message: 'Verifique os seguintes erros'
       dish: 'Prato'
       beverage: 'Bebida'
       save: 'Salvar'

@@ -1,7 +1,6 @@
 pt-BR:
   menus:
     form:
-      errors_message: 'Verifique os seguintes erros'
       save: 'Salvar Cardápio'
       cancel: 'Cancelar'
       confirm: 'Confirmar'

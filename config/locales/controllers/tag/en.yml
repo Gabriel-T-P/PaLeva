@@ -1,7 +1,6 @@
 en:
   tags:
     form:
-      errors_message: 'Check the folowing errors'
       save: 'Save'
       cancel: 'Cancel'
       confirm: 'Confirm'

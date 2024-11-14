@@ -2,7 +2,6 @@ pt-BR:
   portions:
     form:
       image: 'Escolher Imagem'
-      errors_message: 'Verifique os seguintes erros'
       save: 'Salvar Porção'
       cancel: 'Cancelar'
       confirm: 'Confirmar'

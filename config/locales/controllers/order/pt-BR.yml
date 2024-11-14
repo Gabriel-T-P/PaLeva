@@ -1,7 +1,6 @@
 pt-BR:
   orders:
     form:
-      errors_message: 'Verifique os seguintes erros'
       order_items: 'Itens do seu pedido'
       save: 'Salvar Pedido'
       cancel: 'Cancelar'

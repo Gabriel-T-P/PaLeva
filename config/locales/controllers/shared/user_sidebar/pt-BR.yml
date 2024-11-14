@@ -5,3 +5,5 @@ pt-BR:
       profile: 'Perfil'
       settings: 'Configurações'
       logout: 'Sair'
+    errors_form:
+      errors_message: 'Por favor verifique os seguintes erros'

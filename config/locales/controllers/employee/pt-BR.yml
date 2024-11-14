@@ -2,7 +2,6 @@ pt-BR:
   employees:
     new:
       title: 'Criar Pré-Cadastro'
-      errors_message: 'Verifique os seguintes erros'
       save: 'Salvar'
       cancel: 'Cancelar'
       confirm: 'Confirmar'

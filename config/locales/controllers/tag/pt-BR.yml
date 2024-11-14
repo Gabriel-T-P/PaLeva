@@ -1,7 +1,6 @@
 pt-BR:
   tags:
     form:
-      errors_message: 'Verifique os seguintes erros'
       save: 'Salvar Marcador'
       cancel: 'Cancelar'
       confirm: 'Confirmar'

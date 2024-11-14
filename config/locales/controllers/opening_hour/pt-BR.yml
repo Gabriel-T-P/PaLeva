@@ -3,7 +3,6 @@ pt-BR:
     form:
       save: 'Salvar Horário'
       cancel: 'Cancelar'
-      errors_message: 'Verifique os seguintes erros'
     new:
       title: 'Adicione Um Novo Horário'
     create:
