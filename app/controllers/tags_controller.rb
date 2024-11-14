@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_admin
 
   def new
     @tag = Tag.new
