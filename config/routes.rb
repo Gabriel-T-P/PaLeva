@@ -37,4 +37,12 @@ Rails.application.routes.draw do
   resources :tags, only: [:new, :create, :edit, :update, :destroy]
   resources :menus, only: [:new, :create, :edit, :update, :destroy]
   resources :employees, only: [:new, :create, :destroy]
+
+
+  # API
+  namespace :api do
+    namespace :v1 do
+      resources :orders, only: [:show], defaults: {format: :json}
+    end
+  end
 end
