@@ -1,2 +1,3 @@
 en:
   api_order_not_found: 'Order not found'
+  api_order_empty: 'No orders registered found'

@@ -1,2 +1,3 @@
 pt-BR:
   api_order_not_found: 'Pedido não encontrado'
+  api_order_empty: 'Não existem pedidos cadastrados'

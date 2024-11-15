@@ -13,6 +13,21 @@ class Api::V1::OrdersController < ActionController::API
     end
   end
 
+  def index
+    if params[:status].present?
+      order = Order.where(status: params[:status])
+      if order.empty?
+        order = Order.all
+        return render status: 200, json: {result: I18n.t('.api_order_empty')} if order.empty?
+        render status: 200, json: order
+      else
+        render status: 200, json: order
+      end
+    else
+      order = Order.all
+      return render status: 200, json: {result: I18n.t('.api_order_empty')} if order.empty?
+      render status: 200, json: order
+    end
+  end
+  
 end
-
-as_json(include: { posts: { include: { comments: {only: :body } }, only: :title } })

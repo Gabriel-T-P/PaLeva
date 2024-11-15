@@ -52,4 +52,74 @@ describe 'order API' do
     end
   end
   
+  context 'GET /api/v1/orders' do
+    it 'com sucesso e retorna todos os pedidos' do
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+      dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+      portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+      order1 = Order.create!(email: 'teste123@email.com', user: user, cpf: '05513333325', name: 'Carlos', phone_number: '99999999')
+      order2 = Order.create!(email: 'teste123@email.com', user: user, cpf: '05513333325', name: 'Carlos', phone_number: '99999999')
+      portion_order = PortionOrder.create!(portion: portion, order: order1, quantity: 3, observation: 'nada nada')
+
+      get api_v1_orders_path()
+
+      expect(response.status).to eq 200  
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.length).to eq 2
+    end
+    
+    it 'retorna Não existem pedidos cadastrados' do
+      
+      get api_v1_orders_path()
+    
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response['result']).to eq 'Não existem pedidos cadastrados'
+    end
+
+    it 'com sucesso e retorna somente pedidos com status da query' do
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+      dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+      portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+      order1 = Order.create!(email: 'teste123@email.com', user: user, cpf: '05513333325', name: 'Carlos', phone_number: '99999999')
+      order2 = Order.create!(email: 'canceled@email.com', user: user, cpf: '05513333325', name: 'Canceled', phone_number: 'Canceled')
+      order2.update(status: 'canceled')
+      portion_order = PortionOrder.create!(portion: portion, order: order1, quantity: 3, observation: 'nada nada')
+
+      get api_v1_orders_path(status: 'canceled')
+
+      expect(response.status).to eq 200  
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.length).to eq 1
+      expect(json_response.first['email']).to eq 'canceled@email.com'
+      expect(json_response.first['name']).to eq 'Canceled'
+      expect(json_response.first['phone_number']).to eq 'Canceled'
+      expect(json_response.first['status']).to eq 'canceled'
+    end
+
+    it 'retorna todos caso query status inválida' do
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+      dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+      portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+      order1 = Order.create!(email: 'teste123@email.com', user: user, cpf: '05513333325', name: 'Carlos', phone_number: '99999999')
+      order2 = Order.create!(email: 'teste123@email.com', user: user, cpf: '05513333325', name: 'Carlos', phone_number: '99999999')
+      portion_order = PortionOrder.create!(portion: portion, order: order1, quantity: 3, observation: 'nada nada')
+
+      get api_v1_orders_path(status: 'ABABABABA')
+
+      expect(response.status).to eq 200  
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.length).to eq 2
+    end
+  end
 end
