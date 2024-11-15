@@ -50,6 +50,24 @@ describe 'order API' do
       json_response = JSON.parse(response.body)
       expect(json_response['result']).to eq 'Pedido não encontrado'
     end
+
+    it 'falha se tiver um erro interno' do
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+      dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+      portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+      order = Order.create!(email: 'teste123@email.com', user: user, cpf: '05513333325', name: 'Carlos', phone_number: '99999999')
+      portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3, observation: 'nada nada')
+
+      allow(Order).to receive(:find).and_raise(ActiveRecord::ActiveRecordError)
+      get api_v1_order_path(order)
+
+      expect(response).to have_http_status 500
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)  
+      expect(json_response['result']).to eq 'Um erro interno aconteceu' 
+    end
   end
   
   context 'GET /api/v1/orders' do
@@ -120,6 +138,24 @@ describe 'order API' do
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
       expect(json_response.length).to eq 2
+    end
+
+    it 'falha se tiver um erro interno' do
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+      dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+      portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+      order = Order.create!(email: 'teste123@email.com', user: user, cpf: '05513333325', name: 'Carlos', phone_number: '99999999')
+      portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3, observation: 'nada nada')
+
+      allow(Order).to receive(:all).and_raise(ActiveRecord::ActiveRecordError)
+      get api_v1_orders_path()
+
+      expect(response).to have_http_status 500
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)  
+      expect(json_response['result']).to eq 'Um erro interno aconteceu' 
     end
   end
 end
