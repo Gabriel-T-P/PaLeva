@@ -26,3 +26,6 @@ Você pode acessar o diagrama Entidade-Relacionamento pelo link abaixo:
 
 - **Endpoint**: `PATCH /api/v1/orders/:id/set_status_cooking`
 - `id` (obrigatório): Atualiza pedido para em preparo.
+
+- **Endpoint**: `PATCH /api/v1/orders/:id/set_status_ready`
+- `id` (obrigatório): Atualiza pedido para pronto.

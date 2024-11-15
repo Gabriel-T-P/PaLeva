@@ -87,6 +87,9 @@ describe 'order API' do
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
       expect(json_response.length).to eq 2
+      expect(json_response.first.keys).not_to include 'updated_at'  
+      expect(json_response.first.keys).not_to include 'id'
+      expect(json_response.first.keys).not_to include 'user_id'
     end
     
     it 'retorna Não existem pedidos cadastrados' do

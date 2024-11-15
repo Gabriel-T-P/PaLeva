@@ -16,16 +16,22 @@ class Api::V1::OrdersController < ActionController::API
     if orders.empty?
       render status: 200, json: { result: I18n.t('.api_order_empty') }
     else
-      render status: 200, json: orders
+      render status: 200, json: orders.as_json(except: [:updated_at, :id, :user_id])
     end
   end
   
   def set_status_cooking
-    @order = Order.find(params[:id])
-    @order.update(status: 'cooking')
-    render status: 200, json: @order.as_json(except: [:updated_at, :id])
+    order = Order.find(params[:id])
+    order.update(status: 'cooking')
+    render status: 200, json: order.as_json(except: [:updated_at, :id, :user_id])
   end
   
+  def set_status_ready
+    order = Order.find(params[:id])
+    order.update(status: 'ready')
+    render status: 200, json: order.as_json(except: [:updated_at, :id, :user_id])
+  end
+
 
   private
 

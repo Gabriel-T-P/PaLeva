@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :orders, only: [:show, :index], defaults: {format: :json} do
         patch :set_status_cooking, on: :member
+        patch :set_status_ready, on: :member
       end
     end
   end
