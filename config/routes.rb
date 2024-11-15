@@ -42,7 +42,9 @@ Rails.application.routes.draw do
   # API
   namespace :api do
     namespace :v1 do
-      resources :orders, only: [:show, :index], defaults: {format: :json}
+      resources :orders, only: [:show, :index], defaults: {format: :json} do
+        patch :set_status_cooking, on: :member
+      end
     end
   end
 end

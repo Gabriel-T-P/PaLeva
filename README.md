@@ -1,9 +1,7 @@
 # README
 
-## Diagrama de Entidade-Relacionamento (ERD)
-
-Você pode acessar o diagrama ERD pelo link abaixo:
-- [Diagrama ERD no DrawSQL](https://drawsql.app/teams/just-me-110/diagrams/paleva)
+Você pode acessar o diagrama Entidade-Relacionamento pelo link abaixo:
+- [Diagrama ERD](https://drawsql.app/teams/just-me-110/diagrams/paleva)
 
 ---
 
@@ -21,7 +19,10 @@ Você pode acessar o diagrama ERD pelo link abaixo:
 ## Endpoints da API
 
 - **Endpoint**: `GET /api/v1/orders?status=value`
-- `status` (opcional): Filtra os pedidos pelo status especificado.
+- `status` (opcional): Mostra todos os pedidos ou filtra por um status especificado.
 
-- **Endpoint**: `GET /api/v1/orders/id`
+- **Endpoint**: `GET /api/v1/orders/:id`
 - `id` (obrigatório): Mostra um único pedido pelo id especificado.
+
+- **Endpoint**: `PATCH /api/v1/orders/:id/set_status_cooking`
+- `id` (obrigatório): Atualiza pedido para em preparo.

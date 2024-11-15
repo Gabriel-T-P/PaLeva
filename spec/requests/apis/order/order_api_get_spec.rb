@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'order API' do
-  context 'GET /api/v1/order/1' do
+  context 'GET /api/v1/order/:id' do
     it 'com sucesso' do
       allow(SecureRandom).to receive(:alphanumeric).and_return('ABC123')
       establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
