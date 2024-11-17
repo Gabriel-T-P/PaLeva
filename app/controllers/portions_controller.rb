@@ -19,6 +19,7 @@ class PortionsController < ApplicationController
 
     if @portion.save
       flash[:notice] = t '.notice'
+      @portion.image.attach(@parent.image.blob) unless @portion.image.attached?
       redirect_to polymorphic_path([@establishment, @parent])
     else
       flash.now[:alert] = t '.alert'
