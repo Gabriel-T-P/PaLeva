@@ -34,10 +34,10 @@ class Api::V1::OrdersController < Api::V1::ApiController
   private
 
   def fetch_orders
-    return Order.all unless params[:status].present?
+    return Order.all.order("created_at DESC") unless params[:status].present?
   
     orders = Order.where(status: params[:status])
-    orders.presence || Order.all
+    orders.presence || Order.all.order("created_at DESC")
   end
 
 end

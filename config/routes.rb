@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+  get 'switch_locale/:locale', to: 'application#switch_locale', as: :switch_locale
+
   resources :establishments, only: [:new, :create, :edit, :update, :show, :destroy] do
     resources :opening_hours, only: [:edit, :update, :new, :create, :destroy]
     resources :items, only: [:index, :show, :new, :create, :edit, :update, :destroy] do

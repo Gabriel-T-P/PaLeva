@@ -49,6 +49,6 @@ describe 'usuário deleta prato' do
     login_as user2
     put establishment_item_path(establishment, dish)
 
-    expect(response).to redirect_to(root_path)
+    expect(response).to redirect_to root_path(locale: I18n.locale)
   end
 end

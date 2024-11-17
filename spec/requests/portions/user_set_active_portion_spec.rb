@@ -15,7 +15,7 @@ describe 'usuário atualiza uma porção' do
       login_as user2
       patch set_active_establishment_beverage_portion_path(establishment1, beverage, portion)
   
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to root_path(locale: I18n.locale)
     end
   
     it 'e não está logado' do
@@ -40,7 +40,7 @@ describe 'usuário atualiza uma porção' do
       login_as user2
       patch set_active_establishment_beverage_portion_path(establishment, beverage, portion)
   
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to root_path(locale: I18n.locale)
     end
   end
   
@@ -58,7 +58,7 @@ describe 'usuário atualiza uma porção' do
       login_as user2
       patch set_active_establishment_item_portion_path(establishment1, dish, portion)
   
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to root_path(locale: I18n.locale)
     end
   
     it 'e não está logado' do
@@ -83,7 +83,7 @@ describe 'usuário atualiza uma porção' do
       login_as user2
       patch set_active_establishment_item_portion_path(establishment, dish, portion)
 
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to root_path(locale: I18n.locale)
     end
   end
 end

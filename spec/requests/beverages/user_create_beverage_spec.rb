@@ -21,7 +21,7 @@ describe 'usuário cria uma bebida' do
       }
     }
 
-    expect(response).to redirect_to root_path
+    expect(response).to redirect_to root_path(locale: I18n.locale)
   end
   
   it 'e não está logado' do
@@ -60,6 +60,6 @@ describe 'usuário cria uma bebida' do
       }
     }
 
-    expect(response).to redirect_to(root_path)
+    expect(response).to redirect_to root_path(locale: I18n.locale)
   end
 end

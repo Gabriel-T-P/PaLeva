@@ -6,6 +6,12 @@ class ApplicationController < ActionController::Base
   before_action :check_user_establishment
   skip_before_action :check_user_establishment, if: :devise_controller?
   before_action :initialize_cart, if: -> { user_signed_in? }
+  around_action :switch_locale
+
+  def switch_locale(&action)
+    locale = params[:locale] || I18n.default_locale
+    I18n.with_locale(locale, &action)
+  end
 
   protected
 
@@ -31,5 +37,9 @@ class ApplicationController < ActionController::Base
   def check_admin
     return redirect_to root_path, alert: I18n.t('route_negated') unless current_user.admin?
   end
+
+  def default_url_options
+    { locale: I18n.locale }
+  end  
 
 end
