@@ -22,7 +22,7 @@ class Establishment < ApplicationRecord
   end 
 
   def generate_code
-    self.code = SecureRandom.alphanumeric(6)
+    self.code = SecureRandom.alphanumeric(6).upcase
   end
   
 end

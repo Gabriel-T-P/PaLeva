@@ -63,3 +63,16 @@ menu1 = Menu.create!(name: 'Acompanhantes da Noite', establishment: establishmen
   menu1.items<<[beverage1, beverage3]
 menu2 = Menu.create!(name: 'Jantar', establishment: establishment)
   menu2.items<<[dish1, dish2, dish3, beverage1, beverage2]
+
+order1 = Order.create!(name: 'Carlos', cpf: CPF.generate, phone_number: '9999-1111', email: 'carlos@email1.com', user: employee)
+  PortionOrder.create!(portion: portion_dish1_1, order: order1, quantity: 2, observation: 'Molho Extra')
+  PortionOrder.create!(portion: portion_beverage2_1, order: order1, quantity: 1)
+order2 = Order.create!(name: 'Juan', cpf: CPF.generate, phone_number: '7777-1111', email: 'juan@email1.com', user: employee)
+  PortionOrder.create!(portion: portion_dish2_2, order: order2, quantity: 2)
+  PortionOrder.create!(portion: portion_dish3_1, order: order2, quantity: 5)
+order3 = Order.create!(name: 'Zigs', cpf: CPF.generate, phone_number: '8888-1111', email: 'zigs@email1.com', user: employee)
+  PortionOrder.create!(portion: portion_beverage3_2, order: order3, quantity: 2, observation: 'Sem tomate')
+  PortionOrder.create!(portion: portion_dish3_3, order: order3, quantity: 1, observation: 'Bem passada')
+  PortionOrder.create!(portion: portion_beverage1_2, order: order3, quantity: 1, observation: 'Com gelo')
+order4 = Order.create!(name: 'Karl', cpf: CPF.generate, phone_number: '4444-1111', email: 'karl@email1.com', user: employee)
+order4.update(status: 'canceled')

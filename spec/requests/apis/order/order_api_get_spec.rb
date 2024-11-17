@@ -9,7 +9,7 @@ describe 'order API' do
       user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
       dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
       portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
-      allow(SecureRandom).to receive(:alphanumeric).and_return('ABCD1234')
+      allow(SecureRandom).to receive(:alphanumeric).and_return('abcd1234')
       order = Order.create!(email: 'teste123@email.com', user: user, cpf: '05513333325', name: 'Carlos', phone_number: '99999999')
       portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3, observation: 'nada nada')
 
@@ -26,9 +26,7 @@ describe 'order API' do
       expect(order_response['code']).to eq 'ABCD1234'
       expect(order_response['status']).to eq 'waiting_cook_confirmation'
       expect(order_response.keys).not_to include 'updated_at'
-      expect(order_response.keys).not_to include 'email'
-      expect(order_response.keys).not_to include 'cpf'
-      expect(order_response.keys).not_to include 'phone_number'
+      expect(order_response.keys).not_to include 'id'
       expect(order_response.keys).not_to include 'user_id'
       expect(portions_response.first['quantity']).to eq 3
       expect(portions_response.first['observation']).to eq 'nada nada'
@@ -88,7 +86,6 @@ describe 'order API' do
       json_response = JSON.parse(response.body)
       expect(json_response.length).to eq 2
       expect(json_response.first.keys).not_to include 'updated_at'  
-      expect(json_response.first.keys).not_to include 'id'
       expect(json_response.first.keys).not_to include 'user_id'
     end
     

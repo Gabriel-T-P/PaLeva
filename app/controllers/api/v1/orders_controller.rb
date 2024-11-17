@@ -1,12 +1,10 @@
-class Api::V1::OrdersController < ActionController::API
-  rescue_from ActiveRecord::ActiveRecordError, with: :internal_error_500
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_404
+class Api::V1::OrdersController < Api::V1::ApiController
 
   def show
     order = Order.find(params[:id])
     render status: 200, json: {
       establishment_code: order.user.establishment.code,
-      order: order.as_json(only: [:name, :code, :status, :created_at]),
+      order: order.as_json(except: [:id, :updated_at, :user_id]),
       portions: order.portion_orders.as_json(except: [:created_at, :updated_at, :portion_id, :order_id], include: {portion: { only: [:id, :name, :description, :price] }})
     }
   end
@@ -16,7 +14,7 @@ class Api::V1::OrdersController < ActionController::API
     if orders.empty?
       render status: 200, json: { result: I18n.t('.api_order_empty') }
     else
-      render status: 200, json: orders.as_json(except: [:updated_at, :id, :user_id])
+      render status: 200, json: orders.as_json(except: [:updated_at, :user_id])
     end
   end
   
@@ -40,14 +38,6 @@ class Api::V1::OrdersController < ActionController::API
   
     orders = Order.where(status: params[:status])
     orders.presence || Order.all
-  end
-
-  def internal_error_500
-    return render status: 500, json: {result: I18n.t('.api_order_internal_error')}
-  end
-  
-  def not_found_error_404
-    return render status: 404, json: {result: I18n.t('.api_order_not_found')}
   end
 
 end

@@ -76,7 +76,7 @@ describe 'order API' do
       expect(json_response['cpf']).to eq '05513333325'
       expect(json_response['phone_number']).to eq '99999999'
       expect(json_response['status']).to eq 'ready'
-      expect(json_response.keys).not_to include 'updated_at'  
+      expect(json_response.keys).not_to include 'updated_at'
       expect(json_response.keys).not_to include 'id'
       expect(json_response.keys).not_to include 'user_id'
     end

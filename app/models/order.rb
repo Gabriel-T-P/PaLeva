@@ -21,7 +21,7 @@ class Order < ApplicationRecord
   end
 
   def set_alphamumeric_code_and_status
-    self.code = SecureRandom.alphanumeric(8)
+    self.code = SecureRandom.alphanumeric(8).upcase
     self.status = :waiting_cook_confirmation
   end
 

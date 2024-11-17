@@ -45,3 +45,4 @@ end
 
 gem "devise", "~> 4.9"
 gem "cpf_cnpj"
+gem 'rack-cors'
