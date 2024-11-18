@@ -1,0 +1,4 @@
+pt-BR:
+  carts:
+    remove_item:
+      notice: 'Item removido com sucesso'

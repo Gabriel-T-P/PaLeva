@@ -1,0 +1,4 @@
+en:
+  carts:
+    remove_item:
+      notice: 'Item removed'
