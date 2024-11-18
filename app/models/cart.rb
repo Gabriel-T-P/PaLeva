@@ -23,19 +23,8 @@ class Cart
     end
   end
 
-  def remove_item(portion_order)
-    @items.delete(portion_order.portion.id)
-  end
-
-  def add_1(portion_order)
-    item = @items[portion_order.portion.id]
-    item['quantity'] += 1 if item
-  end
-
-  def remove_1(portion_order)
-    item = @items[portion_order.portion.id]
-    item['quantity'] -= 1 if item && item['quantity'] > 1
-    remove_item(portion_order) if item && item['quantity'] <= 0
+  def remove_item(portion_id)
+    @items.delete(portion_id.to_s)
   end
 
   def clear

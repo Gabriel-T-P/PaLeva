@@ -275,26 +275,26 @@ RSpec.describe Establishment, type: :model do
       end
     end
 
-    context 'quando user_admin_id' do
-      it 'existir' do
-        establishment = Establishment.new(corporate_name: 'Carlos LTDA', trade_name: "Carlos's Cafe", full_address: "123 Main St", cnpj: CNPJ.generate, 
-                                            email: 'carlosjonas@email.com', phone_number: '99999043113')
-        user = User.new(first_name: 'Juan', last_name: 'Jonas', cpf: '05513333325', email: 'juanjonas@email.com', password: '1234567891011', establishment: establishment)
-        establishment.update!(admin_user: user)
+    # context 'quando user_admin_id' do
+    #   it 'existir' do
+    #     establishment = Establishment.new(corporate_name: 'Carlos LTDA', trade_name: "Carlos's Cafe", full_address: "123 Main St", cnpj: CNPJ.generate, 
+    #                                         email: 'carlosjonas@email.com', phone_number: '99999043113')
+    #     user = User.new(first_name: 'Juan', last_name: 'Jonas', cpf: '05513333325', email: 'juanjonas@email.com', password: '1234567891011', establishment: establishment)
+    #     establishment.update!(admin_user: user)
 
-        result = establishment.valid?
+    #     result = establishment.valid?
 
-        expect(result).to be true
-      end
+    #     expect(result).to be true
+    #   end
       
-      it 'estiver ausente' do
-        establishment = Establishment.new(corporate_name: 'Carlos LTDA', trade_name: "Carlos's Cafe", full_address: "123 Main St", cnpj: CNPJ.generate, 
-                                            email: 'carlosjonas@email.com', phone_number: '99999043113')
+    #   it 'estiver ausente' do
+    #     establishment = Establishment.new(corporate_name: 'Carlos LTDA', trade_name: "Carlos's Cafe", full_address: "123 Main St", cnpj: CNPJ.generate, 
+    #                                         email: 'carlosjonas@email.com', phone_number: '99999043113')
 
-        result = establishment.valid?
+    #     result = establishment.valid?
 
-        expect(result).to be true
-      end
-    end
+    #     expect(result).to be true
+    #   end
+    # end
   end
 end

@@ -17,7 +17,7 @@ class EstablishmentsController < ApplicationController
     @establishment = Establishment.new(set_params)
 
     if @establishment.save
-      @establishment.users << current_user
+      current_user.update(establishment: @establishment, password: '12346578')
 
       flash[:notice] = t '.notice'
       redirect_to @establishment

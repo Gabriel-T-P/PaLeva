@@ -34,6 +34,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :cart, only: [] do
+    delete :remove_item, on: :member
+  end
+
   resources :portion_orders, only: [:new, :create, :destroy]
   resources :orders, only: [:new, :create, :edit, :update, :show, :destroy]
   resources :tags, only: [:new, :create, :edit, :update, :destroy]

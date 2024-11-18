@@ -22,7 +22,8 @@ describe 'usuário edita estabelecimento' do
     expect(page).to have_field 'Endereço'  
     expect(page).to have_field 'Número de Telefone'  
     expect(page).to have_field 'E-mail'
-    expect(page).to have_button 'Cadastrar' 
+    expect(page).to have_button 'Cadastrar'
+    expect(page).to have_link 'Cancelar'
   end
 
   it 'e deve estar autenticado para aparecer botão' do
@@ -90,6 +91,20 @@ describe 'usuário edita estabelecimento' do
     expect(page).to have_content 'E-mail: teste1223112@email.com'
   end
   
+  it 'e clica em cancelar' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 
+                                            email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+
+    login_as user
+    visit root_path
+    click_on 'Meu Estabelecimento'
+    click_on 'Editar Informações'
+    click_on 'Cancelar'
+
+    expect(current_path).to eq establishment_path(establishment)  
+  end
+
   it 'e vê mensagens de erros' do
     # Arrange
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: '42.182.510/0001-77', 

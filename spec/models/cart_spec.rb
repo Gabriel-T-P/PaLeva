@@ -79,6 +79,43 @@ RSpec.describe Cart, type: :model do
     end
   end
 
+  describe '#remove_item' do
+    it 'remove um item do carrinho' do
+      session = {}
+      cart = Cart.new(session)
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                              cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+      dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+      portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+      order = Order.create!(email: 'teste123@email.com', user: user)
+      portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3) 
+      cart.add_item(portion_order)
+
+      cart.remove_item(portion.id)
+
+      expect(cart.items.length).to eq 0
+    end
+    
+    it 'e tenta remover item que não existe' do
+      session = {}
+      cart = Cart.new(session)
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                              cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+      dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+      portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+      other_portion = Portion.create!(name: 'Grande', description: 'Uma unidade grande de pão de queijo', price: 3.50, item: dish)
+      order = Order.create!(email: 'teste123@email.com', user: user)
+      portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3) 
+      cart.add_item(portion_order)
+
+      cart.remove_item(PortionOrder.create!(portion: other_portion, order: order, quantity: 3))
+
+      expect(cart.items.length).to eq 1
+    end
+  end
+
   describe '#clear' do
     it 'limpa o carrinho de pedidos' do
       session = {}

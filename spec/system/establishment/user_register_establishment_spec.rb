@@ -37,6 +37,7 @@ describe 'usuário cria novo estabelecimento' do
     expect(page).to have_field 'Número de Telefone'  
     expect(page).to have_field 'E-mail'
     expect(page).to have_button 'Cadastrar'
+    expect(page).not_to have_link 'Cancelar'  
   end
 
   it 'e não está logado' do
@@ -48,7 +49,7 @@ describe 'usuário cria novo estabelecimento' do
 
   it 'com sucesso' do
     # Arrange
-    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '12345678')
 
     # Act
     login_as user

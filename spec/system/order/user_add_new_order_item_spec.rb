@@ -53,7 +53,6 @@ describe 'usuário registra item a um pedido' do
 
     login_as user
     visit establishment_item_portion_path(establishment, dish, portion)
-
     fill_in 'Quantidade',	with: 1
     fill_in 'Observação',	with: ''
     click_on 'Adicionar'
@@ -157,7 +156,7 @@ describe 'usuário registra item a um pedido' do
     end
   end
   
-  it 'e ao falhar em salvar renderiza corretamente a página da porção' do
+  it 'e ao falhar em salvar, renderiza corretamente a página da porção' do
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)

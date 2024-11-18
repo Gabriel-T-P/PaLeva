@@ -36,6 +36,9 @@
       <br>
       <div class="d-flex">
         <%= f.submit t('.save'), class: 'btn btn-dark' %>
+        <% if establishment.persisted? %>
+          <%= link_to t('.cancel'), establishment_path(establishment), class: 'btn btn-danger ms-3' %>
+        <% end %>
       </div>
 
     <% end %>    
