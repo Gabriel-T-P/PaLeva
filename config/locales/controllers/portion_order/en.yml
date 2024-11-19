@@ -2,3 +2,4 @@ en:
   portion_orders:
     create:
       notice: 'Item added to the order cart'
+      inactive_alert: 'Inactive item can not be added to order cart'

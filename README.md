@@ -29,3 +29,6 @@ Você pode acessar o diagrama Entidade-Relacionamento pelo link abaixo:
 
 - **Endpoint**: `PATCH /api/v1/orders/:id/set_status_ready`
 `id` (obrigatório): Atualiza pedido para pronto.
+
+- **Endpoint**: `PATCH /api/v1/:establishment_code/:order_code/orders/:id/set_status_canceled`
+`order_code` (obrigatório): Atualiza pedido para cancelado.

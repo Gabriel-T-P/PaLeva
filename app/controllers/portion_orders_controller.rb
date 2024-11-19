@@ -2,6 +2,9 @@ class PortionOrdersController < ApplicationController
   before_action :authenticate_user!
 
   def create
+    portion_id = (params.require(:portion_order).permit(:portion_id)['portion_id'])
+    portion = Portion.find(portion_id)
+    return redirect_to root_path, alert: t('.inactive_alert') unless portion.active
     @portion_order = PortionOrder.new(params.require(:portion_order).permit(:portion_id, :quantity, :observation))
     @portion_order.order = Order.new(name: 'Default', phone_number: '1', user: current_user)
   

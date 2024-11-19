@@ -189,7 +189,6 @@ describe 'order API' do
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
       expect(json_response['result']).to eq 'Um erro interno aconteceu'    
-    end
-    
+    end  
   end
 end

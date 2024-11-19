@@ -2,3 +2,4 @@ pt-BR:
   portion_orders:
     create:
       notice: 'Item adicionado ao carrinho'
+      inactive_alert: 'Item inativo não pode ser adicionado ao carrinho'

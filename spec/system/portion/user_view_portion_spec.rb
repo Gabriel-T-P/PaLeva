@@ -25,7 +25,7 @@ describe 'usuário vê porção' do
       expect(page).to have_content 'Nenhuma imagem cadastrada'
     end
 
-    it 'e não está logado - prato' do
+    it 'e não está logado' do
       establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
                                             cnpj: '42.182.510/0001-77', email: 'carlosjonas@email.com', phone_number: '99999043113')
       user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
@@ -133,6 +133,22 @@ describe 'usuário vê porção' do
       expect(current_path).to eq root_path  
       expect(page).to have_content 'Você não possui acesso a essa página'
     end
+
+    it 'e está inativa, não vendo assim botão de adicionar no carrinho' do
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: '42.182.510/0001-77', email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+      dish = Item.create!(name: 'Lasanha', description: 'Carne, macarrão e molho', calories: '340', item_type: 'dish', establishment: establishment)
+      portion = Portion.create!(name: 'Meia Lasanha', description: 'Lasanha de carne para 1 pessoa', price: 7.50, item: dish)
+      portion.update(active: false)
+
+      login_as user
+      visit establishment_item_portion_path(establishment, dish, portion)
+
+      expect(page).not_to have_field 'Quantidade'  
+      expect(page).not_to have_field 'Observação'  
+      expect(page).not_to have_button 'Adicionar'
+    end
   end
   
   context 'através da página de bebidas' do
@@ -159,7 +175,7 @@ describe 'usuário vê porção' do
       expect(page).to have_content 'Nenhuma imagem cadastrada'
     end
 
-    it 'e não está logado - bebida' do
+    it 'e não está logado' do
       establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
                                             cnpj: '42.182.510/0001-77', email: 'carlosjonas@email.com', phone_number: '99999043113')
       user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
@@ -268,5 +284,20 @@ describe 'usuário vê porção' do
       expect(page).to have_content 'Você não possui acesso a essa página'
     end
     
+    it 'e está inativa, não vendo assim botão de adicionar no carrinho' do
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: '42.182.510/0001-77', email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+      beverage = Beverage.create!(name: 'Água', description: 'Água mineral', calories: '40', item_type: 'beverage', establishment: establishment, alcoholic: false)
+      portion = Portion.create!(name: 'Água 250 ml', description: 'Água mineral em copo plástico de 250ml', price: 2.50, item: beverage)
+      portion.update(active: false)
+
+      login_as user
+      visit establishment_item_portion_path(establishment, beverage, portion)
+
+      expect(page).not_to have_field 'Quantidade'  
+      expect(page).not_to have_field 'Observação'  
+      expect(page).not_to have_button 'Adicionar'
+    end
   end
 end
