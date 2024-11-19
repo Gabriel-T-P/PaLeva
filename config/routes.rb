@@ -51,6 +51,12 @@ Rails.application.routes.draw do
       resources :orders, only: [:show, :index], defaults: {format: :json} do
         patch :set_status_cooking, on: :member
         patch :set_status_ready, on: :member
+        
+        scope ':establishment_code', as: 'establishment' do
+          scope ':order_code', as: 'order' do
+            patch :set_status_canceled, on: :member    
+          end
+        end
       end
     end
   end
