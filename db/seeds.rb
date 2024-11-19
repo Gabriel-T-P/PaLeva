@@ -64,7 +64,7 @@ tag6 = Tag.create!(name: 'Alto Teor Alcoólico')
 ItemTag.create!(item: beverage2, tag: tag5)
 ItemTag.create!(item: beverage3, tag: tag6)
 
-menu1 = Menu.create!(name: 'Acompanhantes da Noite', establishment: establishment)
+menu1 = Menu.create!(name: 'Acompanhantes da Noite', start_date: Date.today, end_date: 2.weeks.from_now, establishment: establishment)
   menu1.items<<[beverage1, beverage3]
 menu2 = Menu.create!(name: 'Jantar', establishment: establishment)
   menu2.items<<[dish1, dish2, dish3, beverage1, beverage2]

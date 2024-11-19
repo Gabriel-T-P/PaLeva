@@ -3,6 +3,8 @@ en:
     attributes:
       menu:
         name: 'Name'
+        start_date: 'Start Date'
+        end_date: 'End Date'
     models:
       menu:
         one: 'Menu'

@@ -3,6 +3,7 @@ pt-BR:
    index:
     title: 'Bem Vindo!'
     menu_title: 'Cardápios Disponíveis'
+    menu_available_between: "Disponível entre os dias: %{start_date} até %{end_date}"
     dish_title: 'Pratos'
     my_establishment: 'Meu Estabelecimento'
     register_establishment: 'Registrar Estabelecimento'

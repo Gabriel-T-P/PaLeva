@@ -17,6 +17,8 @@ describe 'usuário cadastra cardápio' do
     expect(page).to have_field 'Nome'
     expect(page).to have_content 'Pratos para o cardápio'
     expect(page).to have_content 'Bebidas para o cardápio'
+    expect(page).to have_field 'Data de Início'
+    expect(page).to have_field 'Data de Fim'
     expect(page).to have_button 'Salvar Cardápio'  
   end
   
@@ -95,7 +97,7 @@ describe 'usuário cadastra cardápio' do
     expect(page).to have_field 'Suco de Laranja'
   end
   
-  it 'e so vê pratos e bebidas do estabelecimento para cadastro' do
+  it 'e so vê pratos e bebidas do estabelecimento para o cadastro do menu' do
     establishment1 = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
     establishment2 = Establishment.create!(corporate_name: 'Teste inc', trade_name: 'Teste Lunch', full_address: "Av testes, 123", 
@@ -129,6 +131,8 @@ describe 'usuário cadastra cardápio' do
     login_as user
     visit new_menu_path
     fill_in 'Nome',	with: 'Café da Manhã'
+    fill_in 'Data de Início', with: Date.today
+    fill_in 'Data de Fim', with: 2.weeks.from_now
     check 'Suco de Laranja'
     check 'Pão de Queijo'
     click_on 'Salvar Cardápio'
@@ -136,10 +140,34 @@ describe 'usuário cadastra cardápio' do
     expect(current_path).to eq root_path
     expect(page).to have_content 'Cardápio cadastrado com sucesso' 
     expect(page).to have_content 'Café da Manhã'
+    expect(page).to have_content "Disponível entre os dias: #{I18n.l(Date.today)} até #{I18n.l(2.weeks.from_now.to_date)}"
     expect(page).to have_content 'Suco de Laranja'
     expect(page).to have_content 'Pão de Queijo'
   end
   
+  it 'e não vê div das datas caso uma data não seja cadastrada' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    dish1 = Item.create!(name: 'Pão de Queijo', description: 'Polvilho, queijo', calories: '140', item_type: 'dish', establishment: establishment)
+    beverage2 = Beverage.create!(name: 'Suco de Laranja', description: 'Suco de laranja dos bons', calories: '40', item_type: 'beverage',
+                                  establishment: establishment, alcoholic: false)
+
+    login_as user
+    visit new_menu_path
+    fill_in 'Nome',	with: 'Café da Manhã'
+    check 'Suco de Laranja'
+    check 'Pão de Queijo'
+    click_on 'Salvar Cardápio'
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Cardápio cadastrado com sucesso' 
+    expect(page).to have_content 'Café da Manhã'
+    expect(page).not_to have_content 'Disponível entre os dias'
+    expect(page).to have_content 'Suco de Laranja'
+    expect(page).to have_content 'Pão de Queijo'
+  end
+
   it 'e não vê itens que não foram marcados' do
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')

@@ -17,7 +17,7 @@
 </div>
 
 
-<section id="Menus">
+<section id="Menus" class="mb-5">
   <% if user_signed_in? %>
     <h3 class="display-4 text-center mb-4"><%= t '.menu_title' %></h3>
     <% if @menus.any? %>
@@ -31,6 +31,11 @@
                   <h5><%= menu.name %></h5>
                 </div>
                 <div class="card-body">
+                  <% if menu.start_date %>
+                    <div class="alert alert-info text-center">
+                        <%= t('.menu_available_between', start_date: I18n.l(menu.start_date), end_date: I18n.l(menu.end_date)) %>
+                    </div>
+                  <% end %>
                   <span><%= t '.dish_title' %>:</span>
                   <ul class="list-unstyled">
                     <div class="border rounded p-2 mb-2">

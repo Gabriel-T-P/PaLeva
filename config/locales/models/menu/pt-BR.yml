@@ -3,6 +3,8 @@ pt-BR:
     attributes:
       menu:
         name: 'Nome'
+        start_date: 'Data de Início'
+        end_date: 'Data de Fim'
     models:
       menu:
         one: 'Cardápio'

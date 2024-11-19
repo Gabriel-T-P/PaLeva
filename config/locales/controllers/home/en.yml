@@ -3,6 +3,7 @@ en:
    index:
     title: 'Welcome!'
     menu_title: 'Available Menus'
+    menu_available_between: "Available between: %{start_date} to %{end_date}"
     dish_title: 'Dishs'
     my_establishment: 'My Establishment'
     register_establishment: 'Register Establishment'
