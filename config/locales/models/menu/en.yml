@@ -9,3 +9,10 @@ en:
       menu:
         one: 'Menu'
         other: 'Menus'
+    errors:
+      models:
+        menu:
+          attributes:
+            start_date:
+              before_end_date: 'must be before End Date'
+              start_date_different_end_date: 'must be different from End Date'

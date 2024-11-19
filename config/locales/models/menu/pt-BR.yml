@@ -9,3 +9,10 @@ pt-BR:
       menu:
         one: 'Cardápio'
         other: 'Cardápios'
+    errors:
+      models:
+        menu:
+          attributes:
+            start_date:
+              before_end_date: 'deve ser antes da Data de Fim'
+              start_date_different_end_date: 'deve ser diferente da Data de Fim'
