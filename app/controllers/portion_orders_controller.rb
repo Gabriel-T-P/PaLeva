@@ -1,10 +1,9 @@
 class PortionOrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_portion_and_check_active
+  before_action :check_menu
 
   def create
-    portion_id = (params.require(:portion_order).permit(:portion_id)['portion_id'])
-    portion = Portion.find(portion_id)
-    return redirect_to root_path, alert: t('.inactive_alert') unless portion.active
     @portion_order = PortionOrder.new(params.require(:portion_order).permit(:portion_id, :quantity, :observation))
     @portion_order.order = Order.new(name: 'Default', phone_number: '1', user: current_user)
   
@@ -15,6 +14,26 @@ class PortionOrdersController < ApplicationController
     else
       flash[:error] = @portion_order.errors.full_messages
       redirect_to polymorphic_path([current_user.establishment, @portion_order.portion.item, @portion_order.portion])
+    end
+  end
+
+
+  private
+
+  def set_portion_and_check_active
+    portion_id = (params.require(:portion_order).permit(:portion_id)['portion_id'])
+    @portion = Portion.find(portion_id)
+    return redirect_to root_path, alert: t('.inactive_alert'), status: 412 unless @portion.active
+  end
+  
+  def check_menu
+    @item = @portion.item
+    return redirect_to root_path, alert: t('.no_menu_alert'), status: 412 if @item.menus.empty?
+
+    @item.menus.each do |menu|
+      unless Date.current > menu.start_date && Date.current < menu.end_date
+        return redirect_to root_path, alert: t('.menu_out_of_date_alert'), status: 412
+      end 
     end
   end
 

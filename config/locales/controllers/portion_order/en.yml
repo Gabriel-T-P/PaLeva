@@ -3,3 +3,5 @@ en:
     create:
       notice: 'Item added to the order cart'
       inactive_alert: 'Inactive item can not be added to order cart'
+      no_menu_alert: 'Item without a menu can not be added to order cart'
+      menu_out_of_date_alert: 'Menu out of date, can not add item to cart'

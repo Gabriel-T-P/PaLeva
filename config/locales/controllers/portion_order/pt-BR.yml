@@ -3,3 +3,5 @@ pt-BR:
     create:
       notice: 'Item adicionado ao carrinho'
       inactive_alert: 'Item inativo não pode ser adicionado ao carrinho'
+      no_menu_alert: 'Item sem um cardápio não pode ser adicionado ao carrinho'
+      menu_out_of_date_alert: 'Item com cardápio fora de data não pode ser adicionado ao carrinho'
