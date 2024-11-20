@@ -131,7 +131,7 @@ describe 'usuário cadastra cardápio' do
     login_as user
     visit new_menu_path
     fill_in 'Nome',	with: 'Café da Manhã'
-    fill_in 'Data de Início', with: Date.today
+    fill_in 'Data de Início', with: 1.day.ago.to_date
     fill_in 'Data de Fim', with: 2.weeks.from_now
     check 'Suco de Laranja'
     check 'Pão de Queijo'
@@ -140,7 +140,7 @@ describe 'usuário cadastra cardápio' do
     expect(current_path).to eq root_path
     expect(page).to have_content 'Cardápio cadastrado com sucesso' 
     expect(page).to have_content 'Café da Manhã'
-    expect(page).to have_content "Disponível entre os dias: #{I18n.l(Date.today)} até #{I18n.l(2.weeks.from_now.to_date)}"
+    expect(page).to have_content "Disponível entre os dias: #{I18n.l(1.day.ago.to_date)} até #{I18n.l(2.weeks.from_now.to_date)}"
     expect(page).to have_content 'Suco de Laranja'
     expect(page).to have_content 'Pão de Queijo'
   end
