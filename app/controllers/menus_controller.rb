@@ -2,6 +2,10 @@ class MenusController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
 
+  def index
+    @menus = Menu.all
+  end
+
   def new
     @menu = Menu.new
     @dishs = current_user.establishment.items.dish

@@ -1,8 +1,8 @@
-pt-BR:
+en:
   shared:
     user_sidebar:
-      title: 'Account Settings'
-      profile: 'Profile'
+      title: 'Settings'
+      menu: 'Menu'
       settings: 'Configurations'
       logout: 'Log Out'
     errors_form:

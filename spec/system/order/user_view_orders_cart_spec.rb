@@ -6,6 +6,8 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     order = Order.create!(email: 'teste123@email.com', user: user)
     portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)
@@ -25,6 +27,8 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     order = Order.create!(email: 'teste123@email.com', user: user)
 
@@ -48,6 +52,8 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     order = Order.create!(email: 'teste123@email.com', user: user)
 
@@ -65,6 +71,8 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     order = Order.create!(email: 'teste123@email.com', user: user)
 
@@ -84,6 +92,8 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     order = Order.create!(email: 'teste123@email.com', user: user)
     portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)
@@ -104,6 +114,8 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     order = Order.create!(email: 'teste123@email.com', user: user)
     portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)
@@ -126,6 +138,8 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
     beverage = Beverage.create!(name: 'Suco de Laranja', description: 'Suco de laranja dos bons', calories: '30', item_type: 'beverage',
                                 establishment: establishment, alcoholic: false)
     portion = Portion.create!(name: '300 ml', description: 'Suco de Laranja em um copo de vidro de 300 ml', price: 8.00, item: beverage)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [beverage]
     order = Order.create!(email: 'teste123@email.com', user: user)
     portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)
 
@@ -145,6 +159,8 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     order = Order.create!(email: 'teste123@email.com', user: user)
     portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)
@@ -165,6 +181,8 @@ describe 'usuário vê todas as informações atuais do carrinho de pedidos' do
                                             cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     order = Order.create!(email: 'teste123@email.com', user: user)
     portion_order = PortionOrder.create!(portion: portion, order: order, quantity: 3)

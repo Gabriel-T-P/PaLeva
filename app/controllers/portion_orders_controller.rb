@@ -31,9 +31,9 @@ class PortionOrdersController < ApplicationController
     return redirect_to root_path, alert: t('.no_menu_alert'), status: 412 if @item.menus.empty?
 
     @item.menus.each do |menu|
-      unless Date.current > menu.start_date && Date.current < menu.end_date
-        return redirect_to root_path, alert: t('.menu_out_of_date_alert'), status: 412
-      end 
+      if menu.start_date
+        return redirect_to root_path, alert: t('.menu_out_of_date_alert'), status: 412 unless Date.current > menu.start_date && Date.current < menu.end_date
+      end
     end
   end
 

@@ -50,6 +50,8 @@ describe 'usuário registra item a um pedido' do
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items<<[dish]
 
     login_as user
     visit establishment_item_portion_path(establishment, dish, portion)
@@ -73,6 +75,8 @@ describe 'usuário registra item a um pedido' do
     beverage = Beverage.create!(name: 'Suco de Laranja', description: 'Suco de laranja dos bons', calories: '30', item_type: 'beverage',
                                   establishment: establishment, alcoholic: false)
     portion3 = Portion.create!(name: '300 ml', description: 'Suco de Laranja em um copo de vidro de 300 ml', price: 8.00, item: beverage)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish, beverage]
 
     login_as user
     visit establishment_item_portion_path(establishment, dish, portion1)
@@ -103,6 +107,8 @@ describe 'usuário registra item a um pedido' do
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
     portion1 = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     portion2 = Portion.create!(name: 'Grande', description: 'Uma unidade grande de pão de queijo', price: 5.99, item: dish)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
 
     login_as user
     visit establishment_item_portion_path(establishment, dish, portion1)
@@ -124,6 +130,8 @@ describe 'usuário registra item a um pedido' do
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
     portion.update(active: false)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
 
     login_as user
     visit establishment_item_portion_path(establishment, dish, portion)
@@ -142,6 +150,8 @@ describe 'usuário registra item a um pedido' do
     portion2 = Portion.create!(name: 'Grande', description: 'Uma unidade grande de pão de queijo', price: 5.99, item: dish)
     order = Order.create!(name: 'Teste', email: 'teste123@email.com', status: 'delivered', user: user)
     PortionOrder.create!(order: order, portion: portion2, quantity: 1)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
 
     login_as user
     visit establishment_item_portion_path(establishment, dish, portion)
@@ -162,6 +172,8 @@ describe 'usuário registra item a um pedido' do
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
 
     login_as user
     visit establishment_item_portion_path(establishment, dish, portion)
@@ -178,6 +190,8 @@ describe 'usuário registra item a um pedido' do
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
 
     login_as user
     visit establishment_item_portion_path(establishment, dish, portion)
@@ -195,6 +209,8 @@ describe 'usuário registra item a um pedido' do
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
     dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
     portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
 
     login_as user
     visit establishment_item_portion_path(establishment, dish, portion)

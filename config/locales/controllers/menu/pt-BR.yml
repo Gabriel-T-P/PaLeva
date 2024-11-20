@@ -6,6 +6,11 @@ pt-BR:
       confirm: 'Confirmar'
       menu_dishs: 'Pratos para o cardápio'
       menu_beverages: 'Bebidas para o cardápio'
+    index:
+      title: 'Lista de Cardápios'
+      not_defined: 'Não definido'
+      edit: 'Editar'
+      actions: 'Ações'
     new:
       title: 'Criar Cardápio'
     create:
@@ -16,6 +21,3 @@ pt-BR:
     update:
       notice: 'Cardápio editado com sucesso'
       alert: 'Falha ao editar o cardápio'
-    destroy:
-      delete_success: 'Cardápio deletado com sucesso'
-      delete_fail: 'Falha ao deletar o cardápio'

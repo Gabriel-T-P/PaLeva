@@ -2,7 +2,7 @@ pt-BR:
   shared:
     user_sidebar:
       title: 'Configurações da Conta'
-      profile: 'Perfil'
+      menu: 'Cardápio'
       settings: 'Configurações'
       logout: 'Sair'
     errors_form:

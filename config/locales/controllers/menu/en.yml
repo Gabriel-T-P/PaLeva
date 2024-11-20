@@ -6,6 +6,11 @@ en:
       confirm: 'Confirm'
       menu_dishs: 'Dishs dor the menu'
       menu_beverages: 'Beverages for the menu'
+    index:
+      title: 'Lista de Menus'
+      not_defined: 'Não definido'
+      edit: 'Editar'
+      actions: 'Actions'
     new:
       title: 'Create New Menu'
     create:

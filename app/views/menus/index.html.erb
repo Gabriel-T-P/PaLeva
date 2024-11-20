@@ -1,0 +1,37 @@
+<div class="container mt-5">
+  <h1 class="display-4 text-center my-4"><%=t'.title'%></h1>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th><%=Menu.human_attribute_name :name%></th>
+        <th><%=Menu.human_attribute_name :start_date%></th>
+        <th><%=Menu.human_attribute_name :end_date%></th>
+        <th><%=t'.actions'%></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @menus.each do |menu| %>
+        <tr>
+          <td><%= menu.name %></td>
+          <td>
+            <% if menu.start_date.present? %>
+              <%=menu.start_date%>
+            <% else %>
+              <%=t'.not_defined'%>
+            <% end %>
+          </td>
+          <td>
+            <% if menu.end_date.present? %>
+              <%=menu.end_date%>
+            <% else %>
+              <%=t'.not_defined'%>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to t('.edit'), edit_menu_path(menu), class: 'btn btn-dark btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
