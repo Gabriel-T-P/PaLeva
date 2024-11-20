@@ -20,6 +20,7 @@ pt-BR:
     index:
       title: 'Pratos e Bebidas'
       search_for: 'Buscar por nome ou descrição'
+      search_tag_for: 'Selecione um marcador'
       search: 'Buscar'
       no_search_found: 'Nenhum item cadastrado com a informação pedida'
       no_image_found: 'Nenhuma imagem encontrada'

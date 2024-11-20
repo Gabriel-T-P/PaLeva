@@ -1,7 +1,7 @@
 pt-BR:
   shared:
     user_sidebar:
-      title: 'Configurações da Conta'
+      title: 'Configurações'
       menu: 'Cardápio'
       settings: 'Configurações'
       logout: 'Sair'

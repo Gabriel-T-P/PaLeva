@@ -5,10 +5,16 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy, :add_tag, :remove_tag]
 
   def index
+    @tags = Tag.all
+
     if params[:query].present?
       @items = @establishment.items.where("name LIKE :query OR description LIKE :query", query: "%#{params[:query]}%")
     else
       @items = @establishment.items
+    end
+
+    if params[:tag_id].present?
+      @items = @items.joins(:tags).where(tags: { id: params[:tag_id] })
     end
   end
 

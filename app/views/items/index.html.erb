@@ -5,7 +5,8 @@
     <div class="col-md-6">
       <%= form_with url: establishment_items_path(@establishment), method: :get, local: true, class: "d-flex" do |f| %>
         <%= f.text_field :query, class: "form-control me-2", placeholder: t('.search_for'), aria: { label: "Search" } %>
-        <%= f.submit t('.search'), class: "btn btn-primary" %>
+        <%= f.collection_select :tag_id, @tags, :id, :name, { prompt: t('.search_tag_for') }, { class: "form-select me-2 w-75" } %>
+        <%= f.submit t('.search'), class: "btn btn-dark" %>
       <% end %>
     </div>
   </div>
@@ -27,6 +28,13 @@
               </div>
             <% end %>
             <div class="card-body">
+              <div id="Tags" class="row mb-2 gx-2 gy-2">
+                <% item.tags.each do |tag| %>
+                  <div id="<%= dom_id(tag) %>" class="col-auto">
+                    <span class="badge bg-info rounded-pill text-dark"><%= tag.name %></span>
+                  </div>
+                <% end %>
+              </div>
               <% if item.dish? %>
                 <%= link_to establishment_item_path(@establishment, item) do %>
                   <h5 class="card-title"><%=item.name%></h5>

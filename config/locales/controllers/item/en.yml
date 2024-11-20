@@ -21,6 +21,7 @@ en:
     index:
       title: 'Dishs and Beverages'
       search_for: 'Search for name or description'
+      search_tag_for: 'Choose a tag'
       search: 'Search'
       no_search_found: 'No item found'
       no_image_found: 'No image found'

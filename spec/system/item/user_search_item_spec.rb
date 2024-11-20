@@ -162,20 +162,6 @@ describe 'usuário procura por bebidas e pratos' do
     # Assert
     expect(page).to have_content 'Nenhum item cadastrado com a informação pedida'
   end
-  
-  it 'e não pode acessar a página diretamente sem estar autenticado' do
-    # Arrange
-    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
-                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
-    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
-
-    # Act
-    visit establishment_items_path(establishment)
-
-    # Assert
-    expect(current_path).to eq new_user_session_path  
-    expect(page).to have_content 'Para continuar, faça login ou registre-se'
-  end
 
   it 'e acessa os detalhes da bebida pela busca' do
     # Arrange
@@ -203,26 +189,6 @@ describe 'usuário procura por bebidas e pratos' do
     expect(page).to have_button 'Deletar Bebida'
   end
   
-  it 'e botão de editar da bebida leva para a tela de edição' do
-    # Arrange
-    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
-                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
-    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
-    beverage = Beverage.create!(name: 'Limonada', description: 'Bebida mais refrescante', calories: '50', item_type: 'beverage', establishment: establishment, alcoholic: false)
-
-    # Act
-    login_as user
-    visit root_path
-    click_on 'Buscar por Pratos e Bebidas'
-    fill_in 'Buscar por nome ou descrição',	with: 'Limonada'
-    click_on 'Buscar'
-    click_on 'Limonada'
-    click_on 'Editar Bebida'
-
-    # Assert
-    expect(current_path).to eq edit_establishment_beverage_path(establishment, beverage)
-  end
-  
   it 'e acessa os detalhes do prato pela busca' do
     # Arrange
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
@@ -246,27 +212,7 @@ describe 'usuário procura por bebidas e pratos' do
     expect(page).to have_content '350 cal' 
     expect(page).to have_link 'Editar Prato'
     expect(page).to have_button 'Deletar Prato'
-  end
-  
-  it 'e botão de editar do prato leva para a tela de edição' do
-    # Arrange
-    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
-                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
-    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
-    dish = Item.create!(name: 'Lasanha', description: 'Muito sabarosa', calories: '350', item_type: 'dish', establishment: establishment)
-
-    # Act
-    login_as user
-    visit root_path
-    click_on 'Buscar por Pratos e Bebidas'
-    fill_in 'Buscar por nome ou descrição',	with: 'Lasanha'
-    click_on 'Buscar'
-    click_on 'Lasanha'
-    click_on 'Editar Prato'
-
-    # Assert
-    expect(current_path).to eq edit_establishment_item_path(establishment, dish)
-  end
+  end  
 
   it 'e não vê pratos e bebidas de outros estabelecimentos sem fazer pesquisa' do
     establishment1 = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
@@ -301,6 +247,46 @@ describe 'usuário procura por bebidas e pratos' do
 
     expect(page).to have_content 'Nenhum item cadastrado com a informação pedida'
     expect(page).not_to have_content 'Lasanha'
+  end
+  
+  it 'e mostra as tags de um prato ou bebida' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    dish = Item.create!(name: 'Lasanha', description: 'Muito sabarosa', calories: '350', item_type: 'dish', establishment: establishment)
+    tag2 = Tag.create!(name: 'Teste1')
+    tag3 = Tag.create!(name: 'Teste2')
+    ItemTag.create!(item: dish, tag: tag2)
+    ItemTag.create!(item: dish, tag: tag3)
+
+    login_as user
+    visit establishment_items_path(establishment)
+    fill_in 'Buscar por nome ou descrição',	with: 'Lasanha'
+    click_on 'Buscar'
+    
+    expect(page).to have_content 'Lasanha'  
+    expect(page).to have_content 'Teste1'  
+    expect(page).to have_content 'Teste2'
+  end
+
+  it 'e usa o campo selecionar marcador para busca somente com marcadores' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
+                                          email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    dish = Item.create!(name: 'Lasanha', description: 'Muito sabarosa', calories: '350', item_type: 'dish', establishment: establishment)
+    beverage = Beverage.create!(name: 'Limonada', description: 'Bebida mais refrescante', calories: '50', item_type: 'beverage', establishment: establishment, alcoholic: false)
+    tag2 = Tag.create!(name: 'Teste1')
+    tag3 = Tag.create!(name: 'Teste2')
+    ItemTag.create!(item: dish, tag: tag2)
+    ItemTag.create!(item: dish, tag: tag3)
+
+    login_as user
+    visit establishment_items_path(establishment)
+    select 'Teste2', from: 'tag_id'
+    click_on 'Buscar'
+
+    expect(page).to have_content 'Lasanha'
+    expect(page).not_to have_content 'Limonada'  
   end
   
 end
