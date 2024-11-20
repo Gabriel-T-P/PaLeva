@@ -194,4 +194,19 @@ describe 'usuário vê cardápio' do
 
     expect(page).to have_content 'Cerveja - A bebida mais comum do Brasil - Alcoólica' 
   end
+
+  it 'e data atual não está dentro da data de disponibilidade de um cardápio' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    menu = Menu.create!(name: 'Teste de Data que vai funcionar', establishment: establishment, start_date: 2.weeks.ago.to_date, end_date: 2.weeks.from_now.to_date)
+    menu = Menu.create!(name: 'Teste de Data que não vai funcionar', establishment: establishment, start_date: Date.today, end_date: 2.weeks.from_now.to_date)
+    travel_to 2.days.ago
+
+    login_as user
+    visit root_path
+
+    expect(page).not_to have_content 'Teste de Data que não vai funcionar'
+    expect(page).to have_content 'Teste de Data que vai funcionar'
+  end
 end

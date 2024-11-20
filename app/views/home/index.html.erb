@@ -24,6 +24,9 @@
       <div id="menuCarousel" class="carousel slide custom-carousel"  data-bs-interval="false">
         <div class="carousel-inner">
           <% @menus.each_with_index do |menu, index| %>
+            <% if menu.start_date %>
+              <%next unless Date.current > menu.start_date && Date.current < menu.end_date%>
+            <% end %>
             <div class="carousel-item <%= 'active' if index.zero? %>">
 
               <div class="card shadow-sm">

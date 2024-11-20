@@ -54,11 +54,33 @@ RSpec.describe Menu, type: :model do
     end 
 
     context 'quando Data de Início ou Data de Fim' do
-      it 'estiver presente e somente uma delas' do
+      it 'não estiverem presentes' do
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                              cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+        menu = Menu.new(name: 'Almoço', establishment: establishment)
+        
+        result = menu.valid?
+  
+        expect(result).to be true
+      end
+
+      it 'estiver presente e somente a Data de Início' do
         establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
                                               cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
         user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
         menu = Menu.new(name: 'Almoço', establishment: establishment, start_date: Date.today)
+        
+        result = menu.valid?
+  
+        expect(result).to be false
+      end
+
+      it 'estiver presente e somente a Data de Fim' do
+        establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                              cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+        user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+        menu = Menu.new(name: 'Almoço', establishment: establishment, end_date: Date.today)
         
         result = menu.valid?
   
