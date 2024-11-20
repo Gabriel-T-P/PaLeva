@@ -27,6 +27,27 @@ class MenusController < ApplicationController
     end
   end
 
+  def edit
+    @menu = Menu.find(params[:id])
+    @dishs = current_user.establishment.items.dish
+    @beverages = current_user.establishment.items.beverage
+  end
+  
+  def update
+    @menu = Menu.find(params[:id])
+    
+    if @menu.update(menu_params)
+      flash[:notice] = t '.notice'
+      redirect_to root_path
+    else
+      flash.now[:alert] = t '.alert'
+      @dishs = current_user.establishment.items.dish
+      @beverages = current_user.establishment.items.beverage
+      render 'edit'
+    end
+  end
+  
+
   private
 
   def menu_params
