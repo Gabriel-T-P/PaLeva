@@ -15,14 +15,14 @@
           <td><%= menu.name %></td>
           <td>
             <% if menu.start_date.present? %>
-              <%=menu.start_date%>
+              <%=I18n.l(menu.start_date)%>
             <% else %>
               <%=t'.not_defined'%>
             <% end %>
           </td>
           <td>
             <% if menu.end_date.present? %>
-              <%=menu.end_date%>
+              <%=I18n.l(menu.end_date)%>
             <% else %>
               <%=t'.not_defined'%>
             <% end %>
