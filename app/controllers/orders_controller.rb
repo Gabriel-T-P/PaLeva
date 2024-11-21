@@ -36,7 +36,16 @@ class OrdersController < ApplicationController
   
   def show
     return redirect_to root_path if params[:id] == "display"
-    @order = Order.find(params[:id])
+    
+    begin
+      @order = Order.find(params[:id])
+    rescue
+      return redirect_to root_path, alert: t('.order_not_found')
+    end
+    
+    if current_user.employee?
+      return redirect_to root_path, alert: t('.access_negated') if @order.user_id != current_user.id
+    end
   end
 
   def display

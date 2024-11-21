@@ -11,9 +11,11 @@ pt-BR:
       title: 'Lista de Pedidos'
       order_owner: 'Dono do pedido'
       actions: 'Ações'
-      edit: 'Editar'
+      show: 'Detalhes'
     show:
       title: 'Informações do Pedido'
+      access_negated: 'Você não pode acessar essa página'
+      order_not_found: 'Pedido não encontrado'
     new:
       title: 'Cadastro do Pedido'
     create:

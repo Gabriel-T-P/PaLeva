@@ -11,9 +11,10 @@ en:
       title: "Order's List"
       order_owner: 'Order owner'
       actions: 'Actions'
-      edit: 'Edit'
+      show: 'More Details'
     show:
       title: 'Order Informations'
+      access_negated: 'You can not access this page'
     new:
       title: 'Create new order'
     create:
