@@ -10,6 +10,14 @@ pt-BR:
       title: 'Lista de Promoções'
       actions: 'Ações'
       edit: 'Editar'
+    show:
+      title: 'Imformações da Promoção'
+      portions_title: 'Porções afetadas pela promoção'
+      promotion_not_found: 'Promoção não encontrada'
+      edit: 'Editar'
+      uses_left: 'restantes'
+      not_active: 'Inativo'
+      no_image_found: 'Nenhuma imagem encontrada'
     new:
       title: 'Criar uma nova promocão'
     create:

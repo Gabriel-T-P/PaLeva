@@ -1,0 +1,53 @@
+<h1 class="display-4 text-center my-5"> <%= t '.title' %> </h1>
+
+<section id="PromotionInfos">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card mb-4 shadow-sm">
+          <div class="d-flex justify-content-between card-header">
+            <h2><%=@promotion.name%></h2>
+            <% #link_to t('.edit'), root_path, class: 'btn btn-dark py-1 ms-3' %>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong><%= Promotion.human_attribute_name(:percentage) %>:</strong> <%= @promotion.percentage.to_i %>%</li>
+            <li class="list-group-item"><strong><%= Promotion.human_attribute_name(:use_limit) %>:</strong> <%= @promotion.use_limit %> <%=t'.uses_left'%></li>
+            <li class="list-group-item"><strong><%= Promotion.human_attribute_name(:start_date) %>:</strong> <%= I18n.l(@promotion.start_date) %></li>
+            <li class="list-group-item"><strong><%= Promotion.human_attribute_name(:end_date) %>:</strong> <%= I18n.l(@promotion.end_date) %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="PortionsInfos">
+  <h2 class="display-4 text-center my-5"><%=t'.portions_title'%></h2>
+  <div class="row justify-content-center">
+    <% @promotion.portions.each do |portion| %>
+      <div class="col-md-4" >
+        <div class="d-flex justify-content-center mb-2">
+          <% if portion.active %>
+            <span class="badge bg-success fs-5"><%= Portion.human_attribute_name(:active)%></span>
+          <% else %>
+            <span class="badge bg-danger fs-5"><%=t('.not_active')%></span>
+          <% end %>
+        </div>
+        <div class="card mb-4 <%= 'bg-light text-muted' unless portion.active %>">
+          <div class="card-body">
+            <% if portion.image.attached? %>
+              <%= image_tag portion.image, class: 'card-img-top img-fluid', style: 'height: 200px; object-fit: cover;' %>
+            <% else %>
+              <div class="d-flex card-img-top text-center justify-content-center bg-light" style="height: 200px;">
+                <p class="text-muted mt-5"> <%=t '.no_image_found'%> </p>
+              </div>
+            <% end %>
+            <h5 class="card-title mt-2"><%=portion.item.name%> - <%= portion.name %></h5>
+            <p class="card-text"><%= portion.description %></p>
+            <p class="card-text"><strong><%= number_to_currency(portion.price) %></strong></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

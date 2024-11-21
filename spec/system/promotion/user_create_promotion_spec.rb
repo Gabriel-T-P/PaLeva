@@ -69,4 +69,50 @@ describe 'usuário cria promoção para uma porção' do
     expect(page).to have_content 'Você não possui acesso a essa página'   
   end
   
+  it 'e clica em cancelar' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+
+    login_as user
+    visit new_promotion_path
+    click_on 'Cancelar'
+
+    expect(current_path).to eq root_path  
+  end
+  
+  it 'com sucesso' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    dish = Item.create!(name: 'Lasanha', description: 'Carne, macarrão e molho', calories: '340', item_type: 'dish', establishment: establishment)
+    portion = Portion.create!(name: 'Meia Porção', description: 'Lasanha de carne para 1 pessoa', price: 7.50, item: dish)
+    beverage = Item.create!(name: 'Água', description: 'Água mineral', calories: '20', item_type: 'beverage', establishment: establishment, alcoholic: false)
+    portion1 = Portion.create!(name: '200 ml', description: 'Água Mineral', price: 2.50, item: beverage)
+
+    login_as user
+    visit new_promotion_path
+    fill_in 'Nome',	with: 'Promoção da Lasanha'
+    fill_in 'Porcentagem',	with: 20
+    fill_in 'Limite de Usos',	with: 20
+    fill_in 'Data de Início',	with: 1.day.ago.to_date
+    fill_in 'Data de Fim',	with: 1.week.from_now.to_date
+    check 'Lasanha - Meia Porção'
+    check 'Água - 200 ml'
+    click_on 'Salvar Promoção'
+
+    expect(current_path).to eq promotion_path(1)
+    expect(page).to have_content 'Promoção da Lasanha'
+    expect(page).to have_content '20%'
+    expect(page).to have_content '20 restantes'
+    expect(page).to have_content I18n.l(1.day.ago.to_date)
+    expect(page).to have_content I18n.l(1.week.from_now.to_date)
+    expect(page).to have_content 'Porções afetadas pela promoção'
+    expect(page).to have_content 'Água - 200 ml'    
+    expect(page).to have_content 'Lasanha - Meia Porção'
+  end
+  
+  it 'e vê mensagens de erros' do
+    
+  end
 end
