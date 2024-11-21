@@ -14,10 +14,7 @@ pt-BR:
       notice: 'Marcador criado com sucesso'
       alert: 'Falha ao criar o marcador'
     edit:
-      title: 'Ediar Marcador'
+      title: 'Editar Marcador'
     update:
       notice: 'Marcador editado com sucesso'
       alert: 'Falha ao editar o marcador'
-    destroy:
-      notice: 'Deletado com sucesso'
-      alert: 'Falha ao deletar o marcador'

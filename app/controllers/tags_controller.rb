@@ -25,6 +25,18 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
   end
   
+  def update
+    @tag = Tag.find(params[:id])
+
+    if @tag.update(tag_params)
+      flash[:notice] = t '.notice'
+      redirect_to tags_path
+    else
+      flash[:alert] = t '.alert'
+      render 'edit'
+    end
+  end
+  
   
   private
 

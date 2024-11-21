@@ -18,6 +18,3 @@ en:
     update:
       notice: 'Tag edited'
       alert: 'something went wrong'
-    destroy:
-      notice: 'Tag deleted'
-      alert: 'something went wrong'
