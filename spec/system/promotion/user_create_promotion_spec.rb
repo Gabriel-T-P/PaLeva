@@ -101,6 +101,7 @@ describe 'usuário cria promoção para uma porção' do
     check 'Água - 200 ml'
     click_on 'Salvar Promoção'
 
+    expect(page).to have_content 'Promoção criada com sucesso'  
     expect(current_path).to eq promotion_path(1)
     expect(page).to have_content 'Promoção da Lasanha'
     expect(page).to have_content '20%'

@@ -13,6 +13,7 @@ class PromotionsController < ApplicationController
   
   def create
     @promotion = Promotion.new(promotion_params)
+    
     if @promotion.save
       flash[:notice] = t'.notice'
       redirect_to @promotion
