@@ -1,4 +1,6 @@
 class PromotionsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :check_admin
   before_action :extract_portions, only: [:new]
 
   def new

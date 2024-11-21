@@ -46,4 +46,27 @@ describe 'usuário cria promoção para uma porção' do
     expect(page).not_to have_content 'Camarão - Lanche Pequeno'
   end
   
+  it 'e não está logado' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+
+    visit new_promotion_path
+
+    expect(current_path).to eq new_user_session_path
+    expect(page).to have_content 'Para continuar, faça login ou registre-se'    
+  end
+  
+  it 'e usuário não é admin' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = Employee.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+
+    login_as user
+    visit new_promotion_path
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você não possui acesso a essa página'   
+  end
+  
 end
