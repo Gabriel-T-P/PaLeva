@@ -21,12 +21,14 @@ class Api::V1::OrdersController < Api::V1::ApiController
   def set_status_cooking
     order = Order.find(params[:id])
     order.update(status: 'cooking')
+    order.update(cooking_at: DateTime.current)
     render status: 200, json: order.as_json(except: [:updated_at, :id, :user_id])
   end
   
   def set_status_ready
     order = Order.find(params[:id])
     order.update(status: 'ready')
+    order.update(ready_at: DateTime.current)
     render status: 200, json: order.as_json(except: [:updated_at, :id, :user_id])
   end
 
