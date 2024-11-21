@@ -13,6 +13,7 @@ describe 'usuário abre página de configurações' do
       expect(page).to have_content 'Configurações'
       expect(page).to have_link 'Cardápio'
       expect(page).to have_link 'Marcador'
+      expect(page).to have_link 'Pedido'
       expect(page).to have_button 'Sair'      
     end
   end
@@ -28,6 +29,7 @@ describe 'usuário abre página de configurações' do
     expect(page).to have_content 'Configurações'
     expect(page).not_to have_link 'Cardápio'
     expect(page).not_to have_link 'Marcador'
+    expect(page).to have_link 'Pedido'
     expect(page).to have_button 'Sair'
   end
 end

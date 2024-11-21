@@ -11,6 +11,7 @@
           <%= link_to t('.menu'), menus_path, class: 'list-group-item list-group-item-action' %>
           <%= link_to t('.tag'), tags_path, class: 'list-group-item list-group-item-action' %>
         <% end %>
+        <%= link_to t('.order'), orders_path, class: 'list-group-item list-group-item-action' %>
         <%= button_to t('.logout'), destroy_user_session_path, method: :delete, class: 'list-group-item list-group-item-action' %>
       </div>
     </div>

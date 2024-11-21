@@ -1,6 +1,14 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: [:display]
 
+  def index
+    if current_user.admin?
+      @orders = Order.all
+    else
+      @orders = current_user.orders
+    end
+  end
+
   def new
     @order = Order.new
   end

@@ -7,6 +7,11 @@ en:
       confirm: 'Confirm'
     portion_orders:
       order_items: 'Order Items'
+    index:
+      title: "Order's List"
+      order_owner: 'Order owner'
+      actions: 'Actions'
+      edit: 'Edit'
     show:
       title: 'Order Informations'
     new:

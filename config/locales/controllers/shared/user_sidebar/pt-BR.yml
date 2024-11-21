@@ -4,6 +4,7 @@ pt-BR:
       title: 'Configurações'
       menu: 'Cardápio'
       tag: 'Marcador'
+      order: 'Pedido'
       logout: 'Sair'
     errors_form:
       errors_message: 'Por favor verifique os seguintes erros'

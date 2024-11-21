@@ -7,6 +7,11 @@ pt-BR:
       confirm: 'Confirmar'
     portion_orders:
       order_items: 'Itens do seu pedido'
+    index:
+      title: 'Lista de Pedidos'
+      order_owner: 'Dono do pedido'
+      actions: 'Ações'
+      edit: 'Editar'
     show:
       title: 'Informações do Pedido'
     new:

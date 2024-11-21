@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <h1 class="display-4 text-center my-5"><%=t'.title'%></h1>
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th><%=Order.human_attribute_name :name%></th>
+        <th><%=Order.human_attribute_name :email%></th>
+        <th><%=Order.human_attribute_name :cpf%></th>
+        <th><%=Order.human_attribute_name :phone_number%></th>
+        <th><%=t'.order_owner'%></th>
+        <th><%=t'.actions'%></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%=order.name %></td>
+          <td><%=order.email%></td>
+          <td><%=order.cpf%></td>
+          <td><%=order.phone_number%></td>
+          <td><%=order.user.first_name%> <%=order.user.last_name%></td>
+          <td>
+            <%= link_to t('.edit'), edit_order_path(order), class: 'btn btn-dark btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
