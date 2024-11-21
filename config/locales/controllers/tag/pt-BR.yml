@@ -4,6 +4,10 @@ pt-BR:
       save: 'Salvar Marcador'
       cancel: 'Cancelar'
       confirm: 'Confirmar'
+    index:
+      title: 'Lista de Marcadores'
+      actions: 'Ações'
+      edit: 'Editar'
     new:
       title: 'Novo Marcador'
     create:

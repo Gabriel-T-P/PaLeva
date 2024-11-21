@@ -9,8 +9,8 @@
       <div class="list-group">
         <% if current_user.admin? %>
           <%= link_to t('.menu'), menus_path, class: 'list-group-item list-group-item-action' %>
+          <%= link_to t('.tag'), tags_path, class: 'list-group-item list-group-item-action' %>
         <% end %>
-        <a href="/configuracoes" class="list-group-item list-group-item-action"><%= t('.settings') %></a>
         <%= button_to t('.logout'), destroy_user_session_path, method: :delete, class: 'list-group-item list-group-item-action' %>
       </div>
     </div>

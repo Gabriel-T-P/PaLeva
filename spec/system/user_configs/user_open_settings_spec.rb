@@ -9,10 +9,12 @@ describe 'usuário abre página de configurações' do
     login_as user
     visit root_path
     
-    expect(page).to have_content 'Configurações'
-    expect(page).to have_link 'Cardápio'
-    expect(page).to have_link 'Configurações'
-    expect(page).to have_button 'Sair'
+    within '#UserSidebar' do
+      expect(page).to have_content 'Configurações'
+      expect(page).to have_link 'Cardápio'
+      expect(page).to have_link 'Marcador'
+      expect(page).to have_button 'Sair'      
+    end
   end
   
   it 'e não admin não vê alguns links' do
@@ -25,7 +27,7 @@ describe 'usuário abre página de configurações' do
     
     expect(page).to have_content 'Configurações'
     expect(page).not_to have_link 'Cardápio'
-    expect(page).to have_link 'Configurações'
+    expect(page).not_to have_link 'Marcador'
     expect(page).to have_button 'Sair'
   end
 end

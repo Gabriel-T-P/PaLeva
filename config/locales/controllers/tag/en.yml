@@ -4,6 +4,10 @@ en:
       save: 'Save'
       cancel: 'Cancel'
       confirm: 'Confirm'
+    index:
+      title: 'Tags List'
+      actions: 'Actions'
+      edit: 'Edit'
     new:
       title: 'New Tag'
     create:

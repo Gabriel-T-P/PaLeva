@@ -2,6 +2,10 @@ class TagsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
 
+  def index
+    @tags = Tag.all
+  end
+
   def new
     @tag = Tag.new
   end
@@ -16,8 +20,14 @@ class TagsController < ApplicationController
       render 'new'
     end
   end
+
+  def edit
+    @tag = Tag.find(params[:id])
+  end
+  
   
   private
+
 
   def tag_params
     params.require(:tag).permit(:name, :description)

@@ -3,7 +3,7 @@ en:
     user_sidebar:
       title: 'Settings'
       menu: 'Menu'
-      settings: 'Configurations'
+      tag: 'Tag'
       logout: 'Log Out'
     errors_form:
       errors_message: 'Please, verify the following errors'

@@ -3,7 +3,7 @@ pt-BR:
     user_sidebar:
       title: 'Configurações'
       menu: 'Cardápio'
-      settings: 'Configurações'
+      tag: 'Marcador'
       logout: 'Sair'
     errors_form:
       errors_message: 'Por favor verifique os seguintes erros'

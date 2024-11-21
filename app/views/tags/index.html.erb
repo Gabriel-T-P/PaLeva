@@ -1,0 +1,23 @@
+<div class="container w-50 mt-5">
+  <h1 class="display-4 text-center my-4"><%=t'.title'%></h1>
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th class="w-25"><%=Tag.human_attribute_name :name%></th>
+        <th><%=Tag.human_attribute_name :description%></th>
+        <th class="w-25"><%=t'.actions'%></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tags.each do |tag| %>
+        <tr>
+          <td><%= tag.name %></td>
+          <td><%=tag.description%></td>
+          <td>
+            <%= link_to t('.edit'), edit_tag_path(tag), class: 'btn btn-dark btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
