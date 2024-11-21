@@ -89,6 +89,31 @@ RSpec.describe Promotion, type: :model do
 
         expect(result).to be false
       end
+      
+      it 'não for uma data' do
+        promotion = Promotion.new(name: 'Teste01', percentage: 0.5, use_limit: 20, start_date: 'awdwa', end_date: 1.day.from_now.to_date)
+        
+        result = promotion.valid?
+
+        expect(result).to be false
+      end
+      
+      it 'for marcada para depois de Data de Fim' do
+        promotion = Promotion.new(name: 'Teste01', percentage: 0.5, use_limit: 20, start_date: 1.week.from_now.to_date, end_date: Date.current)
+        
+        result = promotion.valid?
+
+        expect(result).to be false
+      end
+      
+      it 'for igual a Data de Fim' do
+        promotion = Promotion.new(name: 'Teste01', percentage: 0.5, use_limit: 20, start_date: Date.current, end_date: Date.current)
+        
+        result = promotion.valid?
+
+        expect(result).to be false
+      end
+      
     end
     
     context 'quando Data de Fim' do
