@@ -3,32 +3,34 @@
 <div class="container mt-5">
   <div class="card shadow-lg p-4">
 
-    <div id="OrderItems" class="mb-4">
-      <h4><%=t '.order_items'%>:</h4>
-      <ul class="list-group">
-        <% @cart.items.each do |key, item| %>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
+    <% unless order.persisted? %>
+      <div id="OrderItems" class="mb-4">
+        <h4><%=t '.order_items'%>:</h4>
+        <ul class="list-group">
+          <% @cart.items.each do |key, item| %>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <strong><%= item['item_name'] %></strong>
+                <small class="d-block text-muted"><%= item['portion_name'] %></small>
+              </div>
+              <div class="d-flex text-end">
+                <span><%= number_to_currency(item['price']) %></span>
+                <span class="text-muted"> x <%= item['quantity'] %></span>
+                <%= button_to 'x', remove_item_cart_path(portion_id: key), method: :delete, class:'btn btn-danger py-1 ms-2' %>
+              </div>
+            </li>
+          <% end %>
+          <li class="list-group-item d-flex justify-content-between align-items-center text-light bg-dark">
             <div>
-              <strong><%= item['item_name'] %></strong>
-              <small class="d-block text-muted"><%= item['portion_name'] %></small>
+              <strong><%=I18n.t('total')%></strong>:
             </div>
-            <div class="d-flex text-end">
-              <span><%= number_to_currency(item['price']) %></span>
-              <span class="text-muted"> x <%= item['quantity'] %></span>
-              <%= button_to 'x', remove_item_cart_path(portion_id: key), method: :delete, class:'btn btn-danger py-1 ms-2' %>
+            <div class="text-end">
+              <span><%= number_to_currency(@cart.total_price) %></span>
             </div>
           </li>
-        <% end %>
-        <li class="list-group-item d-flex justify-content-between align-items-center text-light bg-dark">
-          <div>
-            <strong><%=I18n.t('total')%></strong>:
-          </div>
-          <div class="text-end">
-            <span><%= number_to_currency(@cart.total_price) %></span>
-          </div>
-        </li>
-      </ul>
-    </div>
+        </ul>
+      </div>
+    <% end %>
 
     <%= form_with model: order do |f| %>
       <div class="row g-3">

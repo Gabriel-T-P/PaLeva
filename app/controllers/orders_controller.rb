@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: [:display]
+  before_action :set_order, only: [:edit, :update, :show]
+  before_action :check_employee, only: [:edit, :update, :show]
 
   def index
     if current_user.admin?
@@ -11,16 +13,6 @@ class OrdersController < ApplicationController
 
   def show
     return redirect_to root_path if params[:id] == "display"
-    
-    begin
-      @order = Order.find(params[:id])
-    rescue
-      return redirect_to root_path, alert: t('.order_not_found')
-    end
-    
-    if current_user.employee?
-      return redirect_to root_path, alert: t('.access_negated') if @order.user_id != current_user.id
-    end
   end
 
   def new
@@ -49,7 +41,16 @@ class OrdersController < ApplicationController
   end
   
   def edit
-    @order = Order.find(params[:id])
+  end
+
+  def update
+    if @order.update(order_params)
+      flash[:notice] = t '.notice'
+      redirect_to @order
+    else
+      flash[:alert] = t '.alert'
+      render 'edit'
+    end
   end
 
   def display
@@ -63,6 +64,20 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def set_order
+    begin
+      @order = Order.find(params[:id])
+    rescue
+      return redirect_to root_path, alert: t('.order_not_found')
+    end
+  end
+
+  def check_employee
+    if current_user.employee?
+      return redirect_to root_path, alert: t('.access_negated') if @order.user_id != current_user.id
+    end
+  end
 
   def order_params
     params.require(:order).permit(:name, :cpf, :email, :phone_number)

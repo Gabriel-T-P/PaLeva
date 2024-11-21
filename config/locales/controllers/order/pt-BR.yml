@@ -25,6 +25,8 @@ pt-BR:
       alert: 'Falha ao cadastrar o pedido'
     edit:
       title: 'Editar Pedido'
+      access_negated: 'Você não pode acessar essa página'
+      order_not_found: 'Pedido não encontrado'
     update:
       notice: 'Pedido editado com sucesso'
       alert: 'Falha ao editar o pedido'
