@@ -75,4 +75,44 @@ describe 'visitante busca por um pedido' do
     expect(current_path).to eq root_path  
   end
   
+  it 'e está com status esperando confirmação' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: 'Carlos Café', full_address: 'Rio Branco, Deodoro', 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
+    portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+    allow(SecureRandom).to receive(:alphanumeric).and_return('AAAA1111')
+    freeze_time
+
+    login_as user
+    visit new_order_path
+    fill_in 'E-mail',	with: 'sometext@email.com'
+    click_on 'Salvar Pedido'
+    visit display_order_path(code: 'AAAA1111')
+    expect(page).to have_content "Esperando confirmação #{I18n.l(DateTime.current)}"
+  end
+  
+  it 'e esta com status cancelado' do
+    allow(SecureRandom).to receive(:alphanumeric).and_return('AAA111')
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: 'Carlos Café', full_address: 'Rio Branco, Deodoro', 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    menu = Menu.create!(name: 'teste', establishment: establishment)
+    menu.items << [dish]
+    portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+    allow(SecureRandom).to receive(:alphanumeric).and_return('AAAA1111')
+    freeze_time
+
+    login_as user
+    visit new_order_path
+    fill_in 'E-mail',	with: 'sometext@email.com'
+    click_on 'Salvar Pedido'
+    patch set_status_canceled_api_v1_establishment_order_order_path(establishment_code: 'AAA111', order_code: 'AAAA1111', id: 1)
+    visit display_order_path(code: 'AAAA1111')
+    expect(page).to have_content "Cancelado #{I18n.l(DateTime.current)}"
+  end
+
 end

@@ -33,6 +33,7 @@ class Api::V1::OrdersController < Api::V1::ApiController
   def set_status_canceled
     order = Order.find_by!(code: params[:order_code])
     order.update(status: 'canceled')
+    order.update(canceled_at: DateTime.current)
     order.update(cancel_reason: params[:cancel_reason]) if params[:cancel_reason]
     render status: 200, json: order.as_json(except: [:updated_at, :id, :user_id])
   end
