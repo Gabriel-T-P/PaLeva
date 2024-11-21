@@ -1,0 +1,55 @@
+<h1 class="display-4 text-center my-4"> <%= t '.title' %> <%=@order.code%> </h1>
+
+<section id="EstablishmentInfos">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h2><%= t '.contact_infos' %></h2>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong><%= Establishment.human_attribute_name(:trade_name) %>:</strong> <%= @establishment.trade_name %></li>
+            <li class="list-group-item"><strong><%= Establishment.human_attribute_name(:full_address) %>:</strong> <%= @establishment.full_address %></li>
+            <li class="list-group-item"><strong><%= Establishment.human_attribute_name(:phone_number) %>:</strong> <%= @establishment.phone_number %></li>
+            <li class="list-group-item"><strong><%= Establishment.human_attribute_name(:email) %>:</strong> <%= @establishment.email %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="Portions">
+  <div class="container w-50">
+    <%= render 'portion_orders', order: @order %>
+  </div>
+</section>
+
+<section id="OrderStatus">
+  <div class="container w-50 mt-5">
+    <h3><%=t'.order_status_title'%></h3>
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>Status</th>
+          <th><%=t'.updated_at'%></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Order.statuses.keys.each do |status| %>
+          <tr class="<%= 'table-success' if @order.status == status %>">
+            <td><%= t(".status.#{status}") %></td>
+            <td>
+              <% if @order["#{status}_at"] %>
+                <%=I18n.l(@order["#{status}_at"])%>
+              <% else %>
+                <%=t'.not_updated'%>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

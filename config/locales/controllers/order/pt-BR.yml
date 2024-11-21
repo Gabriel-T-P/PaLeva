@@ -5,9 +5,10 @@ pt-BR:
       save: 'Salvar Pedido'
       cancel: 'Cancelar'
       confirm: 'Confirmar'
+    portion_orders:
+      order_items: 'Itens do seu pedido'
     show:
       title: 'Informações do Pedido'
-      order_items: 'Itens do seu pedido'
     new:
       title: 'Cadastro do Pedido'
     create:
@@ -21,3 +22,16 @@ pt-BR:
     destroy:
       notice: 'Pedido deletado com sucesso'
       alert: 'Falha ao deletar o pedido'
+    display:
+      title: 'Pedido:'
+      order_status_title: 'Status do Pedido'
+      contact_infos: 'Informações do Estabelecimento'
+      order_not_found: 'Pedido não encontrado'
+      updated_at: 'Atualizado em'
+      not_updated: 'Não atualizado'
+      status:
+        canceled: 'Cancelado'
+        waiting_cook_confirmation: 'Esperando confirmação'
+        cooking: 'Em preparo'
+        ready: 'Pronto'
+        delivered: 'Entregue'

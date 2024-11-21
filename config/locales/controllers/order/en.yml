@@ -1,23 +1,37 @@
-pt-BR:
+en:
   orders:
     form:
-      order_items: 'Items'
+      order_items: 'Order Items'
       save: 'Save'
       cancel: 'Cancel'
-      confirm: 'Comfirm'
+      confirm: 'Confirm'
+    portion_orders:
+      order_items: 'Order Items'
     show:
-      title: "Order's Informations"
-      order_items: 'Items'
+      title: 'Order Informations'
     new:
-      title: 'Register the order'
+      title: 'Create new order'
     create:
-      notice: 'Order registered with success'
+      notice: 'Order registered'
       alert: 'Something went wrong'
     edit:
-      title: 'Edit Order'
+      title: 'Edit order'
     update:
       notice: 'Order edited'
       alert: 'Something went wrong'
     destroy:
-      notice: 'Order deleteds'
+      notice: 'Order deleted'
       alert: 'Something went wrong'
+    display:
+      title: 'Order:'
+      order_status_title: "Order's Status"
+      contact_infos: 'Establishment Informations'
+      order_not_found: 'Order not found'
+      updated_at: 'Updated at'
+      not_updated: 'Not updated'
+      status:
+        canceled: 'Canceled'
+        waiting_cook_confirmation: 'Waiting confirmation'
+        cooking: 'Cooking'
+        ready: 'Ready'
+        delivered: 'Delivered'

@@ -22,39 +22,6 @@
   </div>
 </section>
 
-<div class="container mt-5">
-  <div class="card shadow-lg p-4">
-    <div class="mb-4">
-      <h4><%=t '.order_items'%>:</h4>
-      <ul class="list-group">
-        <% @order.portion_orders.each do |portion_order| %>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <strong><%= portion_order.portion.item.name %></strong>
-              <small class="d-block text-muted"><%= portion_order.portion.name %></small>
-            </div>
-            <div>
-              <small><%=portion_order.observation%></small>
-            </div>
-            <div>
-              <span><%= number_to_currency(portion_order.portion.price) %></span>
-              <small class="text-muted"> x <%= portion_order.quantity %></small>
-            </div>
-          </li>
-        <% end %>
-        <li class="list-group-item d-flex justify-content-between align-items-center text-light bg-dark">
-          <div>
-            <strong><%=I18n.t('total')%></strong>:
-          </div>
-          <div class="text-end">
-            <%total_price = 0%>
-            <%@order.portion_orders.each do |portion_order|%>
-              <%total_price += portion_order.portion.price * portion_order.quantity%>
-            <% end %>
-            <span><%= number_to_currency(total_price) %></span>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
+<div>
+  <%= render 'portion_orders', order: @order %>
 </div>

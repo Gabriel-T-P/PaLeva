@@ -269,7 +269,7 @@ describe 'usuário procura por bebidas e pratos' do
     expect(page).to have_content 'Teste2'
   end
 
-  it 'e usa o campo selecionar marcador para busca somente com marcadores' do
+  it 'e usa o campo selecionar marcador para busca com marcadores' do
     establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", cnpj: CNPJ.generate, 
                                           email: 'carlosjonas@email.com', phone_number: '99999043113')
     user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)

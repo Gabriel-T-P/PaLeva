@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:display]
 
   def new
     @order = Order.new
@@ -27,9 +27,19 @@ class OrdersController < ApplicationController
   end
   
   def show
+    return redirect_to root_path if params[:id] == "display"
     @order = Order.find(params[:id])
   end
-  
+
+  def display
+    begin
+      order_code = params.require(:code)
+      @order = Order.find_by!("code = ?", order_code)
+    rescue
+      return redirect_to root_path, alert: t('.order_not_found')
+    end
+    @establishment = @order.user.establishment
+  end
 
   private
 

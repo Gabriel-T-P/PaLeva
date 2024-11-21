@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row justify-content-center mb-4">
     <div class="col-md-6">
-      <%= form_with url: establishment_items_path(@establishment), method: :get, local: true, class: "d-flex" do |f| %>
+      <%= form_with url: establishment_items_path(@establishment), method: :get, class: "d-flex" do |f| %>
         <%= f.text_field :query, class: "form-control me-2", placeholder: t('.search_for'), aria: { label: "Search" } %>
         <%= f.collection_select :tag_id, @tags, :id, :name, { prompt: t('.search_tag_for') }, { class: "form-select me-2 w-75" } %>
         <%= f.submit t('.search'), class: "btn btn-dark" %>

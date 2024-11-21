@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_19_195730) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_20_232852) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -115,6 +115,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_195730) do
     t.integer "status"
     t.string "code"
     t.string "cancel_reason"
+    t.datetime "canceled_at"
+    t.datetime "waiting_cook_confirmation_at"
+    t.datetime "cooking_at"
+    t.datetime "ready_at"
+    t.datetime "delivered_at"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

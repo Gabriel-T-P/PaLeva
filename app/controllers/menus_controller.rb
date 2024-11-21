@@ -1,6 +1,7 @@
 class MenusController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
+  before_action :set_menu, only: [:edit, :update]
 
   def index
     @menus = Menu.all
@@ -28,14 +29,11 @@ class MenusController < ApplicationController
   end
 
   def edit
-    @menu = Menu.find(params[:id])
     @dishs = current_user.establishment.items.dish
     @beverages = current_user.establishment.items.beverage
   end
   
   def update
-    @menu = Menu.find(params[:id])
-    
     if @menu.update(menu_params)
       flash[:notice] = t '.notice'
       redirect_to root_path
@@ -49,6 +47,10 @@ class MenusController < ApplicationController
   
 
   private
+
+  def set_menu
+    @menu = Menu.find(params[:id])
+  end
 
   def menu_params
     params.require(:menu).permit(:name, :start_date, :end_date, item_ids: [])

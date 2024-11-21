@@ -9,10 +9,14 @@
       <%= link_to t('.register_establishment'), new_establishment_path, class: 'btn btn-dark btn-lg mx-2' %>
       <p class="lead"><%=t '.please_create_establishment'%></p>
     <% end %>
-
-  <% elsif user_signed_in? && current_user.employee? %>
   <% else %>
     <p class="lead"><%=t '.please_login'%></p>
+    <div class="d-flex justify-content-center align-items-center mt-5">
+      <%=form_with url: display_order_path, method: :get, class: 'd-flex' do |f|%>
+        <%= f.text_field :code, class: "form-control me-2", placeholder: t('.search_for'), aria: { label: "Search" } %>
+        <%= f.submit t('.order_search'), class: "btn btn-dark" %>
+      <% end %>
+    </div>
   <% end %>
 </div>
 
