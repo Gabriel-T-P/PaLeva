@@ -1,0 +1,65 @@
+<div class="d-flex justify-content-center">
+  <div class="col-md-6">
+    <%= form_with model: promotion, class: 'border p-4 shadow-sm' do |f| %>
+
+      <div class="mb-3">
+        <%= f.label :name, class: 'form-label' %>:
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <div class="mb-3 w-50 me-2">
+          <%= f.label :percentage, class: 'form-label' %>:
+          <%= f.number_field :percentage, in: 1..100, step: 1, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3 w-50 ms-2">
+          <%= f.label :use_limit, class: 'form-label' %>:
+          <%= f.number_field :use_limit, min: 0.0, step: 10, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between mb-2">
+        <div class="mb-3 w-50 me-2">
+          <%= f.label :start_date, class: 'form-label' %>:
+          <%= f.date_field :start_date, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3 ms-2 w-50">
+          <%= f.label :end_date, class: 'form-label' %>:
+          <%= f.date_field :end_date, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="border rounded p-3 mb-4">
+        <h3 class="h5 mb-3"><%=t '.portions_dishs'%>:</h3>
+        <div class="d-flex flex-wrap gap-3">
+          <%= f.collection_check_boxes :portion_ids, @portions_dish, :id, :name do |b| %>
+            <div class="form-check me-3 mb-2" style="width: 180px;">
+              <%= b.check_box class: "form-check-input" %>
+              <%= b.label(class: "form-check-label") { "#{b.object.item.name} - #{b.text}" } %>
+            </div>
+          <% end %>
+        </div>
+
+        <h3 class="h5 my-3"><%=t '.portions_beverages'%>:</h3>
+        <div class="d-flex flex-wrap gap-3">
+          <%= f.collection_check_boxes :portion_ids, @portions_beverage, :id, :name do |b| %>
+            <div class="form-check me-3 mb-2" style="width: 180px;">
+              <%= b.check_box class: "form-check-input" %>
+              <%= b.label(class: "form-check-label") { "#{b.object.item.name} - #{b.text}" } %>
+            </div>
+          <% end %>
+        </div> 
+      </div>
+
+      <div class="d-flex justify-content-between mt-2 mx-2">
+        <div>
+          <%= f.submit t('.save'), class: 'btn btn-dark' %>
+          <%= link_to t('.cancel'), root_path, class: 'btn btn-danger ms-3' %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

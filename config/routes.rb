@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   resources :portion_orders, only: [:new, :create, :destroy]
   get 'orders/display', to: 'orders#display', as: 'display_order'
   resources :orders, only: [:index, :new, :create, :edit, :update, :show]
+  resources :promotions, only: [:index, :new, :create, :edit, :update, :show]
   resources :tags, only: [:index, :new, :create, :edit, :update]
   resources :menus, only: [:index, :new, :create, :edit, :update]
   resources :employees, only: [:new, :create, :destroy]

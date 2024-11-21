@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_20_232852) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_21_185748) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -142,7 +142,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_20_232852) do
     t.integer "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "promotion_id"
     t.index ["item_id"], name: "index_portions_on_item_id"
+    t.index ["promotion_id"], name: "index_portions_on_promotion_id"
   end
 
   create_table "price_histories", force: :cascade do |t|
@@ -154,6 +156,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_20_232852) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["portion_id"], name: "index_price_histories_on_portion_id"
+  end
+
+  create_table "promotions", force: :cascade do |t|
+    t.string "name", null: false
+    t.decimal "percentage", precision: 5, scale: 4, null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "use_limit"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -196,6 +208,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_20_232852) do
   add_foreign_key "portion_orders", "orders"
   add_foreign_key "portion_orders", "portions"
   add_foreign_key "portions", "items"
+  add_foreign_key "portions", "promotions"
   add_foreign_key "price_histories", "portions"
   add_foreign_key "users", "establishments"
 end

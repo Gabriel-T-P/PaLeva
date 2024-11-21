@@ -1,0 +1,22 @@
+en:
+  promotions:
+    form:
+      save: 'Save'
+      cancel: 'Cancel'
+      confirm: 'Confirm'
+      portions_dishs: 'Portions dishs list'
+      portions_beverages: 'Portions beverages list'
+    index:
+      title: "Promotion's List"
+      actions: 'Actions'
+      edit: 'Edit'
+    new:
+      title: 'Create new promotion'
+    create:
+      notice: 'Promotion created'
+      alert: 'Something went wrong'
+    edit:
+      title: 'Edit promotion'
+    update:
+      notice: 'Promotion edited'
+      alert: 'Something went wrong'

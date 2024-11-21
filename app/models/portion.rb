@@ -1,5 +1,6 @@
 class Portion < ApplicationRecord
   belongs_to :item
+  belongs_to :promotion, optional: true
   has_one_attached :image
   has_many :price_histories, dependent: :destroy
   has_many :portion_orders

@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    attributes:
+      promotion:
+        name: 'Name'
+        percentage: 'Percentage'
+        start_date: 'Start Date'
+        end_date: 'End Date'
+        use_limit: 'Limit of Uses'
+    models:
+      promotion:
+        one: 'Promotion'
+        other: 'Promotions'

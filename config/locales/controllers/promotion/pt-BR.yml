@@ -1,0 +1,22 @@
+pt-BR:
+  promotions:
+    form:
+      save: 'Salvar Promoção'
+      cancel: 'Cancelar'
+      confirm: 'Confirmar'
+      portions_dishs: 'Lista de porções dos pratos'
+      portions_beverages: 'Lista de porções das bebidas'
+    index:
+      title: 'Lista de Promoções'
+      actions: 'Ações'
+      edit: 'Editar'
+    new:
+      title: 'Criar uma nova promocão'
+    create:
+      notice: 'Promoção criada com sucesso'
+      alert: 'Falha ao criar a promoção'
+    edit:
+      title: 'Editar Promoção'
+    update:
+      notice: 'Promoção editada com sucesso'
+      alert: 'Falha ao editar a promoção'
