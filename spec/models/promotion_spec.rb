@@ -22,6 +22,29 @@ RSpec.describe Promotion, type: :model do
         expect(result).to be false  
       end
       
+      it 'não for um número' do
+        promotion = Promotion.new(name: 'Teste01', percentage: 'asdaw', use_limit: 20, start_date: Date.current, end_date: 1.day.from_now.to_date)
+        
+        result = promotion.valid?
+
+        expect(result).to be false  
+      end
+      
+      it 'for menor do que 0' do
+        promotion = Promotion.new(name: 'Teste01', percentage: -1, use_limit: 20, start_date: Date.current, end_date: 1.day.from_now.to_date)
+        
+        result = promotion.valid?
+
+        expect(result).to be false  
+      end
+      
+      it 'for maior do que 1' do
+        promotion = Promotion.new(name: 'Teste01', percentage: 2, use_limit: 20, start_date: Date.current, end_date: 1.day.from_now.to_date)
+        
+        result = promotion.valid?
+
+        expect(result).to be false
+      end
     end
     
     context 'quando Limite de Uso' do
@@ -31,6 +54,30 @@ RSpec.describe Promotion, type: :model do
         result = promotion.valid?
 
         expect(result).to be true
+      end
+
+      it 'não for um número' do
+        promotion = Promotion.new(name: 'Teste01', percentage: 0.5, use_limit: 'avad', start_date: Date.current, end_date: 1.day.from_now.to_date)
+        
+        result = promotion.valid?
+
+        expect(result).to be false
+      end
+      
+      it 'não for um número inteiro' do
+        promotion = Promotion.new(name: 'Teste01', percentage: 0.5, use_limit: 1.5, start_date: Date.current, end_date: 1.day.from_now.to_date)
+        
+        result = promotion.valid?
+
+        expect(result).to be false
+      end
+      
+      it ' for um número menor que 0' do
+        promotion = Promotion.new(name: 'Teste01', percentage: 0.5, use_limit: -1, start_date: Date.current, end_date: 1.day.from_now.to_date)
+        
+        result = promotion.valid?
+
+        expect(result).to be false
       end
     end
     
