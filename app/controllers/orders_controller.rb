@@ -9,6 +9,20 @@ class OrdersController < ApplicationController
     end
   end
 
+  def show
+    return redirect_to root_path if params[:id] == "display"
+    
+    begin
+      @order = Order.find(params[:id])
+    rescue
+      return redirect_to root_path, alert: t('.order_not_found')
+    end
+    
+    if current_user.employee?
+      return redirect_to root_path, alert: t('.access_negated') if @order.user_id != current_user.id
+    end
+  end
+
   def new
     @order = Order.new
   end
@@ -34,18 +48,8 @@ class OrdersController < ApplicationController
     end
   end
   
-  def show
-    return redirect_to root_path if params[:id] == "display"
-    
-    begin
-      @order = Order.find(params[:id])
-    rescue
-      return redirect_to root_path, alert: t('.order_not_found')
-    end
-    
-    if current_user.employee?
-      return redirect_to root_path, alert: t('.access_negated') if @order.user_id != current_user.id
-    end
+  def edit
+    @order = Order.find(params[:id])
   end
 
   def display

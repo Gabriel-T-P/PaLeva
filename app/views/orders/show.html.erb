@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
       <div class="col-md-5">
         <div class="card mb-4 shadow-sm">
-          <div class="card-header">
+          <div class="d-flex justify-content-between card-header">
             <h2><%=Order.model_name.human%> <%=@order.code.upcase%></h2>
-            <% #link_to t('.edit_order'), edit_order_path(@order), class: 'btn btn-outline-dark ms-3'%>
+            <%= link_to t('.edit'), edit_order_path(@order), class: 'btn btn-dark py-1 ms-3'%>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><strong><%= Order.human_attribute_name(:name) %>:</strong> <%= @order.name %></li>

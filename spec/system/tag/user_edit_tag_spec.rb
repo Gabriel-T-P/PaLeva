@@ -76,4 +76,17 @@ describe 'usuário edita marcador' do
     expect(page).to have_content 'Nome não pode ficar em branco'
   end
   
+  it 'e cancela' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    dish = Item.create!(name: 'Lasanha', description: 'Carne, macarrão e molho picante', calories: '340', item_type: 'dish', establishment: establishment)
+    tag = Tag.create!(name: 'Picante')
+
+    login_as user
+    visit edit_tag_path(tag)
+    click_on 'Cancelar'
+
+    expect(current_path).to eq root_path  
+  end
 end

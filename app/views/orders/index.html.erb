@@ -20,7 +20,8 @@
           <td><%=order.phone_number%></td>
           <td><%=order.user.first_name%> <%=order.user.last_name%></td>
           <td>
-            <%= link_to t('.show'), order_path(order), class: 'btn btn-dark btn-sm' %>
+            <%= link_to t('.show'), order_path(order), class: 'btn btn-dark btn-sm me-1' %>
+            <%= link_to t('.edit'), edit_order_path(order), class: 'btn btn-dark btn-sm'%>
           </td>
         </tr>
       <% end %>

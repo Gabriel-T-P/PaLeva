@@ -12,10 +12,12 @@ pt-BR:
       order_owner: 'Dono do pedido'
       actions: 'Ações'
       show: 'Detalhes'
+      edit: 'Editar'
     show:
       title: 'Informações do Pedido'
       access_negated: 'Você não pode acessar essa página'
       order_not_found: 'Pedido não encontrado'
+      edit: 'Editar'
     new:
       title: 'Cadastro do Pedido'
     create:
@@ -26,9 +28,6 @@ pt-BR:
     update:
       notice: 'Pedido editado com sucesso'
       alert: 'Falha ao editar o pedido'
-    destroy:
-      notice: 'Pedido deletado com sucesso'
-      alert: 'Falha ao deletar o pedido'
     display:
       title: 'Pedido:'
       order_status_title: 'Status do Pedido'
