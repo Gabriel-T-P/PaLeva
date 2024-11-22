@@ -1,6 +1,8 @@
 class Promotion < ApplicationRecord
   has_many :portion_promotions
   has_many :portions, through: :portion_promotions
+  has_many :promotion_orders
+  has_many :orders, through: :promotion_orders
 
   before_validation  :convert_percentage
 

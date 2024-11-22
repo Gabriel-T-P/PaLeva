@@ -36,6 +36,53 @@ RSpec.describe Order, type: :model do
     end
   end
   
+  describe '#uses_promotions' do
+    it 'Limite de Uso existe e é maior que zero' do
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                              cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+      dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+      portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+      promotion = Promotion.create!(name: 'Semana do Pão de Queijo', percentage: 0.20, use_limit: 20, start_date: 1.week.ago.to_date, end_date: 1.week.from_now.to_date, portions: [portion])
+      menu = Menu.create!(name: 'teste', establishment: establishment, items: [dish])
+      
+      order = Order.create!(email: 'teste123@email.com', user: user, cpf: CPF.generate, promotions: [promotion])
+
+      promotion.reload
+      expect(promotion.use_limit).to eq 19  
+    end
+    
+    it 'Limite de Uso não existe' do
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                              cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+      dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+      portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+      promotion = Promotion.create!(name: 'Semana do Pão de Queijo', percentage: 0.20, start_date: 1.week.ago.to_date, end_date: 1.week.from_now.to_date, portions: [portion])
+      menu = Menu.create!(name: 'teste', establishment: establishment, items: [dish])
+      
+      order = Order.create!(email: 'teste123@email.com', user: user, cpf: CPF.generate, promotions: [promotion])
+
+      promotion.reload
+      expect(promotion.use_limit).to eq nil
+    end
+    
+    it 'Limite de Uso é zero' do
+      establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                              cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+      user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+      dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+      portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+      promotion = Promotion.create!(name: 'Semana do Pão de Queijo', percentage: 0.20, use_limit: 0, start_date: 1.week.ago.to_date, end_date: 1.week.from_now.to_date, portions: [portion])
+      menu = Menu.create!(name: 'teste', establishment: establishment, items: [dish])
+      
+      order = Order.create!(email: 'teste123@email.com', user: user, cpf: CPF.generate, promotions: [promotion])
+
+      promotion.reload
+      expect(promotion.use_limit).to eq 0
+    end
+  end
+
   describe '#valid?' do
     context 'quando E-mail' do
       it 'estiver presente e Número de Telefone não' do

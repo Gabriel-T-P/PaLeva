@@ -2,6 +2,8 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :portion_orders, dependent: :destroy
   has_many :portions, through: :portion_orders
+  has_many :promotion_orders
+  has_many :promotions, through: :promotion_orders
 
   before_validation :set_alphamumeric_code_and_status, on: :create
   after_create :uses_promotions
@@ -26,5 +28,14 @@ class Order < ApplicationRecord
     self.status = :waiting_cook_confirmation
     self.waiting_cook_confirmation_at = DateTime.current
   end
+
+  def uses_promotions
+    self.promotions.each do |promotion|
+      return if (promotion.use_limit == nil) || (promotion.use_limit == 0)
+      promotion.use_limit -= 1
+      promotion.save!
+    end
+  end
+  
 
 end

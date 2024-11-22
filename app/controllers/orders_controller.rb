@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
       redirect_to @order
     else
       flash.now[:alert] = t '.alert'
-      @promotions = Promotion.all
+      search_applicable_promotions()
       render 'new'
     end
   end
@@ -87,9 +87,13 @@ class OrdersController < ApplicationController
 
   def search_applicable_promotions
     cart_portion_ids = @cart.items.keys.map(&:to_i)
-    
+
     @applicable_promotion = Promotion.includes(:portions).select do |promotion|
-      ((promotion.portions.pluck(:id) & cart_portion_ids).any?) && (promotion.start_date < Date.current && promotion.end_date > Date.current)
+      if promotion.use_limit
+        ((promotion.portions.pluck(:id) & cart_portion_ids).any?) && (promotion.start_date < Date.current && promotion.end_date > Date.current) && (promotion.use_limit > 0)
+      else
+        ((promotion.portions.pluck(:id) & cart_portion_ids).any?) && (promotion.start_date < Date.current && promotion.end_date > Date.current)
+      end
     end
   end
 
