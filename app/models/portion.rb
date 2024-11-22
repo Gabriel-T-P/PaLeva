@@ -1,10 +1,11 @@
 class Portion < ApplicationRecord
   belongs_to :item
-  belongs_to :promotion, optional: true
   has_one_attached :image
   has_many :price_histories, dependent: :destroy
   has_many :portion_orders
   has_many :orders, through: :portion_orders
+  has_many :portion_promotions
+  has_many :promotions, through: :portion_promotions
 
   validates :name, :description, presence: true
   validates :price, :numericality => { :greater_than_or_equal_to => 0 }

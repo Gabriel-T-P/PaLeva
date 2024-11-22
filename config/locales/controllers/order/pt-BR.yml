@@ -2,6 +2,8 @@ pt-BR:
   orders:
     form:
       order_items: 'Itens do seu pedido'
+      promotion_title: 'Descontos disponíveis'
+      no_promotions: 'sem descontos disponíveis'
       save: 'Salvar Pedido'
       cancel: 'Cancelar'
       confirm: 'Confirmar'

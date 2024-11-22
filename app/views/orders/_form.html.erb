@@ -32,6 +32,50 @@
       </div>
     <% end %>
 
+    <% unless order.persisted? %>
+      <% unless @applicable_promotion.empty? %>
+        <div id="Promotions" class="mb-4">
+          <h4><%=t '.promotion_title'%>:</h4>
+          <ul class="list-group">
+            <%percentage_sum = 0%>
+            <% @applicable_promotion.each do |promotion| %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <strong><%= promotion.name %></strong>
+                </div>
+                <div class="d-flex text-end">
+                  <span><%= (promotion.percentage.to_f) * 100 %>%</span>
+                  <%percentage_sum += promotion.percentage.to_f%>
+                </div>
+              </li>
+            <% end %>
+            <li class="list-group-item d-flex justify-content-between align-items-center text-light bg-dark">
+              <div>
+                <strong><%=I18n.t('final_price')%></strong>:
+              </div>
+              <div class="text-end">
+                <span><%= number_to_currency((@cart.total_price) - (@cart.total_price * percentage_sum)) %></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      <% else %>
+        <ul class="list-group mb-4">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+          <small class="d-block text-muted"><%= t'.no_promotions' %></small>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center text-light bg-dark">
+            <div>
+              <strong><%=I18n.t('final_price')%></strong>:
+            </div>
+            <div class="text-end">
+              <span><%= number_to_currency(@cart.total_price) %></span>
+            </div>
+          </li>
+        </ul>
+      <% end %>
+    <% end %>
+
     <%= form_with model: order do |f| %>
       <div class="row g-3">
         <div class="col-md-6">

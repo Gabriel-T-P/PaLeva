@@ -10,6 +10,7 @@ en:
   day_already_used: 'Day of week already in use, please make a edition and not a register'
   route_negated: "You don't have access to this page"
   total: 'Total'
+  final_price: 'Final Price'
   status:
     open: 'Open'
     canceled: 'Canceled'

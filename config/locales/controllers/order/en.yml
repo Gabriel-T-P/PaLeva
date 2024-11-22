@@ -2,6 +2,8 @@ en:
   orders:
     form:
       order_items: 'Order Items'
+      promotion_title: 'Available promotions'
+      no_promotions: 'no promotions available'
       save: 'Save'
       cancel: 'Cancel'
       confirm: 'Confirm'

@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, except: [:display]
   before_action :set_order, only: [:edit, :update, :show]
   before_action :check_employee, only: [:edit, :update, :show]
+  before_action :search_applicable_promotions, only: [:new]
 
   def index
     if current_user.admin?
@@ -36,6 +37,7 @@ class OrdersController < ApplicationController
       redirect_to @order
     else
       flash.now[:alert] = t '.alert'
+      @promotions = Promotion.all
       render 'new'
     end
   end
@@ -81,6 +83,14 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:name, :cpf, :email, :phone_number)
+  end
+
+  def search_applicable_promotions
+    cart_portion_ids = @cart.items.keys.map(&:to_i)
+    
+    @applicable_promotion = Promotion.includes(:portions).select do |promotion|
+      ((promotion.portions.pluck(:id) & cart_portion_ids).any?) && (promotion.start_date < Date.current && promotion.end_date > Date.current)
+    end
   end
 
 end

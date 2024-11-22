@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   has_many :portions, through: :portion_orders
 
   before_validation :set_alphamumeric_code_and_status, on: :create
+  after_create :uses_promotions
 
   enum :status, { :canceled => 5, :waiting_cook_confirmation => 7, :cooking => 9, :ready => 11, :delivered => 13 }
 

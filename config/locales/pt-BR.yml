@@ -10,6 +10,7 @@ pt-BR:
   hour: 'horas'
   to: 'às'
   total: 'Total'
+  final_price: 'Preço Final'
   see_orders: 'Ver Pedido'
   no_item: 'Nenhum item adicionado'
   status:
