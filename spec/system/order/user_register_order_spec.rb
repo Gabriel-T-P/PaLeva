@@ -276,4 +276,60 @@ describe 'usuário registra pedido' do
     expect(page).not_to have_content '10.0%'  
   end
   
+  it 'e salva pedido com promoção' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+    promotion = Promotion.create!(name: 'Semana do Pão de Queijo', percentage: 0.20, start_date: 1.week.ago.to_date, end_date: 1.week.from_now.to_date, portions: [portion])
+    promotion2 = Promotion.create!(name: 'Mês do Pão de Queijo', percentage: 0.10, start_date: 1.week.ago.to_date, end_date: 1.month.from_now.to_date, portions: [portion])
+    promotion3 = Promotion.create!(name: 'Ano do Pão de Queijo', percentage: 0.05, start_date: 1.week.ago.to_date, end_date: 1.year.from_now.to_date, portions: [portion])
+    menu = Menu.create!(name: 'teste', establishment: establishment, items: [dish])
+
+    login_as user
+    visit establishment_item_portion_path(establishment, dish, portion)
+    fill_in 'Quantidade',	with: 3
+    click_on 'Adicionar'
+    within 'nav' do
+      click_on 'Ver Pedido'
+    end
+    fill_in 'Nome do Cliente',	with: 'Teste'
+    fill_in 'E-mail',	with: 'teste123@email.com'
+    fill_in 'CPF',	with: '055.133.333-25'
+    fill_in 'Número de Telefone',	with: '99999043113'
+    click_on 'Salvar Pedido'
+
+    expect(page).to have_content 'Descontos Usados'
+    expect(page).to have_content 'Semana do Pão de Queijo'  
+    expect(page).to have_content '20.0%'  
+    expect(page).to have_content 'Mês do Pão de Queijo'  
+    expect(page).to have_content '10.0%'  
+    expect(page).to have_content 'Ano do Pão de Queijo'  
+    expect(page).to have_content '5.0%'
+  end
+
+  it 'e não envia informações da promoção se não tiver uma promoção' do
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    dish = Item.create!(name: 'Pão de Queijo', description: 'Polvilho e queijo assado no forno', calories: '50', item_type: 'dish', establishment: establishment)
+    portion = Portion.create!(name: 'Pequeno', description: 'Uma unidade pequena de pão de queijo', price: 1.50, item: dish)
+    menu = Menu.create!(name: 'teste', establishment: establishment, items: [dish])
+
+    login_as user
+    visit establishment_item_portion_path(establishment, dish, portion)
+    fill_in 'Quantidade',	with: 3
+    click_on 'Adicionar'
+    within 'nav' do
+      click_on 'Ver Pedido'
+    end
+    fill_in 'Nome do Cliente',	with: 'Teste'
+    fill_in 'E-mail',	with: 'teste123@email.com'
+    fill_in 'CPF',	with: '055.133.333-25'
+    fill_in 'Número de Telefone',	with: '99999043113'
+    click_on 'Salvar Pedido'
+
+    expect(page).not_to have_content 'Descontos Usados'  
+  end
 end

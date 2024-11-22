@@ -24,6 +24,10 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.user = current_user
 
+    if params[:order][:promotion_ids]
+      @order.promotion_ids = params[:order][:promotion_ids].split(",").map(&:to_i)
+    end
+
     if @order.valid?
       @cart.items.each do |portion_id, item|
         portion = Portion.find(portion_id)
@@ -82,13 +86,13 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:name, :cpf, :email, :phone_number)
+    params.require(:order).permit(:name, :cpf, :email, :phone_number, :total_value, :final_value, :promotion_ids)
   end
 
   def search_applicable_promotions
     cart_portion_ids = @cart.items.keys.map(&:to_i)
 
-    @applicable_promotion = Promotion.includes(:portions).select do |promotion|
+    @applicable_promotions = Promotion.includes(:portions).select do |promotion|
       if promotion.use_limit
         ((promotion.portions.pluck(:id) & cart_portion_ids).any?) && (promotion.start_date < Date.current && promotion.end_date > Date.current) && (promotion.use_limit > 0)
       else

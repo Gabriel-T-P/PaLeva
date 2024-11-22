@@ -17,6 +17,7 @@ pt-BR:
       edit: 'Editar'
     show:
       title: 'Informações do Pedido'
+      promotion_title: 'Descontos Usados'
       access_negated: 'Você não pode acessar essa página'
       order_not_found: 'Pedido não encontrado'
       edit: 'Editar'

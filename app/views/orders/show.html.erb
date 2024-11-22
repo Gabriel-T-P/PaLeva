@@ -25,3 +25,31 @@
 <div class="container w-50 mb-5">
   <%= render 'portion_orders', order: @order %>
 </div>
+
+<section id="PromotionInfos">
+  <% unless @order.promotions.empty? %>
+    <div class="container w-50 mb-4 card shadow-lg p-4">
+      <h4><%=t '.promotion_title'%>:</h4>
+      <ul class="list-group">
+        <% @order.promotions.each do |promotion| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center bg-white text-dark">
+            <div>
+              <strong><%= promotion.name %></strong>
+            </div>
+            <div class="d-flex text-end">
+              <span><%= (promotion.percentage.to_f) * 100 %>%</span>
+            </div>
+          </li>
+        <% end %>
+        <li class="list-group-item d-flex justify-content-between align-items-center text-light bg-dark">
+          <div>
+            <strong><%=I18n.t('final_price')%></strong>:
+          </div>
+          <div class="text-end">
+            <span><%= number_to_currency(@order.final_value) %></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+</section>

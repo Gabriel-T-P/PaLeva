@@ -33,12 +33,12 @@
     <% end %>
 
     <% unless order.persisted? %>
-      <% unless @applicable_promotion.empty? %>
+      <% unless @applicable_promotions.empty? %>
         <div id="Promotions" class="mb-4">
           <h4><%=t '.promotion_title'%>:</h4>
           <ul class="list-group">
             <%percentage_sum = 0%>
-            <% @applicable_promotion.each do |promotion| %>
+            <% @applicable_promotions.each do |promotion| %>
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 <div>
                   <strong><%= promotion.name %></strong>
@@ -55,6 +55,7 @@
               </div>
               <div class="text-end">
                 <span><%= number_to_currency((@cart.total_price) - (@cart.total_price * percentage_sum)) %></span>
+                <%@final_value = (@cart.total_price) - (@cart.total_price * percentage_sum)%>
               </div>
             </li>
           </ul>
@@ -78,6 +79,14 @@
 
     <%= form_with model: order do |f| %>
       <div class="row g-3">
+        <% unless order.persisted? %>
+          <% unless @applicable_promotions.empty? %>
+            <%= f.hidden_field :final_value, value: @final_value %>
+            <%= f.hidden_field :promotion_ids, value: @applicable_promotions.map(&:id).join(",") %>
+          <% end %>
+        <% end %>
+        <%= f.hidden_field :total_value, value: @cart.total_price %>
+
         <div class="col-md-6">
           <%= f.label :cpf, class: "form-label" %>
           <%= f.text_field :cpf, class: "form-control" %>

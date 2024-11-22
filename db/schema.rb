@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_22_033331) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_22_042239) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -120,6 +120,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_22_033331) do
     t.datetime "cooking_at"
     t.datetime "ready_at"
     t.datetime "delivered_at"
+    t.decimal "total_value"
+    t.decimal "final_value"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
