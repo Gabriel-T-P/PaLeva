@@ -1,0 +1,29 @@
+<div class="container w-50 mt-5">
+  <h1 class="display-4 text-center my-4"><%=t'.title'%></h1>
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th><%=Promotion.human_attribute_name :name%></th>
+        <th><%=Promotion.human_attribute_name :percentage%></th>
+        <th><%=Promotion.human_attribute_name :use_limit%></th>
+        <th><%=Promotion.human_attribute_name :start_date%></th>
+        <th><%=Promotion.human_attribute_name :end_date%></th>
+        <th><%=t'.actions'%></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @promotions.each do |promotion| %>
+        <tr>
+          <td><%= promotion.name %></td>
+          <td><%=(promotion.percentage.to_f)*100%></td>
+          <td><%=promotion.use_limit%></td>
+          <td><%=promotion.start_date%></td>
+          <td><%=promotion.end_date%></td>
+          <td>
+            <%= link_to t('.show'), promotion_path(promotion), class: 'btn btn-dark btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

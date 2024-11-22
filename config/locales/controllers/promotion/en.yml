@@ -9,7 +9,7 @@ en:
     index:
       title: "Promotion's List"
       actions: 'Actions'
-      edit: 'Edit'
+      show: 'Details'
     show:
       title: 'Promotion Infos'
       portions_title: "Promotion's Portions"

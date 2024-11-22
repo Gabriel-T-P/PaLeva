@@ -9,10 +9,11 @@ pt-BR:
     index:
       title: 'Lista de Promoções'
       actions: 'Ações'
-      edit: 'Editar'
+      show: 'Detalhes'
     show:
       title: 'Imformações da Promoção'
       portions_title: 'Porções afetadas pela promoção'
+      orders_title: 'Pedidos'
       promotion_not_found: 'Promoção não encontrada'
       edit: 'Editar'
       uses_left: 'restantes'

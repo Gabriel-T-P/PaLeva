@@ -4,7 +4,12 @@ class PromotionsController < ApplicationController
   before_action :extract_portions, only: [:new]
   before_action :set_promotion, only: [:show]
 
+  def index
+    @promotions = Promotion.all
+  end
+
   def show
+    @orders = @promotion.orders
   end
 
   def new
@@ -13,7 +18,7 @@ class PromotionsController < ApplicationController
   
   def create
     @promotion = Promotion.new(promotion_params)
-    
+
     if @promotion.save
       flash[:notice] = t'.notice'
       redirect_to @promotion
