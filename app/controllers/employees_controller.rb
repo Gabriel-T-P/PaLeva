@@ -1,4 +1,10 @@
 class EmployeesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :check_admin
+
+  def index
+    @employees = Employee.employee
+  end
 
   def new
     @employee = Employee.new

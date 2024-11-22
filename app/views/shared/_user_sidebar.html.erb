@@ -9,6 +9,7 @@
       <div class="list-group">
         <% if current_user.admin? %>
           <%= link_to t('.menu'), menus_path, class: 'list-group-item list-group-item-action' %>
+          <%= link_to t('.employee'), employees_path, class: 'list-group-item list-group-item-action' %>
           <%= link_to t('.tag'), tags_path, class: 'list-group-item list-group-item-action' %>
           <%= link_to Promotion.model_name.human, promotions_path, class: 'list-group-item list-group-item-action' %>
         <% end %>

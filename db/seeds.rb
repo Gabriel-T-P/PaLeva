@@ -13,6 +13,9 @@ establishment = Establishment.create!(corporate_name: 'Master LTDA', trade_name:
 master = User.create!(first_name: 'Master', last_name: 'do Estabelecimento', cpf: CPF.generate, email: 'master@email.com', password: '12345678', establishment: establishment)
 employee1 = Employee.create!(first_name: 'Leon', last_name: 'employee', cpf: CPF.generate, email: 'employee@email.com', password: '12345678', establishment: establishment)
 employee2 = Employee.create!(first_name: 'Karl', last_name: 'employee', cpf: CPF.generate, email: 'employee222@email.com', password: '12345678', establishment: establishment)
+employee3 = Employee.create!(first_name: 'Ruan', last_name: 'new employee', cpf: CPF.generate, email: 'new_employee@email.com', password: '12345678', establishment: establishment)
+employee1.active!
+employee2.active!
 
 OpeningHour.create!(day_of_week: 0, closed: true, establishment: establishment)
 OpeningHour.create!(day_of_week: 1, closed: true, establishment: establishment)

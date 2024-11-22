@@ -1,5 +1,10 @@
 en:
   employees:
+    index:
+      title: 'Employees List'
+      status:
+        active: 'Active'
+        pre_registered: 'Pre Registered'
     new:
       title: 'Pre Register'
       save: 'Save'

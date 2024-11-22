@@ -3,6 +3,7 @@ pt-BR:
     user_sidebar:
       title: 'Configurações'
       menu: 'Cardápio'
+      employee: 'Funcionário'
       tag: 'Marcador'
       order: 'Pedido'
       logout: 'Sair'

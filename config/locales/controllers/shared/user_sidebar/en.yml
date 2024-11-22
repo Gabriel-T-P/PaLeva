@@ -2,6 +2,7 @@ en:
   shared:
     user_sidebar:
       title: 'Settings'
+      employee: 'Employee'
       menu: 'Menu'
       tag: 'Tag'
       order: 'Order'

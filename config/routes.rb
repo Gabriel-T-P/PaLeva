@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   resources :promotions, only: [:index, :new, :create, :edit, :update, :show]
   resources :tags, only: [:index, :new, :create, :edit, :update]
   resources :menus, only: [:index, :new, :create, :edit, :update]
-  resources :employees, only: [:new, :create, :destroy]
+  resources :employees, only: [:index, :new, :create]
 
 
   # API

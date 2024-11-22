@@ -1,5 +1,10 @@
 pt-BR:
   employees:
+    index:
+      title: 'Lista de Funcionários'
+      status:
+        active: 'Ativo'
+        pre_registered: 'Pré-Registrado'
     new:
       title: 'Criar Pré-Cadastro'
       save: 'Salvar'

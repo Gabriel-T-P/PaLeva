@@ -12,6 +12,7 @@ describe 'usuário abre página de configurações' do
     within '#UserSidebar' do
       expect(page).to have_content 'Configurações'
       expect(page).to have_link 'Cardápio'
+      expect(page).to have_link 'Funcionário'
       expect(page).to have_link 'Marcador'
       expect(page).to have_link 'Pedido'
       expect(page).to have_link 'Promoção'
@@ -29,6 +30,7 @@ describe 'usuário abre página de configurações' do
     
     expect(page).to have_content 'Configurações'
     expect(page).not_to have_link 'Cardápio'
+    expect(page).not_to have_link 'Funcionário'
     expect(page).not_to have_link 'Marcador'
     expect(page).to have_link 'Pedido'
     expect(page).not_to have_link 'Promoção'
