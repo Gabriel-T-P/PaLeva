@@ -114,6 +114,26 @@ describe 'usuário cria promoção para uma porção' do
   end
   
   it 'e vê mensagens de erros' do
-    
+    establishment = Establishment.create!(corporate_name: 'Carlos LTDA', trade_name: "Carlo's Café", full_address: "Rio Branco, Deodoro", 
+                                            cnpj: CNPJ.generate, email: 'carlosjonas@email.com', phone_number: '99999043113')
+    user = User.create!(first_name: 'Carlos', last_name: 'Jonas', cpf: CPF.generate, email: 'carlosjonas@email.com', password: '1234567891011', establishment: establishment)
+    dish = Item.create!(name: 'Lasanha', description: 'Carne, macarrão e molho', calories: '340', item_type: 'dish', establishment: establishment)
+    portion = Portion.create!(name: 'Meia Porção', description: 'Lasanha de carne para 1 pessoa', price: 7.50, item: dish)
+    beverage = Item.create!(name: 'Água', description: 'Água mineral', calories: '20', item_type: 'beverage', establishment: establishment, alcoholic: false)
+    portion1 = Portion.create!(name: '200 ml', description: 'Água Mineral', price: 2.50, item: beverage)
+
+    login_as user
+    visit new_promotion_path
+    fill_in 'Nome',	with: ''
+    fill_in 'Porcentagem',	with: ''
+    fill_in 'Limite de Usos',	with: 20
+    fill_in 'Data de Início',	with: ''
+    fill_in 'Data de Fim',	with: ''
+    click_on 'Salvar Promoção'
+
+    expect(page).to have_content 'Nome não pode ficar em branco'  
+    expect(page).to have_content 'Porcentagem não pode ficar em branco'  
+    expect(page).to have_content 'Data de Início não pode ficar em branco'
+    expect(page).to have_content 'Data de Fim não pode ficar em branco'
   end
 end

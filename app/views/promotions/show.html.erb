@@ -10,7 +10,7 @@
             <% #link_to t('.edit'), root_path, class: 'btn btn-dark py-1 ms-3' %>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong><%= Promotion.human_attribute_name(:percentage) %>:</strong> <%= @promotion.percentage.to_i %>%</li>
+            <li class="list-group-item"><strong><%= Promotion.human_attribute_name(:percentage) %>:</strong> <%= (@promotion.percentage.to_f * 100).to_i %>%</li>
             <li class="list-group-item"><strong><%= Promotion.human_attribute_name(:use_limit) %>:</strong> <%= @promotion.use_limit %> <%=t'.uses_left'%></li>
             <li class="list-group-item"><strong><%= Promotion.human_attribute_name(:start_date) %>:</strong> <%= I18n.l(@promotion.start_date) %></li>
             <li class="list-group-item"><strong><%= Promotion.human_attribute_name(:end_date) %>:</strong> <%= I18n.l(@promotion.end_date) %></li>

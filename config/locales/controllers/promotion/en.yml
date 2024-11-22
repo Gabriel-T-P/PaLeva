@@ -10,6 +10,14 @@ en:
       title: "Promotion's List"
       actions: 'Actions'
       edit: 'Edit'
+    show:
+      title: 'Promotion Infos'
+      portions_title: "Promotion's Portions"
+      promotion_not_found: 'Promotion not found'
+      edit: 'Edit'
+      uses_left: 'left'
+      not_active: 'Unactive'
+      no_image_found: 'No image found'
     new:
       title: 'Create new promotion'
     create:
