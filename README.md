@@ -1,11 +1,19 @@
-# README
+# PaLevá 
 
 Você pode acessar o diagrama Entidade-Relacionamento pelo link abaixo:
 - [Diagrama ERD](https://drawsql.app/teams/just-me-110/diagrams/paleva)
 
 ---
 
-## Cadastro criado pelo Seed
+## Gems utilizadas:
+- bootstrap
+- cpf_cnpj
+- rack-cors
+- devise
+- capybara
+
+
+## Cadastro criado pelo Seeds
 
 ### Admin
 - **E-mail**: `master@email.com`
@@ -32,3 +40,10 @@ Você pode acessar o diagrama Entidade-Relacionamento pelo link abaixo:
 
 - **Endpoint**: `PATCH /api/v1/:establishment_code/:order_code/orders/:id/set_status_canceled`
 `order_code` (obrigatório): Atualiza pedido para cancelado.
+
+
+## Bugs Atuais:
+
+Infelizmente eu não consegui resolver a tempo um problema com o cadastro do funcionário. É possível ver
+pelos testes no rspec que existem 3 testes falhando, referentes a esse problema. O problema está muito provavelmente
+relacionado ao tipo de relação que eu usei entre o user, establishment e employee.

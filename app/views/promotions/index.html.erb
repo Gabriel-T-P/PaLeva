@@ -15,7 +15,7 @@
       <% @promotions.each do |promotion| %>
         <tr>
           <td><%= promotion.name %></td>
-          <td><%=(promotion.percentage.to_f)*100%></td>
+          <td><%=(promotion.percentage.to_f)*100%>%</td>
           <td><%=promotion.use_limit%></td>
           <td><%=promotion.start_date%></td>
           <td><%=promotion.end_date%></td>
