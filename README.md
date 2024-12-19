@@ -41,6 +41,9 @@ Você pode acessar o diagrama Entidade-Relacionamento pelo link abaixo:
 - **Endpoint**: `PATCH /api/v1/:establishment_code/:order_code/orders/:id/set_status_canceled`
 `order_code` (obrigatório): Atualiza pedido para cancelado.
 
+- **Endpoint**: `POST  /api/v1/orders`
+`params` (obrigatório): Cria um pedido com os parâmetros enviados.
+
 
 ## Bugs Atuais:
 

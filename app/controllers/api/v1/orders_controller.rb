@@ -17,6 +17,18 @@ class Api::V1::OrdersController < Api::V1::ApiController
       render status: 200, json: orders.as_json(except: [:updated_at, :user_id])
     end
   end
+
+  def create
+    order_params = params.require(:order).permit(:name, :phone_number, :cpf, :email)
+    order = Order.new(order_params)
+    order.user = User.first
+
+    if order.save
+      render status: 201, json: order.as_json(except: [:updated_at, :id, :user_id])
+    else
+      render status: 412, json: { errors: order.errors.full_messages }
+    end
+  end
   
   def set_status_cooking
     order = Order.find(params[:id])

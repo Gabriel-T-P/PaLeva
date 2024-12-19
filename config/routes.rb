@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   # API
   namespace :api do
     namespace :v1 do
-      resources :orders, only: [:show, :index], defaults: {format: :json} do
+      resources :orders, only: [:show, :index, :create], defaults: {format: :json} do
         patch :set_status_cooking, on: :member
         patch :set_status_ready, on: :member
         
